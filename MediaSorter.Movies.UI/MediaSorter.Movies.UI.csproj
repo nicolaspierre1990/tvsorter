@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFramework>net6.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MediaSorter.Core\MediaSorter.Core.csproj" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="REM copy &quot;$(TargetPath)&quot; &quot;$(SolutionDir)MediaSorter\bin\Debug\net6.0-windows&quot;&quot;&#xD;&#xA;xcopy /y &quot;$(TargetPath)&quot; &quot;$(SolutionDir)MediaSorter\bin\Debug\net6.0-windows\Modules\&quot;" />
+  </Target>
+
+</Project>

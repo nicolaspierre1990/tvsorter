@@ -1,0 +1,32 @@
+﻿<Window x:Class="MediaSorter.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+        xmlns:viewmodels="clr-namespace:MediaSorter.ViewModels" 
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
+        mc:Ignorable="d" d:Width="800" d:Height="600"
+        Title="{Binding Title}" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" Height="25" HorizontalAlignment="Stretch"/>
+        <TabControl x:Name="mainTabControl">
+            <i:Interaction.Triggers>
+                <i:EventTrigger x:Name="SelectionChanged">
+                    <prism:InvokeCommandAction Command="{Binding SelectedTabChangedCommand, Mode=TwoWay}" 
+                                               CommandParameter="{Binding ElementName=mainTabControl, Path=SelectedItem}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <TabControl.Items>
+                <TabItem x:Name="tabMovies" Header="Movies">
+                    <ContentControl prism:RegionManager.RegionName="MovieRegion"/>
+                </TabItem>
+                <TabItem x:Name="tabTvShows" Header="TV Shows">
+                    <ContentControl prism:RegionManager.RegionName="TVShowRegion"/>
+                </TabItem>
+            </TabControl.Items>
+        </TabControl>
+    </DockPanel>
+</Window>
