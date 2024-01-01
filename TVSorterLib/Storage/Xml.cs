@@ -103,12 +103,7 @@ namespace TVSorter.Storage
                 throw new XmlException("XML is invalid.");
             }
 
-            var settingsNode = document.Root.Element("Settings".GetElementName());
-            if (settingsNode == null)
-            {
-                throw new XmlSchemaException("The XML file is invalid.");
-            }
-
+            var settingsNode = document.Root.Element("Settings".GetElementName()) ?? throw new XmlSchemaException("The XML file is invalid.");
             Settings.FromXml(settingsNode);
             return Settings;
         }
@@ -176,20 +171,8 @@ namespace TVSorter.Storage
             }
 
             var show = document.Descendants("Show".GetElementName())
-                .FirstOrDefault(x => x.GetAttribute("tvdbid") == episode.Show.TvdbId.ToString());
-
-            if (show == null)
-            {
-                throw new InvalidOperationException("The specified show is not saved.");
-            }
-
-            var episodes = show.Element("Episodes".GetElementName());
-
-            if (episodes == null)
-            {
-                throw new XmlException("XML is invalid.");
-            }
-
+                .FirstOrDefault(x => x.GetAttribute("tvdbid") == episode.Show.TvdbId.ToString()) ?? throw new InvalidOperationException("The specified show is not saved.");
+            var episodes = show.Element("Episodes".GetElementName()) ?? throw new XmlException("XML is invalid.");
             var episodeElement = episodes.Elements("Episode".GetElementName())
                 .FirstOrDefault(x => x.GetAttribute("tvdbid") == episode.TvdbId);
 
@@ -215,12 +198,7 @@ namespace TVSorter.Storage
                 throw new XmlException("XML is invalid.");
             }
 
-            var settingsNode = document.Root.Element("MissingEpisodeSettings".GetElementName());
-            if (settingsNode == null)
-            {
-                throw new XmlException("Xml is invalid");
-            }
-
+            var settingsNode = document.Root.Element("MissingEpisodeSettings".GetElementName()) ?? throw new XmlException("Xml is invalid");
             settingsNode.ReplaceWith(MissingEpisodeSettings.ToXml());
             document.Save(XmlFile);
         }
@@ -235,12 +213,7 @@ namespace TVSorter.Storage
                 throw new XmlException("XML is invalid.");
             }
 
-            var settingsNode = document.Root.Element("Settings".GetElementName());
-            if (settingsNode == null)
-            {
-                throw new XmlException("Xml is invalid");
-            }
-
+            var settingsNode = document.Root.Element("Settings".GetElementName()) ?? throw new XmlException("Xml is invalid");
             settingsNode.ReplaceWith(Settings.ToXml());
             document.Save(XmlFile);
             OnSettingsSaved();
@@ -280,12 +253,7 @@ namespace TVSorter.Storage
         /// </param>
         public void SaveShows(IEnumerable<TvShow> shows)
         {
-            var showsElement = document.Descendants("Shows".GetElementName()).FirstOrDefault();
-            if (showsElement == null)
-            {
-                throw new XmlException("XML is invalid.");
-            }
-
+            var showsElement = document.Descendants("Shows".GetElementName()).FirstOrDefault() ?? throw new XmlException("XML is invalid.");
             foreach (var show in shows)
             {
                 // Check if the show already exists. Else add it.
@@ -333,12 +301,7 @@ namespace TVSorter.Storage
                 throw new XmlException("XML is invalid.");
             }
 
-            var settingsNode = document.Root.Element("MissingEpisodeSettings".GetElementName());
-            if (settingsNode == null)
-            {
-                throw new XmlSchemaException("The XML file is invalid.");
-            }
-
+            var settingsNode = document.Root.Element("MissingEpisodeSettings".GetElementName()) ?? throw new XmlSchemaException("The XML file is invalid.");
             MissingEpisodeSettings.FromXml(settingsNode);
         }
 
@@ -417,9 +380,7 @@ namespace TVSorter.Storage
         ///     The show that was added.
         /// </param>
         private void OnTvShowAdded(TvShow show)
-        {
-            TvShowAdded?.Invoke(this, new TvShowEventArgs(show));
-        }
+        => TvShowAdded?.Invoke(this, new TvShowEventArgs(show));
 
         /// <summary>
         ///     Fires a TvShowChanged event.
@@ -428,9 +389,7 @@ namespace TVSorter.Storage
         ///     The show that changed.
         /// </param>
         private void OnTvShowChanged(TvShow show)
-        {
-            TvShowChanged?.Invoke(this, new TvShowEventArgs(show));
-        }
+        => TvShowChanged?.Invoke(this, new TvShowEventArgs(show));
 
         /// <summary>
         ///     Fires a TvShowRemoved event.
@@ -439,8 +398,6 @@ namespace TVSorter.Storage
         ///     The show that was removed.
         /// </param>
         private void OnTvShowRemoved(TvShow show)
-        {
-            TvShowRemoved?.Invoke(this, new TvShowEventArgs(show));
-        }
+        => TvShowRemoved?.Invoke(this, new TvShowEventArgs(show));
     }
 }

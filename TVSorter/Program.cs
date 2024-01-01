@@ -34,7 +34,7 @@ namespace TVSorter
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(kernel.Get<MainForm>());
+            Application.Run(kernel.Get<StartupWindow>());
         }
     }
 }

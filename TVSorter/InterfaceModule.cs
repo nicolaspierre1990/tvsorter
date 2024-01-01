@@ -17,6 +17,7 @@ namespace TVSorter
             Bind<SortEpisodesController>().ToSelf();
             Bind<TvShowsController>().ToSelf();
 
+            Bind<StartupWindow>().ToSelf();
             Bind<MainForm>().ToSelf();
             Bind<SortEpisodes>().ToSelf();
             Bind<TvShows>().ToSelf();

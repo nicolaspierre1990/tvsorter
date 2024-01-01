@@ -1,21 +1,15 @@
 ﻿using System.Xml;
 using System.Xml.Linq;
 
-namespace TVSorter.Storage
+namespace TVSorter.Storage;
+
+public class Version5Migration : IStorageMigration
 {
-    public class Version5Migration : IStorageMigration
+    public int MigratesToVersion => 5;
+
+    public void Migrate(XElement root)
     {
-        public int MigratesToVersion => 5;
-
-        public void Migrate(XElement root)
-        {
-            var settingsNode = root.Element("Settings".GetElementName());
-            if (settingsNode == null)
-            {
-                throw new XmlException("Xml is not valid");
-            }
-
-            settingsNode.FirstNode.AddAfterSelf(new XElement("IgnoredDirectories", new object[] { }));
-        }
+        var settingsNode = root.Element("Settings".GetElementName()) ?? throw new XmlException("Xml is not valid");
+        settingsNode.FirstNode.AddAfterSelf(new XElement("IgnoredDirectories", []));
     }
 }
