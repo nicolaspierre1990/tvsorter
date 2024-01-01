@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.IO;
+using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TVSorter.Model;
@@ -24,7 +26,7 @@ public class TvSorterDbContextFactory : IDesignTimeDbContextFactory<TvSorterDbCo
     public TvSorterDbContext CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<TvSorterDbContext>();
-        optionsBuilder.UseSqlite("Data Source=tvsorter.db");
+        optionsBuilder.UseSqlite($"Data Source={Path.Combine(Assembly.GetExecutingAssembly().Location, "Data\\tvsorter.db")}");
 
         return new TvSorterDbContext(optionsBuilder.Options);
     }
