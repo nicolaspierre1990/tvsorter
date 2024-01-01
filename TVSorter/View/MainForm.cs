@@ -8,6 +8,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace TVSorter.View
@@ -20,10 +21,7 @@ namespace TVSorter.View
         /// <summary>
         ///     Initialises a new instance of the <see cref="MainForm" /> class.
         /// </summary>
-        public MainForm()
-        {
-            InitializeComponent();
-        }
+        public MainForm() => InitializeComponent();
 
         /// <summary>
         ///     Handles the load event for the form.
@@ -34,9 +32,6 @@ namespace TVSorter.View
         /// <param name="e">
         ///     The arguments of the event.
         /// </param>
-        private void MainFormLoad(object sender, EventArgs e)
-        {
-            Text = "TV Sorter " + Version.CurrentVersion;
-        }
+        private void MainFormLoad(object sender, EventArgs e) => Text = $"TV Sorter {Assembly.GetExecutingAssembly().GetName().Version}";
     }
 }

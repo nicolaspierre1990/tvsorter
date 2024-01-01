@@ -278,13 +278,7 @@ namespace TVSorter.Controller
         /// <summary>
         ///     Raises an on search shows complete event.
         /// </summary>
-        private void OnSearchShowsComplete()
-        {
-            if (SearchShowsComplete != null)
-            {
-                SearchShowsComplete(this, EventArgs.Empty);
-            }
-        }
+        private void OnSearchShowsComplete() => SearchShowsComplete?.Invoke(this, EventArgs.Empty);
 
         /// <summary>
         ///     Handles the TVShow's OnTvShowAdded event.
@@ -295,10 +289,7 @@ namespace TVSorter.Controller
         /// <param name="e">
         ///     The arguments of the event.
         /// </param>
-        private void OnTvShowAdded(object sender, TvShowEventArgs e)
-        {
-            Shows.Add(e.TvShow);
-        }
+        private void OnTvShowAdded(object sender, TvShowEventArgs e) => Shows.Add(e.TvShow);
 
         /// <summary>
         ///     Handles the TVShow's OnTvShowChanged event.

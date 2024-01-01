@@ -16,7 +16,6 @@ using System.Linq;
 using System.Windows.Forms;
 using TVSorter.Controller;
 using TVSorter.Files;
-using TVSorter.Properties;
 using TVSorter.Repostitory;
 
 namespace TVSorter.View
@@ -100,7 +99,7 @@ namespace TVSorter.View
             var dialog = new ListDialog(listController);
             if (dialog.ShowDialog(this) == DialogResult.OK)
             {
-                alternateNames = listController.List.ToList();
+                alternateNames = [.. listController.List];
             }
         }
 
@@ -417,7 +416,7 @@ namespace TVSorter.View
 
             if (show.Locked)
             {
-                e.Graphics.DrawImage(Resources._lock, new PointF(5, 2 + e.Bounds.Y + ((e.Bounds.Height - 20) / 2.0f)));
+                e.Graphics.DrawImage(Resources.Resources._lock, new PointF(5, 2 + e.Bounds.Y + ((e.Bounds.Height - 20) / 2.0f)));
             }
 
             var stringSize = e.Graphics.MeasureString(show.Name, e.Font);

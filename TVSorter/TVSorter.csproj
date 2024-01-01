@@ -1,242 +1,162 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{90CB0336-FD4A-48CF-AAA3-92DD2F0CED94}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TVSorter</RootNamespace>
-    <AssemblyName>TVSorter</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
-    <FileAlignment>512</FileAlignment>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\bin\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>..\Stylecop.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>..\Stylecop.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>logo.ico</ApplicationIcon>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="TheTvdbDotNet, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TheTvdbDotNet.0.2.0\lib\net461\TheTvdbDotNet.dll</HintPath>
-    </Reference>
-    <Reference Include="TheTvdbDotNet.Ninject, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TheTvdbDotNet.Ninject.0.1.0\lib\net461\TheTvdbDotNet.Ninject.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Controller\AddShowController.cs" />
-    <Compile Include="Controller\BackgroundTask.cs" />
-    <Compile Include="Controller\ControllerBase.cs" />
-    <Compile Include="Controller\IProgressTask.cs" />
-    <Compile Include="Controller\ListController.cs" />
-    <Compile Include="Controller\LogController.cs" />
-    <Compile Include="Controller\MissingDuplicateController.cs" />
-    <Compile Include="Controller\SearchResultsController.cs" />
-    <Compile Include="Controller\SettingsController.cs" />
-    <Compile Include="Controller\ShowSearchController.cs" />
-    <Compile Include="Controller\SortEpisodesController.cs" />
-    <Compile Include="Controller\TvShowsController.cs" />
-    <Compile Include="FileResultExtensions.cs" />
-    <Compile Include="InterfaceModule.cs" />
-    <Compile Include="View\FormatBuilder.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\FormatBuilder.Designer.cs">
-      <DependentUpon>FormatBuilder.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\IView.cs" />
-    <Compile Include="View\ListDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\ListDialog.Designer.cs">
-      <DependentUpon>ListDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\Log.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\Log.Designer.cs">
-      <DependentUpon>Log.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\MissingDuplicateEpisodes.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\MissingDuplicateEpisodes.Designer.cs">
-      <DependentUpon>MissingDuplicateEpisodes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\NumberInputDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\NumberInputDialog.Designer.cs">
-      <DependentUpon>NumberInputDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\ProgressDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\ProgressDialog.Designer.cs">
-      <DependentUpon>ProgressDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\Settings.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\Settings.Designer.cs">
-      <DependentUpon>Settings.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\ShowSearchDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\ShowSearchDialog.Designer.cs">
-      <DependentUpon>ShowSearchDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\ShowSelectDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\ShowSelectDialog.Designer.cs">
-      <DependentUpon>ShowSelectDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\SortEpisodes.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\SortEpisodes.Designer.cs">
-      <DependentUpon>SortEpisodes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\TvShows.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\TvShows.Designer.cs">
-      <DependentUpon>TvShows.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="View\FormatBuilder.resx">
-      <DependentUpon>FormatBuilder.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\ListDialog.resx">
-      <DependentUpon>ListDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Log.resx">
-      <DependentUpon>Log.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <EmbeddedResource Include="View\MissingDuplicateEpisodes.resx">
-      <DependentUpon>MissingDuplicateEpisodes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\NumberInputDialog.resx">
-      <DependentUpon>NumberInputDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\ProgressDialog.resx">
-      <DependentUpon>ProgressDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Settings.resx">
-      <DependentUpon>Settings.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\ShowSearchDialog.resx">
-      <DependentUpon>ShowSearchDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\ShowSelectDialog.resx">
-      <DependentUpon>ShowSelectDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\SortEpisodes.resx">
-      <DependentUpon>SortEpisodes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\TvShows.resx">
-      <DependentUpon>TvShows.cs</DependentUpon>
-    </EmbeddedResource>
-    <AdditionalFiles Include="..\stylecop.json">
-      <Link>stylecop.json</Link>
-    </AdditionalFiles>
-    <None Include="app.config" />
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\lock.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TVSorterLib\TVSorterLib.csproj">
-      <Project>{70096D06-63B7-4057-A40E-C5CCBE6BACE9}</Project>
-      <Name>TVSorterLib</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="logo.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+		<ProductVersion>8.0.30703</ProductVersion>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<AssemblyTitle>TVSorter</AssemblyTitle>
+		<Product>TVSorter</Product>
+		<Copyright>Copyright ©  2012</Copyright>
+		<AssemblyVersion>1.5.1.0</AssemblyVersion>
+		<FileVersion>1.5.1.0</FileVersion>
+		<CodeAnalysisRuleSet>..\Stylecop.ruleset</CodeAnalysisRuleSet>
+		<OutputPath>..\bin\</OutputPath>
+		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+		<DebugType>full</DebugType>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+		<DebugType>pdbonly</DebugType>
+	</PropertyGroup>
+	<PropertyGroup>
+		<ApplicationIcon>logo.ico</ApplicationIcon>
+		<UseWindowsForms>True</UseWindowsForms>
+		<UseWPF>True</UseWPF>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
+		<PackageReference Include="TheTvdbDotNet" Version="0.2.0">
+			<TreatAsUsed>true</TreatAsUsed>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Update="Resources\Resources.Designer.cs">
+		  <DesignTime>True</DesignTime>
+		  <AutoGen>True</AutoGen>
+		  <DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
+		<Compile Update="View\FormatBuilder.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="View\FormatBuilder.Designer.cs">
+			<DependentUpon>FormatBuilder.cs</DependentUpon>
+		</Compile>
+		<Compile Update="View\ListDialog.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="View\ListDialog.Designer.cs">
+			<DependentUpon>ListDialog.cs</DependentUpon>
+		</Compile>
+		<Compile Update="View\Log.cs">
+			<SubType>UserControl</SubType>
+		</Compile>
+		<Compile Update="View\Log.Designer.cs">
+			<DependentUpon>Log.cs</DependentUpon>
+		</Compile>
+		<Compile Update="View\MainForm.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="View\MainForm.Designer.cs">
+			<DependentUpon>MainForm.cs</DependentUpon>
+		</Compile>
+		<Compile Update="View\MissingDuplicateEpisodes.cs">
+			<SubType>UserControl</SubType>
+		</Compile>
+		<Compile Update="View\MissingDuplicateEpisodes.Designer.cs">
+			<DependentUpon>MissingDuplicateEpisodes.cs</DependentUpon>
+		</Compile>
+		<Compile Update="View\NumberInputDialog.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="View\NumberInputDialog.Designer.cs">
+			<DependentUpon>NumberInputDialog.cs</DependentUpon>
+		</Compile>
+		<Compile Update="View\ProgressDialog.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="View\ProgressDialog.Designer.cs">
+			<DependentUpon>ProgressDialog.cs</DependentUpon>
+		</Compile>
+		<Compile Update="View\Settings.cs">
+			<SubType>UserControl</SubType>
+		</Compile>
+		<Compile Update="View\Settings.Designer.cs">
+			<DependentUpon>Settings.cs</DependentUpon>
+		</Compile>
+		<Compile Update="View\ShowSearchDialog.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="View\ShowSearchDialog.Designer.cs">
+			<DependentUpon>ShowSearchDialog.cs</DependentUpon>
+		</Compile>
+		<Compile Update="View\ShowSelectDialog.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="View\ShowSelectDialog.Designer.cs">
+			<DependentUpon>ShowSelectDialog.cs</DependentUpon>
+		</Compile>
+		<Compile Update="View\SortEpisodes.cs">
+			<SubType>UserControl</SubType>
+		</Compile>
+		<Compile Update="View\SortEpisodes.Designer.cs">
+			<DependentUpon>SortEpisodes.cs</DependentUpon>
+		</Compile>
+		<Compile Update="View\TvShows.cs">
+			<SubType>UserControl</SubType>
+		</Compile>
+		<Compile Update="View\TvShows.Designer.cs">
+			<DependentUpon>TvShows.cs</DependentUpon>
+		</Compile>
+		<EmbeddedResource Update="Resources\Resources.resx">
+		  <Generator>ResXFileCodeGenerator</Generator>
+		  <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="View\FormatBuilder.resx">
+			<DependentUpon>FormatBuilder.cs</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="View\ListDialog.resx">
+			<DependentUpon>ListDialog.cs</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="View\Log.resx">
+			<DependentUpon>Log.cs</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="View\MainForm.resx">
+			<DependentUpon>MainForm.cs</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="View\MissingDuplicateEpisodes.resx">
+			<DependentUpon>MissingDuplicateEpisodes.cs</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="View\NumberInputDialog.resx">
+			<DependentUpon>NumberInputDialog.cs</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="View\ProgressDialog.resx">
+			<DependentUpon>ProgressDialog.cs</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="View\Settings.resx">
+			<DependentUpon>Settings.cs</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="View\ShowSearchDialog.resx">
+			<DependentUpon>ShowSearchDialog.cs</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="View\ShowSelectDialog.resx">
+			<DependentUpon>ShowSelectDialog.cs</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="View\SortEpisodes.resx">
+			<DependentUpon>SortEpisodes.cs</DependentUpon>
+		</EmbeddedResource>
+		<EmbeddedResource Update="View\TvShows.resx">
+			<DependentUpon>TvShows.cs</DependentUpon>
+		</EmbeddedResource>
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="Resources\lock.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\TheTvdbDotNet\src\TheTvdbDotNet.Ninject\TheTvdbDotNet.Ninject.csproj" />
+		<ProjectReference Include="..\TVSorterLib\TVSorterLib.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="logo.ico" />
+	</ItemGroup>
 </Project>

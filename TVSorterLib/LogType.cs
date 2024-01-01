@@ -19,6 +19,6 @@ namespace TVSorter
         /// <summary>
         ///     An error log message.
         /// </summary>
-        Error
+        Error,
     }
 }

@@ -1,4 +1,5 @@
-﻿using Ninject.Modules;
+﻿using Microsoft.EntityFrameworkCore;
+using Ninject.Modules;
 using TVSorter.Data;
 using TVSorter.Data.TvdbV2;
 using TVSorter.Files;
@@ -27,6 +28,11 @@ namespace TVSorter
             Bind<IFileSearch>().To<FileSearch>().InSingletonScope();
             Bind<ITvShowRepository>().To<TvShowRepository>().InSingletonScope();
             Bind<IStreamWriter>().To<StreamWriter>().InSingletonScope();
+
+            Bind<TvSorterDbContext>().ToSelf()
+                .WithConstructorArgument("options", new DbContextOptionsBuilder<TvSorterDbContext>()
+                .UseSqlite("Data Source=tvsorter.db").Options);
+
         }
     }
 }

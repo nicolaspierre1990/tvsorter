@@ -264,12 +264,7 @@ namespace TVSorter.Storage
             }
             else
             {
-                var shows = document.Descendants("Shows".GetElementName()).FirstOrDefault();
-                if (shows == null)
-                {
-                    throw new XmlException("XML is invalid.");
-                }
-
+                var shows = document.Descendants("Shows".GetElementName()).FirstOrDefault() ?? throw new XmlException("XML is invalid.");
                 shows.Add(show.ToXml());
                 OnTvShowAdded(show);
             }
