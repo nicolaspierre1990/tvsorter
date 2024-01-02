@@ -21,7 +21,13 @@ namespace TVSorter.View
         /// <summary>
         ///     Initialises a new instance of the <see cref="MainForm" /> class.
         /// </summary>
-        public MainForm() => InitializeComponent();
+        public MainForm()
+        {
+            InitializeComponent();
+            FormClosed += MainForm_FormClosed;
+            WindowState = FormWindowState.Maximized;
+            StartPosition = FormStartPosition.CenterScreen;
+        }
 
         /// <summary>
         ///     Handles the load event for the form.
@@ -32,6 +38,13 @@ namespace TVSorter.View
         /// <param name="e">
         ///     The arguments of the event.
         /// </param>
-        private void MainFormLoad(object sender, EventArgs e) => Text = $"TV Sorter {Assembly.GetExecutingAssembly().GetName().Version}";
+        private void MainFormLoad(object sender, EventArgs e) => Text = $"TV Sorter v{CompositionRoot.Version}";
+
+        /// <summary>
+        /// Handles the FormClosed event of the MainForm control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FormClosedEventArgs"/> instance containing the event data.</param>
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e) => Application.Exit();
     }
 }
