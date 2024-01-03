@@ -23,6 +23,9 @@
 		<UseWPF>True</UseWPF>
 	</PropertyGroup>
 	<ItemGroup>
+	  <Content Include="logo.ico" />
+	</ItemGroup>
+	<ItemGroup>
 		<Compile Update="Resources\Resources.Designer.cs">
 		  <DesignTime>True</DesignTime>
 		  <AutoGen>True</AutoGen>
@@ -147,8 +150,5 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\TheTvdbDotNet\src\TheTvdbDotNet.Ninject\TheTvdbDotNet.Ninject.csproj" />
 		<ProjectReference Include="..\TVSorterLib\TVSorterLib.csproj" />
-	</ItemGroup>
-	<ItemGroup>
-		<Content Include="logo.ico" />
 	</ItemGroup>
 </Project>

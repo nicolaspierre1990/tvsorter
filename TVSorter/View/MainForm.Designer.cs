@@ -108,151 +108,109 @@ namespace TVSorter.View
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.mainTabs = new System.Windows.Forms.TabControl();
-            this.sortEpisodesPage = new System.Windows.Forms.TabPage();
-            this.sortEpisodes = new TVSorter.View.SortEpisodes();
-            this.tvShowsPage = new System.Windows.Forms.TabPage();
-            this.tvShows = new TVSorter.View.TvShows();
-            this.missingDuplicatePage = new System.Windows.Forms.TabPage();
-            this.missingDuplicateEpisodes = new TVSorter.View.MissingDuplicateEpisodes();
-            this.settingsPage = new System.Windows.Forms.TabPage();
-            this.settings = new TVSorter.View.Settings();
-            this.logPage = new System.Windows.Forms.TabPage();
-            this.log = new TVSorter.View.Log();
-            this.mainTabs.SuspendLayout();
-            this.sortEpisodesPage.SuspendLayout();
-            this.tvShowsPage.SuspendLayout();
-            this.missingDuplicatePage.SuspendLayout();
-            this.settingsPage.SuspendLayout();
-            this.logPage.SuspendLayout();
-            this.SuspendLayout();
+            ComponentResourceManager resources = new ComponentResourceManager(typeof(MainForm));
+            mainTabs = new TabControl();
+            sortEpisodesPage = new TabPage();
+            tvShowsPage = new TabPage();
+            missingDuplicatePage = new TabPage();
+            missingDuplicateEpisodes = new MissingDuplicateEpisodes();
+            settingsPage = new TabPage();
+            logPage = new TabPage();
+            mainTabs.SuspendLayout();
+            missingDuplicatePage.SuspendLayout();
+            SuspendLayout();
             // 
             // mainTabs
             // 
-            this.mainTabs.Controls.Add(this.sortEpisodesPage);
-            this.mainTabs.Controls.Add(this.tvShowsPage);
-            this.mainTabs.Controls.Add(this.missingDuplicatePage);
-            this.mainTabs.Controls.Add(this.settingsPage);
-            this.mainTabs.Controls.Add(this.logPage);
-            this.mainTabs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainTabs.Location = new System.Drawing.Point(0, 0);
-            this.mainTabs.Name = "mainTabs";
-            this.mainTabs.SelectedIndex = 0;
-            this.mainTabs.Size = new System.Drawing.Size(942, 636);
-            this.mainTabs.TabIndex = 0;
+            mainTabs.Controls.Add(sortEpisodesPage);
+            mainTabs.Controls.Add(tvShowsPage);
+            mainTabs.Controls.Add(missingDuplicatePage);
+            mainTabs.Controls.Add(settingsPage);
+            mainTabs.Controls.Add(logPage);
+            mainTabs.Dock = DockStyle.Fill;
+            mainTabs.Location = new Point(0, 0);
+            mainTabs.Margin = new Padding(4, 5, 4, 5);
+            mainTabs.Name = "mainTabs";
+            mainTabs.SelectedIndex = 0;
+            mainTabs.Size = new Size(1256, 978);
+            mainTabs.TabIndex = 0;
             // 
             // sortEpisodesPage
             // 
-            this.sortEpisodesPage.Controls.Add(this.sortEpisodes);
-            this.sortEpisodesPage.Location = new System.Drawing.Point(4, 22);
-            this.sortEpisodesPage.Name = "sortEpisodesPage";
-            this.sortEpisodesPage.Padding = new System.Windows.Forms.Padding(3);
-            this.sortEpisodesPage.Size = new System.Drawing.Size(934, 565);
-            this.sortEpisodesPage.TabIndex = 1;
-            this.sortEpisodesPage.Text = "Sort Episode Files";
-            this.sortEpisodesPage.UseVisualStyleBackColor = true;
-            // 
-            // sortEpisodes
-            // 
-            this.sortEpisodes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sortEpisodes.Location = new System.Drawing.Point(3, 3);
-            this.sortEpisodes.Name = "sortEpisodes";
-            this.sortEpisodes.Size = new System.Drawing.Size(928, 559);
-            this.sortEpisodes.TabIndex = 0;
+            sortEpisodesPage.Location = new Point(4, 29);
+            sortEpisodesPage.Margin = new Padding(4, 5, 4, 5);
+            sortEpisodesPage.Name = "sortEpisodesPage";
+            sortEpisodesPage.Padding = new Padding(4, 5, 4, 5);
+            sortEpisodesPage.Size = new Size(1248, 945);
+            sortEpisodesPage.TabIndex = 1;
+            sortEpisodesPage.Text = "Sort Episode Files";
+            sortEpisodesPage.UseVisualStyleBackColor = true;
             // 
             // tvShowsPage
             // 
-            this.tvShowsPage.Controls.Add(this.tvShows);
-            this.tvShowsPage.Location = new System.Drawing.Point(4, 22);
-            this.tvShowsPage.Name = "tvShowsPage";
-            this.tvShowsPage.Size = new System.Drawing.Size(934, 610);
-            this.tvShowsPage.TabIndex = 2;
-            this.tvShowsPage.Text = "TV Shows";
-            this.tvShowsPage.UseVisualStyleBackColor = true;
-            // 
-            // tvShows
-            // 
-            this.tvShows.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvShows.Location = new System.Drawing.Point(0, 0);
-            this.tvShows.Name = "tvShows";
-            this.tvShows.Size = new System.Drawing.Size(934, 610);
-            this.tvShows.TabIndex = 0;
+            tvShowsPage.Location = new Point(4, 29);
+            tvShowsPage.Margin = new Padding(4, 5, 4, 5);
+            tvShowsPage.Name = "tvShowsPage";
+            tvShowsPage.Size = new Size(1248, 945);
+            tvShowsPage.TabIndex = 2;
+            tvShowsPage.Text = "TV Shows";
+            tvShowsPage.UseVisualStyleBackColor = true;
             // 
             // missingDuplicatePage
             // 
-            this.missingDuplicatePage.Controls.Add(this.missingDuplicateEpisodes);
-            this.missingDuplicatePage.Location = new System.Drawing.Point(4, 22);
-            this.missingDuplicatePage.Name = "missingDuplicatePage";
-            this.missingDuplicatePage.Size = new System.Drawing.Size(933, 561);
-            this.missingDuplicatePage.TabIndex = 3;
-            this.missingDuplicatePage.Text = "Missing / Duplicate Episodes";
-            this.missingDuplicatePage.UseVisualStyleBackColor = true;
+            missingDuplicatePage.Controls.Add(missingDuplicateEpisodes);
+            missingDuplicatePage.Location = new Point(4, 29);
+            missingDuplicatePage.Margin = new Padding(4, 5, 4, 5);
+            missingDuplicatePage.Name = "missingDuplicatePage";
+            missingDuplicatePage.Size = new Size(1248, 945);
+            missingDuplicatePage.TabIndex = 3;
+            missingDuplicatePage.Text = "Missing / Duplicate Episodes";
+            missingDuplicatePage.UseVisualStyleBackColor = true;
             // 
             // missingDuplicateEpisodes
             // 
-            this.missingDuplicateEpisodes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.missingDuplicateEpisodes.Location = new System.Drawing.Point(0, 0);
-            this.missingDuplicateEpisodes.Name = "missingDuplicateEpisodes";
-            this.missingDuplicateEpisodes.Size = new System.Drawing.Size(192, 74);
-            this.missingDuplicateEpisodes.TabIndex = 0;
+            missingDuplicateEpisodes.Dock = DockStyle.Fill;
+            missingDuplicateEpisodes.Location = new Point(0, 0);
+            missingDuplicateEpisodes.Margin = new Padding(5, 8, 5, 8);
+            missingDuplicateEpisodes.Name = "missingDuplicateEpisodes";
+            missingDuplicateEpisodes.Size = new Size(1248, 945);
+            missingDuplicateEpisodes.TabIndex = 0;
             // 
             // settingsPage
             // 
-            this.settingsPage.Controls.Add(this.settings);
-            this.settingsPage.Location = new System.Drawing.Point(4, 22);
-            this.settingsPage.Name = "settingsPage";
-            this.settingsPage.Size = new System.Drawing.Size(933, 561);
-            this.settingsPage.TabIndex = 4;
-            this.settingsPage.Text = "Settings";
-            this.settingsPage.UseVisualStyleBackColor = true;
-            // 
-            // settings
-            // 
-            this.settings.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.settings.Location = new System.Drawing.Point(0, 0);
-            this.settings.Name = "settings";
-            this.settings.Size = new System.Drawing.Size(192, 74);
-            this.settings.TabIndex = 0;
+            settingsPage.Location = new Point(4, 29);
+            settingsPage.Margin = new Padding(4, 5, 4, 5);
+            settingsPage.Name = "settingsPage";
+            settingsPage.Size = new Size(1248, 945);
+            settingsPage.TabIndex = 4;
+            settingsPage.Text = "Settings";
+            settingsPage.UseVisualStyleBackColor = true;
             // 
             // logPage
             // 
-            this.logPage.Controls.Add(this.log);
-            this.logPage.Location = new System.Drawing.Point(4, 22);
-            this.logPage.Name = "logPage";
-            this.logPage.Size = new System.Drawing.Size(933, 561);
-            this.logPage.TabIndex = 5;
-            this.logPage.Text = "Log";
-            this.logPage.UseVisualStyleBackColor = true;
-            // 
-            // log
-            // 
-            this.log.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.log.Location = new System.Drawing.Point(0, 0);
-            this.log.Name = "log";
-            this.log.Size = new System.Drawing.Size(192, 74);
-            this.log.TabIndex = 0;
+            logPage.Location = new Point(4, 29);
+            logPage.Margin = new Padding(4, 5, 4, 5);
+            logPage.Name = "logPage";
+            logPage.Size = new Size(1248, 945);
+            logPage.TabIndex = 5;
+            logPage.Text = "Log";
+            logPage.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(942, 636);
-            this.Controls.Add(this.mainTabs);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(950, 670);
-            this.Name = "MainForm";
-            this.Text = "TV Sorter";
-            this.Load += new System.EventHandler(this.MainFormLoad);
-            this.mainTabs.ResumeLayout(false);
-            this.sortEpisodesPage.ResumeLayout(false);
-            this.tvShowsPage.ResumeLayout(false);
-            this.missingDuplicatePage.ResumeLayout(false);
-            this.settingsPage.ResumeLayout(false);
-            this.logPage.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1256, 978);
+            Controls.Add(mainTabs);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(4, 5, 4, 5);
+            MinimumSize = new Size(1261, 1005);
+            Name = "MainForm";
+            Text = "TV Sorter";
+            Load += MainFormLoad;
+            mainTabs.ResumeLayout(false);
+            missingDuplicatePage.ResumeLayout(false);
+            ResumeLayout(false);
         }
-
     }
 }
