@@ -8,62 +8,51 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TVSorter.View;
 
-namespace TVSorter.Controller
+namespace TVSorter.Controller;
+
+/// <summary>
+///     A task that runs in the background
+/// </summary>
+/// <remarks>
+///     Initialises a new instance of the <see cref="BackgroundTask" /> class.
+/// </remarks>
+/// <param name="action">
+///     The method to run.
+/// </param>
+public class BackgroundTask(Action action) : IProgressTask
 {
     /// <summary>
-    ///     A task that runs in the background
+    ///     The task that should be run.
     /// </summary>
-    public class BackgroundTask : IProgressTask
+    private readonly Action action = action;
+
+    /// <summary>
+    ///     Occurs when the task is complete.
+    /// </summary>
+    public event EventHandler TaskComplete;
+
+    /// <summary>
+    ///     Starts the task.
+    /// </summary>
+    public void Start()
     {
-        /// <summary>
-        ///     The task that should be run.
-        /// </summary>
-        private readonly Action action;
-
-        /// <summary>
-        ///     Initialises a new instance of the <see cref="BackgroundTask" /> class.
-        /// </summary>
-        /// <param name="action">
-        ///     The method to run.
-        /// </param>
-        public BackgroundTask(Action action)
-        {
-            this.action = action;
-        }
-
-        /// <summary>
-        ///     Occurs when the task is complete.
-        /// </summary>
-        public event EventHandler TaskComplete;
-
-        /// <summary>
-        ///     Starts the task.
-        /// </summary>
-        public void Start()
-        {
-            var task = Task.Factory.StartNew(
-                () =>
+        var task = Task.Factory.StartNew(
+            () =>
+            {
+                try
                 {
-                    try
-                    {
-                        action();
-                    }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show(e.Message);
-                    }
-                });
-            task.ContinueWith(
-                x =>
+                    action();
+                }
+                catch (Exception e) when (e is not IOException)
                 {
-                    if (TaskComplete != null)
-                    {
-                        TaskComplete(this, EventArgs.Empty);
-                    }
-                });
-        }
+                    MessageBox.Show(CompositionRoot.Get<MainForm>(), e.AggregateMessages());
+                }
+            });
+        task.ContinueWith(x => TaskComplete?.Invoke(this, EventArgs.Empty));
     }
 }

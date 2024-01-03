@@ -5,12 +5,9 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<AssemblyTitle>TVSorterLib</AssemblyTitle>
 		<Product>TVSorterLib</Product>
-		<Copyright>Copyright ©  2012</Copyright>
-		<AssemblyVersion>1.5.1.0</AssemblyVersion>
-		<FileVersion>1.5.1.0</FileVersion>
-		<CodeAnalysisRuleSet>..\Stylecop.ruleset</CodeAnalysisRuleSet>
+		<Copyright>Copyright © 2024</Copyright>
+		<Version>2.0.0-beta</Version>
 		<OutputPath>..\bin\</OutputPath>
-		<AnalysisLevel>latest</AnalysisLevel>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 		<DebugType>full</DebugType>
@@ -27,7 +24,9 @@
 		</PackageReference>
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0" />
 		<PackageReference Include="Ninject" Version="3.3.6" />
-		<PackageReference Include="TheTvdbDotNet" Version="0.2.0" />
+		<PackageReference Include="Ninject.Extensions.Interception" Version="3.3.5" />
+		<PackageReference Include="Ninject.Extensions.Interception.DynamicProxy" Version="3.3.5" />
+		<PackageReference Include="System.Drawing.Common" Version="8.0.0" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="TVSorter-5.0.xsd">
@@ -50,5 +49,8 @@
 			<SubType>Designer</SubType>
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\TheTvdbDotNet\src\TheTvdbDotNet\TheTvdbDotNet.csproj" />
 	</ItemGroup>
 </Project>

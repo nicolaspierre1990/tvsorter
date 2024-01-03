@@ -6,10 +6,8 @@
 		<TargetFramework>net8.0-windows</TargetFramework>
 		<AssemblyTitle>TVSorter</AssemblyTitle>
 		<Product>TVSorter</Product>
-		<Copyright>Copyright ©  2012</Copyright>
-		<AssemblyVersion>1.5.1.0</AssemblyVersion>
-		<FileVersion>1.5.1.0</FileVersion>
-		<CodeAnalysisRuleSet>..\Stylecop.ruleset</CodeAnalysisRuleSet>
+		<Copyright>Copyright © 2024</Copyright>
+		<Version>2.0.0-beta</Version>
 		<OutputPath>..\bin\</OutputPath>
 		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
 	</PropertyGroup>
@@ -24,12 +22,6 @@
 		<UseWindowsForms>True</UseWindowsForms>
 		<UseWPF>True</UseWPF>
 	</PropertyGroup>
-	<ItemGroup>
-		<PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
-		<PackageReference Include="TheTvdbDotNet" Version="0.2.0">
-			<TreatAsUsed>true</TreatAsUsed>
-		</PackageReference>
-	</ItemGroup>
 	<ItemGroup>
 		<Compile Update="Resources\Resources.Designer.cs">
 		  <DesignTime>True</DesignTime>

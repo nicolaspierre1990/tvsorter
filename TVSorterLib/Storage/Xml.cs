@@ -68,6 +68,8 @@ namespace TVSorter.Storage
         /// </summary>
         public MissingEpisodeSettings MissingEpisodeSettings { get; private set; }
 
+        public bool IsAvailable => throw new NotImplementedException();
+
         /// <summary>
         ///     Gets the episodes that have more than 1 file grouped by show.
         /// </summary>

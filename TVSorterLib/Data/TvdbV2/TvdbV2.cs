@@ -63,6 +63,7 @@ public class TvdbV2(ITvdbSeries series, ITvdbSearch search, ITvdbUpdate update, 
                 x => new Episode
                 {
                     TvdbId = x.Id.ToString(),
+                    ShowId = show.TvdbId,
                     EpisodeNumber =
                         show.UseDvdOrder && x.DvdEpisodeNumber.HasValue
                             ? x.DvdEpisodeNumber.Value
@@ -107,6 +108,7 @@ public class TvdbV2(ITvdbSeries series, ITvdbSearch search, ITvdbUpdate update, 
                 x => new Episode
                 {
                     TvdbId = x.Id.ToString(),
+                    ShowId = show.TvdbId,
                     EpisodeNumber =
                         show.UseDvdOrder && x.DvdEpisodeNumber.HasValue
                             ? x.DvdEpisodeNumber.Value

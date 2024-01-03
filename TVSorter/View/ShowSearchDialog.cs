@@ -169,7 +169,7 @@ public partial class ShowSearchDialog : Form, IView
     /// </summary>
     /// <param name="sender">The source of the event.</param>
     /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-    private void listResults_SelectedIndexChanged(object sender, EventArgs e)
+    private void ListResults_SelectedIndexChanged(object sender, EventArgs e)
     {
         if(listResults.SelectedItems.Count > 0)
         {

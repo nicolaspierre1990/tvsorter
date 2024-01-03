@@ -105,11 +105,11 @@ namespace TVSorter.View
             // mainTable
             // 
             mainTable.ColumnCount = 5;
-            mainTable.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 51F));
+            mainTable.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 58F));
             mainTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            mainTable.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 94F));
-            mainTable.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 94F));
-            mainTable.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 94F));
+            mainTable.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 107F));
+            mainTable.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 107F));
+            mainTable.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 107F));
             mainTable.Controls.Add(listResults, 0, 0);
             mainTable.Controls.Add(nameLabel, 0, 1);
             mainTable.Controls.Add(nameText, 1, 1);
@@ -118,12 +118,12 @@ namespace TVSorter.View
             mainTable.Controls.Add(selectButton, 3, 1);
             mainTable.Dock = DockStyle.Fill;
             mainTable.Location = new Point(0, 0);
-            mainTable.Margin = new Padding(4, 3, 4, 3);
+            mainTable.Margin = new Padding(5, 4, 5, 4);
             mainTable.Name = "mainTable";
             mainTable.RowCount = 2;
             mainTable.RowStyles.Add(new RowStyle(SizeType.Percent, 89.31298F));
             mainTable.RowStyles.Add(new RowStyle(SizeType.Percent, 10.68702F));
-            mainTable.Size = new Size(534, 273);
+            mainTable.Size = new Size(610, 364);
             mainTable.TabIndex = 1;
             // 
             // listResults
@@ -132,15 +132,15 @@ namespace TVSorter.View
             mainTable.SetColumnSpan(listResults, 5);
             listResults.Dock = DockStyle.Fill;
             listResults.FullRowSelect = true;
-            listResults.Location = new Point(4, 3);
-            listResults.Margin = new Padding(4, 3, 4, 3);
+            listResults.Location = new Point(5, 4);
+            listResults.Margin = new Padding(5, 4, 5, 4);
             listResults.MultiSelect = false;
             listResults.Name = "listResults";
-            listResults.Size = new Size(526, 237);
+            listResults.Size = new Size(600, 317);
             listResults.TabIndex = 0;
             listResults.UseCompatibleStateImageBehavior = false;
             listResults.View = View.Details;
-            listResults.SelectedIndexChanged += listResults_SelectedIndexChanged;
+            listResults.SelectedIndexChanged += ListResults_SelectedIndexChanged;
             listResults.DoubleClick += ListResultsDoubleClick;
             // 
             // nameColumn
@@ -157,29 +157,29 @@ namespace TVSorter.View
             // 
             nameLabel.Anchor = AnchorStyles.Right;
             nameLabel.AutoSize = true;
-            nameLabel.Location = new Point(5, 250);
-            nameLabel.Margin = new Padding(4, 0, 4, 0);
+            nameLabel.Location = new Point(12, 325);
+            nameLabel.Margin = new Padding(5, 0, 5, 0);
             nameLabel.Name = "nameLabel";
-            nameLabel.Size = new Size(42, 15);
+            nameLabel.Size = new Size(41, 39);
             nameLabel.TabIndex = 1;
             nameLabel.Text = "Name:";
             // 
             // nameText
             // 
             nameText.Dock = DockStyle.Fill;
-            nameText.Location = new Point(55, 246);
-            nameText.Margin = new Padding(4, 3, 4, 3);
+            nameText.Location = new Point(63, 329);
+            nameText.Margin = new Padding(5, 4, 5, 4);
             nameText.Name = "nameText";
-            nameText.Size = new Size(193, 23);
+            nameText.Size = new Size(221, 27);
             nameText.TabIndex = 2;
             // 
             // searchButton
             // 
             searchButton.Dock = DockStyle.Fill;
-            searchButton.Location = new Point(256, 246);
-            searchButton.Margin = new Padding(4, 3, 4, 3);
+            searchButton.Location = new Point(294, 329);
+            searchButton.Margin = new Padding(5, 4, 5, 4);
             searchButton.Name = "searchButton";
-            searchButton.Size = new Size(86, 24);
+            searchButton.Size = new Size(97, 31);
             searchButton.TabIndex = 3;
             searchButton.Text = "Search";
             searchButton.UseVisualStyleBackColor = true;
@@ -188,10 +188,10 @@ namespace TVSorter.View
             // closeButton
             // 
             closeButton.Dock = DockStyle.Fill;
-            closeButton.Location = new Point(444, 246);
-            closeButton.Margin = new Padding(4, 3, 4, 3);
+            closeButton.Location = new Point(508, 329);
+            closeButton.Margin = new Padding(5, 4, 5, 4);
             closeButton.Name = "closeButton";
-            closeButton.Size = new Size(86, 24);
+            closeButton.Size = new Size(97, 31);
             closeButton.TabIndex = 4;
             closeButton.Text = "Close";
             closeButton.UseVisualStyleBackColor = true;
@@ -200,10 +200,10 @@ namespace TVSorter.View
             // selectButton
             // 
             selectButton.Dock = DockStyle.Fill;
-            selectButton.Location = new Point(350, 246);
-            selectButton.Margin = new Padding(4, 3, 4, 3);
+            selectButton.Location = new Point(401, 329);
+            selectButton.Margin = new Padding(5, 4, 5, 4);
             selectButton.Name = "selectButton";
-            selectButton.Size = new Size(86, 24);
+            selectButton.Size = new Size(97, 31);
             selectButton.TabIndex = 5;
             selectButton.Text = "Select";
             selectButton.UseVisualStyleBackColor = true;
@@ -211,13 +211,13 @@ namespace TVSorter.View
             // 
             // ShowSearchDialog
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(534, 273);
+            ClientSize = new Size(610, 364);
             ControlBox = false;
             Controls.Add(mainTable);
             FormBorderStyle = FormBorderStyle.FixedDialog;
-            Margin = new Padding(4, 3, 4, 3);
+            Margin = new Padding(5, 4, 5, 4);
             Name = "ShowSearchDialog";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Show Search";

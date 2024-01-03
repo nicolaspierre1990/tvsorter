@@ -17,15 +17,7 @@ namespace TVSorter.Model;
 ///     The settings.
 /// </summary>
 public class Settings
-{
-    /// <summary>
-    ///     Initialises a new instance of the <see cref="Settings" /> class.
-    /// </summary>
-    public Settings()
-    {
-        SetDefault();
-    }
-
+{ 
     /// <summary>
     ///     Gets or sets a value indicating whether unmatched shows should be added.
     /// </summary>
@@ -99,8 +91,9 @@ public class Settings
     /// <summary>
     ///     Sets default settings.
     /// </summary>
-    private void SetDefault()
+    public static Settings GetDefault()
     {
+        var settings = new Settings();
         var regularExpressions = new List<string>
         {
             @"s(?<S>[0-9]+)e((?<E>[0-9]+)[e-]{0,1})+",
@@ -113,24 +106,26 @@ public class Settings
             @"s(?<S>[0-9]+)[.]e(?<E>[0-9]+)"
         };
 
-        SourceDirectory = Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture);
-        DestinationDirectories = [];
-        IgnoredDirectories = [];
-        DefaultDestinationDirectory = Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture);
-        FileExtensions = [".avi", ".mkv", ".wmv", ".mpg", ".mp4"];
-        RegularExpressions = regularExpressions;
-        DefaultOutputFormat = "{FName}" +
+        settings.SourceDirectory = Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture);
+        settings.DestinationDirectories = [];
+        settings.IgnoredDirectories = [];
+        settings.DefaultDestinationDirectory = Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture);
+        settings.FileExtensions = [".avi", ".mkv", ".wmv", ".mpg", ".mp4"];
+        settings.RegularExpressions = regularExpressions;
+        settings.DefaultOutputFormat = "{FName}" +
                               Path.DirectorySeparatorChar +
                               "Season {SNum(1)}" +
                               Path.DirectorySeparatorChar +
                               "{SName(.)}." +
                               "S{SNum(2)}E{ENum(2)}.{EName(.)}{Ext}";
-        DeleteEmptySubdirectories = false;
-        OverwriteKeywords = ["repack", "proper"];
-        RecurseSubdirectories = false;
-        RenameIfExists = false;
-        UnlockMatchedShows = false;
-        AddUnmatchedShows = false;
-        LockShowsWithNoEpisodes = false;
+        settings.DeleteEmptySubdirectories = false;
+        settings.OverwriteKeywords = ["repack", "proper"];
+        settings.RecurseSubdirectories = false;
+        settings.RenameIfExists = false;
+        settings.UnlockMatchedShows = false;
+        settings.AddUnmatchedShows = false;
+        settings.LockShowsWithNoEpisodes = false;
+
+        return settings;
     }
 }

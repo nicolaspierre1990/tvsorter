@@ -90,10 +90,7 @@ public class TvShowRepository : ITvShowRepository
     /// <param name="show">
     ///     The show to delete.
     /// </param>
-    public void Delete(TvShow show)
-    {
-        storageProvider.RemoveShow(show);
-    }
+    public void Delete(TvShow show) => storageProvider.RemoveShow(show);
 
     /// <summary>
     ///     Saves the specified show.

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
@@ -9,27 +10,33 @@ namespace TVSorter.Data;
 
 public class TvSorterDbContext : DbContext
 {
+    private readonly string _dbPath;
+
     public DbSet<TvShow> TvShows { get; set; }
     public DbSet<Episode> Episodes { get; set; }
     public DbSet<Setting> Settings { get; set; }
 
-    public TvSorterDbContext(DbContextOptions options) : base(options) => Database.EnsureCreated();
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    public TvSorterDbContext()
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+        var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data\\");
+        _dbPath = Path.Join(path, "tvsorter.db");
+
+        if (!File.Exists(_dbPath))
+        {
+            Directory.CreateDirectory(path);
+            Database.Migrate();
+        }
     }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder options)
+        => options.UseSqlite($"Data Source={_dbPath}");
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder) => modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
 }
 
 public class TvSorterDbContextFactory : IDesignTimeDbContextFactory<TvSorterDbContext>
 {
-    public TvSorterDbContext CreateDbContext(string[] args)
-    {
-        var optionsBuilder = new DbContextOptionsBuilder<TvSorterDbContext>();
-        optionsBuilder.UseSqlite($"Data Source={Path.Combine(Assembly.GetExecutingAssembly().Location, "Data\\tvsorter.db")}");
-
-        return new TvSorterDbContext(optionsBuilder.Options);
-    }
+    public TvSorterDbContext CreateDbContext(string[] args) => new();
 }
 
 public class Setting
@@ -61,8 +68,5 @@ public class TvShowEntityTypeConfiguration : IEntityTypeConfiguration<TvShow>
 
 public class EpisodeEntityTypeConfiguration : IEntityTypeConfiguration<Episode>
 {
-    public void Configure(EntityTypeBuilder<Episode> builder)
-    {
-        builder.HasKey(x => x.TvdbId);
-    }
+    public void Configure(EntityTypeBuilder<Episode> builder) => builder.HasKey(x => x.TvdbId);
 }

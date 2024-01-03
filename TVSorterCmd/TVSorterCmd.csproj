@@ -7,11 +7,8 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<AssemblyTitle>TVSorter</AssemblyTitle>
 		<Product>TVSorterCmd</Product>
-		<Copyright>Copyright ©  2012</Copyright>
-		<Version>1.2</Version>
-		<AssemblyVersion>1.5.1.0</AssemblyVersion>
-		<FileVersion>1.5.1.0</FileVersion>
-		<CodeAnalysisRuleSet>..\Stylecop.ruleset</CodeAnalysisRuleSet>
+		<Copyright>Copyright © 2024</Copyright>
+		<Version>2.0.0-beta</Version>
 		<OutputPath>..\bin\</OutputPath>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">

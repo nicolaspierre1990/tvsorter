@@ -83,130 +83,136 @@ namespace TVSorter.View
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TableLayoutPanel tableMain;
-            System.Windows.Forms.FlowLayoutPanel flowBottomButtons;
-            this.closeButton = new System.Windows.Forms.Button();
-            this.saveButton = new System.Windows.Forms.Button();
-            this.list = new System.Windows.Forms.ListBox();
-            this.text = new System.Windows.Forms.TextBox();
-            this.addButton = new System.Windows.Forms.Button();
-            this.removeButton = new System.Windows.Forms.Button();
-            tableMain = new System.Windows.Forms.TableLayoutPanel();
-            flowBottomButtons = new System.Windows.Forms.FlowLayoutPanel();
+            TableLayoutPanel tableMain;
+            FlowLayoutPanel flowBottomButtons;
+            closeButton = new Button();
+            saveButton = new Button();
+            list = new ListBox();
+            text = new TextBox();
+            addButton = new Button();
+            removeButton = new Button();
+            tableMain = new TableLayoutPanel();
+            flowBottomButtons = new FlowLayoutPanel();
             tableMain.SuspendLayout();
             flowBottomButtons.SuspendLayout();
-            this.SuspendLayout();
+            SuspendLayout();
             // 
             // tableMain
             // 
             tableMain.ColumnCount = 2;
-            tableMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 118F));
+            tableMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableMain.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 157F));
             tableMain.Controls.Add(flowBottomButtons, 0, 2);
-            tableMain.Controls.Add(this.list, 0, 1);
-            tableMain.Controls.Add(this.text, 0, 0);
-            tableMain.Controls.Add(this.addButton, 1, 0);
-            tableMain.Controls.Add(this.removeButton, 1, 1);
-            tableMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableMain.Location = new System.Drawing.Point(0, 0);
+            tableMain.Controls.Add(list, 0, 1);
+            tableMain.Controls.Add(text, 0, 0);
+            tableMain.Controls.Add(addButton, 1, 0);
+            tableMain.Controls.Add(removeButton, 1, 1);
+            tableMain.Dock = DockStyle.Fill;
+            tableMain.Location = new Point(0, 0);
+            tableMain.Margin = new Padding(4, 5, 4, 5);
             tableMain.Name = "tableMain";
             tableMain.RowCount = 3;
-            tableMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
-            tableMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            tableMain.Size = new System.Drawing.Size(306, 237);
+            tableMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 43F));
+            tableMain.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableMain.RowStyles.Add(new RowStyle(SizeType.Absolute, 46F));
+            tableMain.Size = new Size(408, 365);
             tableMain.TabIndex = 0;
             // 
             // flowBottomButtons
             // 
             tableMain.SetColumnSpan(flowBottomButtons, 2);
-            flowBottomButtons.Controls.Add(this.closeButton);
-            flowBottomButtons.Controls.Add(this.saveButton);
-            flowBottomButtons.Dock = System.Windows.Forms.DockStyle.Fill;
-            flowBottomButtons.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowBottomButtons.Location = new System.Drawing.Point(0, 207);
-            flowBottomButtons.Margin = new System.Windows.Forms.Padding(0);
+            flowBottomButtons.Controls.Add(closeButton);
+            flowBottomButtons.Controls.Add(saveButton);
+            flowBottomButtons.Dock = DockStyle.Fill;
+            flowBottomButtons.FlowDirection = FlowDirection.RightToLeft;
+            flowBottomButtons.Location = new Point(0, 319);
+            flowBottomButtons.Margin = new Padding(0);
             flowBottomButtons.Name = "flowBottomButtons";
-            flowBottomButtons.Size = new System.Drawing.Size(306, 30);
+            flowBottomButtons.Size = new Size(408, 46);
             flowBottomButtons.TabIndex = 0;
             // 
             // closeButton
             // 
-            this.closeButton.Location = new System.Drawing.Point(228, 3);
-            this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(75, 23);
-            this.closeButton.TabIndex = 1;
-            this.closeButton.Text = "Close";
-            this.closeButton.UseVisualStyleBackColor = true;
-            this.closeButton.Click += new System.EventHandler(this.CloseButtonClick);
+            closeButton.Location = new Point(304, 5);
+            closeButton.Margin = new Padding(4, 5, 4, 5);
+            closeButton.Name = "closeButton";
+            closeButton.Size = new Size(100, 35);
+            closeButton.TabIndex = 1;
+            closeButton.Text = "Close";
+            closeButton.UseVisualStyleBackColor = true;
+            closeButton.Click += CloseButtonClick;
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(147, 3);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 23);
-            this.saveButton.TabIndex = 0;
-            this.saveButton.Text = "OK";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.SaveButtonClick);
+            saveButton.Location = new Point(196, 5);
+            saveButton.Margin = new Padding(4, 5, 4, 5);
+            saveButton.Name = "saveButton";
+            saveButton.Size = new Size(100, 35);
+            saveButton.TabIndex = 0;
+            saveButton.Text = "OK";
+            saveButton.UseVisualStyleBackColor = true;
+            saveButton.Click += SaveButtonClick;
             // 
             // list
             // 
-            this.list.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.list.FormattingEnabled = true;
-            this.list.Location = new System.Drawing.Point(3, 31);
-            this.list.Name = "list";
-            this.list.Size = new System.Drawing.Size(182, 173);
-            this.list.TabIndex = 1;
+            list.Dock = DockStyle.Fill;
+            list.FormattingEnabled = true;
+            list.Location = new Point(4, 48);
+            list.Margin = new Padding(4, 5, 4, 5);
+            list.Name = "list";
+            list.Size = new Size(243, 266);
+            list.TabIndex = 1;
             // 
             // text
             // 
-            this.text.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.text.Location = new System.Drawing.Point(3, 3);
-            this.text.Name = "text";
-            this.text.Size = new System.Drawing.Size(182, 20);
-            this.text.TabIndex = 2;
+            text.Dock = DockStyle.Fill;
+            text.Location = new Point(4, 5);
+            text.Margin = new Padding(4, 5, 4, 5);
+            text.Name = "text";
+            text.Size = new Size(243, 27);
+            text.TabIndex = 2;
             // 
             // addButton
             // 
-            this.addButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.addButton.Location = new System.Drawing.Point(191, 3);
-            this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(112, 22);
-            this.addButton.TabIndex = 3;
-            this.addButton.Text = "Add";
-            this.addButton.UseVisualStyleBackColor = true;
-            this.addButton.Click += new System.EventHandler(this.AddButtonClick);
+            addButton.Dock = DockStyle.Fill;
+            addButton.Location = new Point(255, 5);
+            addButton.Margin = new Padding(4, 5, 4, 5);
+            addButton.Name = "addButton";
+            addButton.Size = new Size(149, 33);
+            addButton.TabIndex = 3;
+            addButton.Text = "Add";
+            addButton.UseVisualStyleBackColor = true;
+            addButton.Click += AddButtonClick;
             // 
             // removeButton
             // 
-            this.removeButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.removeButton.Location = new System.Drawing.Point(191, 31);
-            this.removeButton.Name = "removeButton";
-            this.removeButton.Size = new System.Drawing.Size(112, 23);
-            this.removeButton.TabIndex = 4;
-            this.removeButton.Text = "Remove";
-            this.removeButton.UseVisualStyleBackColor = true;
-            this.removeButton.Click += new System.EventHandler(this.RemoveButtonClick);
+            removeButton.Dock = DockStyle.Top;
+            removeButton.Location = new Point(255, 48);
+            removeButton.Margin = new Padding(4, 5, 4, 5);
+            removeButton.Name = "removeButton";
+            removeButton.Size = new Size(149, 35);
+            removeButton.TabIndex = 4;
+            removeButton.Text = "Remove";
+            removeButton.UseVisualStyleBackColor = true;
+            removeButton.Click += RemoveButtonClick;
             // 
             // ListDialog
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(306, 237);
-            this.ControlBox = false;
-            this.Controls.Add(tableMain);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Name = "ListDialog";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "ListDialog";
-            this.Load += new System.EventHandler(this.ListDialogLoad);
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(408, 365);
+            ControlBox = false;
+            Controls.Add(tableMain);
+            FormBorderStyle = FormBorderStyle.SizableToolWindow;
+            Margin = new Padding(4, 5, 4, 5);
+            Name = "ListDialog";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "ListDialog";
+            Load += ListDialogLoad;
             tableMain.ResumeLayout(false);
             tableMain.PerformLayout();
             flowBottomButtons.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            ResumeLayout(false);
         }
-
     }
 }

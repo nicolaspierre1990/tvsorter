@@ -15,14 +15,6 @@ namespace TVSorter.Model
     public class MissingEpisodeSettings
     {
         /// <summary>
-        ///     Initialises a new instance of the <see cref="MissingEpisodeSettings" /> class.
-        /// </summary>
-        internal MissingEpisodeSettings()
-        {
-            SetDefault();
-        }
-
-        /// <summary>
         ///     Gets or sets a value indicating whether to hide locked shows from missing episode searches.
         /// </summary>
         public bool HideLocked { get; set; }
@@ -50,13 +42,16 @@ namespace TVSorter.Model
         /// <summary>
         ///     Initialises the settings to default values.
         /// </summary>
-        private void SetDefault()
+        public static MissingEpisodeSettings GetDefault()
         {
-            HideLocked = false;
-            HideMissingSeasons = false;
-            HideNotYetAired = false;
-            HidePart2 = false;
-            HideSeason0 = false;
+            return new MissingEpisodeSettings
+            {
+                HideLocked = false,
+                HideMissingSeasons = false,
+                HideNotYetAired = false,
+                HidePart2 = false,
+                HideSeason0 = false
+            };
         }
     }
 }

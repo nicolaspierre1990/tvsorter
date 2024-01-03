@@ -19,6 +19,14 @@ namespace TVSorter.Storage
     public interface IStorageProvider
     {
         /// <summary>
+        /// Gets a value indicating whether this instance is available.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is available; otherwise, <c>false</c>.
+        /// </value>
+        bool IsAvailable { get; }
+
+        /// <summary>
         ///     Gets the settings object.
         /// </summary>
         Settings Settings { get; }
