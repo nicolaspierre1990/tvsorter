@@ -148,7 +148,7 @@
 		<None Include="Resources\lock.png" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\TheTvdbDotNet\src\TheTvdbDotNet.Ninject\TheTvdbDotNet.Ninject.csproj" />
+		<ProjectReference Include="..\TheTvdbDotNet.Ninject\TheTvdbDotNet.Ninject.csproj" />
 		<ProjectReference Include="..\TVSorterLib\TVSorterLib.csproj" />
 	</ItemGroup>
 </Project>

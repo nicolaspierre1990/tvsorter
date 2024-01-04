@@ -8,43 +8,60 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
-using System.Reflection;
 using System.Windows.Forms;
 
-namespace TVSorter.View
+namespace TVSorter.View;
+
+/// <summary>
+///     The main form of the program.
+/// </summary>
+public partial class MainForm : Form
 {
     /// <summary>
-    ///     The main form of the program.
+    ///     Initialises a new instance of the <see cref="MainForm" /> class.
     /// </summary>
-    public partial class MainForm : Form
+    public MainForm()
     {
-        /// <summary>
-        ///     Initialises a new instance of the <see cref="MainForm" /> class.
-        /// </summary>
-        public MainForm()
+        InitializeComponent();
+        FormClosed += MainForm_FormClosed;
+        WindowState = FormWindowState.Maximized;
+        StartPosition = FormStartPosition.CenterScreen;
+    }
+
+    /// <summary>
+    ///     Handles the load event for the form.
+    /// </summary>
+    /// <param name="sender">
+    ///     The sender of the event.
+    /// </param>
+    /// <param name="e">
+    ///     The arguments of the event.
+    /// </param>
+    private void MainFormLoad(object sender, EventArgs e)
+    {
+        Text = $"TV Sorter v{CompositionRoot.Version}";
+        LoadTabContent<SortEpisodes>(sortEpisodesPage);
+        LoadTabContent<TvShows>(tvShowsPage);
+        LoadTabContent<MissingDuplicateEpisodes>(missingDuplicatePage);
+        LoadTabContent<Settings>(settingsPage);
+        LoadTabContent<Log>(logPage);
+    }
+
+    /// <summary>
+    /// Handles the FormClosed event of the MainForm control.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="FormClosedEventArgs"/> instance containing the event data.</param>
+    private void MainForm_FormClosed(object sender, FormClosedEventArgs e) => Application.Exit();
+
+    private static void LoadTabContent<TTabControl>(TabPage tabPage)
+        where TTabControl : UserControl, new()
+    {
+        TTabControl tabControl = new()
         {
-            InitializeComponent();
-            FormClosed += MainForm_FormClosed;
-            WindowState = FormWindowState.Maximized;
-            StartPosition = FormStartPosition.CenterScreen;
-        }
+            Dock = DockStyle.Fill
+        };
 
-        /// <summary>
-        ///     Handles the load event for the form.
-        /// </summary>
-        /// <param name="sender">
-        ///     The sender of the event.
-        /// </param>
-        /// <param name="e">
-        ///     The arguments of the event.
-        /// </param>
-        private void MainFormLoad(object sender, EventArgs e) => Text = $"TV Sorter v{CompositionRoot.Version}";
-
-        /// <summary>
-        /// Handles the FormClosed event of the MainForm control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="FormClosedEventArgs"/> instance containing the event data.</param>
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e) => Application.Exit();
+        tabPage.Controls.Add(tabControl);
     }
 }

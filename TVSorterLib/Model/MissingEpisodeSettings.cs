@@ -14,6 +14,8 @@ namespace TVSorter.Model
     /// </summary>
     public class MissingEpisodeSettings
     {
+        public const string SETTING_NAME = "MissingEpisodeSettings";
+
         /// <summary>
         ///     Gets or sets a value indicating whether to hide locked shows from missing episode searches.
         /// </summary>

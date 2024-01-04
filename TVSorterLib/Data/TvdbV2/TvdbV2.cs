@@ -103,7 +103,7 @@ public class TvdbV2(ITvdbSeries series, ITvdbSearch search, ITvdbUpdate update, 
             streamWriter.WriteStream(banner, targetPath);
         }
 
-        var newEpisodesResult = await series.GetAllEpisodesAsync(show.TvdbId);
+        var newEpisodesResult = await series.GetAllEpisodesAsync(show.TvdbId, cancellationToken: cancellationToken);
         var newEpisodes = newEpisodesResult.Select(
                 x => new Episode
                 {
@@ -128,6 +128,7 @@ public class TvdbV2(ITvdbSeries series, ITvdbSearch search, ITvdbUpdate update, 
                 var currentEpisode = show.Episodes.FirstOrDefault(x => x.Equals(episode));
                 if (currentEpisode != null)
                 {
+                    episode.OriginalFileName = currentEpisode.OriginalFileName;
                     episode.FileCount = currentEpisode.FileCount;
                 }
             }

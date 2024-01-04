@@ -29,5 +29,6 @@ public class LibraryModule : NinjectModule
         Bind<IStreamWriter>().To<StreamWriter>().InSingletonScope();
 
         Bind<TvSorterDbContext>().ToSelf().InThreadScope();
+        Bind<XMLToSQLMigration>().ToSelf().InSingletonScope();
     }
 }

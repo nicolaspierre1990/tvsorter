@@ -56,6 +56,14 @@ public class Episode : IEquatable<Episode>
     public int ShowId { get; set; }
 
     /// <summary>
+    /// Gets or sets the name of the original file.
+    /// </summary>
+    /// <value>
+    /// The name of the original.
+    /// </value>
+    public string OriginalFileName { get; set; }
+
+    /// <summary>
     ///     Gets or sets the TVDB ID.
     /// </summary>
     public string TvdbId { get; set; }

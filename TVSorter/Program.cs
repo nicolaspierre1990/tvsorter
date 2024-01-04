@@ -13,30 +13,29 @@ using Ninject;
 using TheTvdbDotNet.Ninject;
 using TVSorter.View;
 
-namespace TVSorter
+namespace TVSorter;
+
+/// <summary>
+///     TVSorter's Program.
+/// </summary>
+internal static class Program
 {
     /// <summary>
-    ///     TVSorter's Program.
+    ///     The main entry point for the application.
     /// </summary>
-    internal static class Program
+    [STAThread]
+    private static void Main()
     {
-        /// <summary>
-        ///     The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        private static void Main()
-        {
-            IKernel kernel = new StandardKernel(
-                new InterfaceModule(),
-                new LibraryModule(),
-                new TheTvdbDotNetModule("1c1cc44893259628eca511dfbe4ebc52"));
-            CompositionRoot.SetKernel(kernel);
+        IKernel kernel = new StandardKernel(
+            new InterfaceModule(),
+            new LibraryModule(),
+            new TheTvdbDotNetModule("1c1cc44893259628eca511dfbe4ebc52"));
+        CompositionRoot.SetKernel(kernel);
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+        Application.EnableVisualStyles();
+        Application.SetCompatibleTextRenderingDefault(false);
 
 
-            Application.Run(kernel.Get<StartupWindow>());
-        }
+        Application.Run(kernel.Get<StartupWindow>());
     }
 }

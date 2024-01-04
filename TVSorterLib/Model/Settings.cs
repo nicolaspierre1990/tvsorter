@@ -17,7 +17,8 @@ namespace TVSorter.Model;
 ///     The settings.
 /// </summary>
 public class Settings
-{ 
+{
+    public const string SETTING_NAME = "Settings";
     /// <summary>
     ///     Gets or sets a value indicating whether unmatched shows should be added.
     /// </summary>

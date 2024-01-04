@@ -113,11 +113,9 @@ namespace TVSorter.View
             sortEpisodesPage = new TabPage();
             tvShowsPage = new TabPage();
             missingDuplicatePage = new TabPage();
-            missingDuplicateEpisodes = new MissingDuplicateEpisodes();
             settingsPage = new TabPage();
             logPage = new TabPage();
             mainTabs.SuspendLayout();
-            missingDuplicatePage.SuspendLayout();
             SuspendLayout();
             // 
             // mainTabs
@@ -158,7 +156,6 @@ namespace TVSorter.View
             // 
             // missingDuplicatePage
             // 
-            missingDuplicatePage.Controls.Add(missingDuplicateEpisodes);
             missingDuplicatePage.Location = new Point(4, 29);
             missingDuplicatePage.Margin = new Padding(4, 5, 4, 5);
             missingDuplicatePage.Name = "missingDuplicatePage";
@@ -166,15 +163,6 @@ namespace TVSorter.View
             missingDuplicatePage.TabIndex = 3;
             missingDuplicatePage.Text = "Missing / Duplicate Episodes";
             missingDuplicatePage.UseVisualStyleBackColor = true;
-            // 
-            // missingDuplicateEpisodes
-            // 
-            missingDuplicateEpisodes.Dock = DockStyle.Fill;
-            missingDuplicateEpisodes.Location = new Point(0, 0);
-            missingDuplicateEpisodes.Margin = new Padding(5, 8, 5, 8);
-            missingDuplicateEpisodes.Name = "missingDuplicateEpisodes";
-            missingDuplicateEpisodes.Size = new Size(1248, 945);
-            missingDuplicateEpisodes.TabIndex = 0;
             // 
             // settingsPage
             // 
@@ -209,7 +197,6 @@ namespace TVSorter.View
             Text = "TV Sorter";
             Load += MainFormLoad;
             mainTabs.ResumeLayout(false);
-            missingDuplicatePage.ResumeLayout(false);
             ResumeLayout(false);
         }
     }

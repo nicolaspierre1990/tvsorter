@@ -93,10 +93,7 @@ public partial class SortEpisodes : UserControl, IView
     /// <param name="e">
     ///     The arguments of the event.
     /// </param>
-    private void CopyButtonClick(object sender, EventArgs e)
-    {
-        controller.CopyEpisodes();
-    }
+    private void CopyButtonClick(object sender, EventArgs e) => controller.CopyEpisodes();
 
     /// <summary>
     ///     Handles the Deselect all button being clicked.
@@ -124,10 +121,7 @@ public partial class SortEpisodes : UserControl, IView
     /// <param name="e">
     ///     The arguments of the event.
     /// </param>
-    private void MoveButtonClick(object sender, EventArgs e)
-    {
-        controller.MoveEpisodes();
-    }
+    private void MoveButtonClick(object sender, EventArgs e) => controller.MoveEpisodes();
 
     /// <summary>
     ///     Processes the results of a scan
@@ -192,10 +186,7 @@ public partial class SortEpisodes : UserControl, IView
     /// <param name="e">
     ///     The arguments of the event.
     /// </param>
-    private void ScanButtonClick(object sender, EventArgs e)
-    {
-        controller.ScanEpisodes((string)subDirectoryFilter.SelectedItem);
-    }
+    private void ScanButtonClick(object sender, EventArgs e) => controller.ScanEpisodes((string)subDirectoryFilter.SelectedItem);
 
     /// <summary>
     ///     Handles the Select All button being clicked.

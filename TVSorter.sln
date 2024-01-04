@@ -3,22 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TVSorter", "tvsorter\TVSorter.csproj", "{90CB0336-FD4A-48CF-AAA3-92DD2F0CED94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TVSorter", "tvsorter\TVSorter.csproj", "{90CB0336-FD4A-48CF-AAA3-92DD2F0CED94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TVSorterLib", "TVSorterLib\TVSorterLib.csproj", "{70096D06-63B7-4057-A40E-C5CCBE6BACE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TVSorterLib", "TVSorterLib\TVSorterLib.csproj", "{70096D06-63B7-4057-A40E-C5CCBE6BACE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TVSorterCmd", "TVSorterCmd\TVSorterCmd.csproj", "{AB5BF33E-EA7D-4475-9B4B-5CE9CBFD32E4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TVSorter.Test", "TVSorter.Test\TVSorter.Test.csproj", "{6551555C-2B88-4359-8CEF-ECB89FFC8205}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheTvdbDotNet.Ninject", "..\TheTvdbDotNet\src\TheTvdbDotNet.Ninject\TheTvdbDotNet.Ninject.csproj", "{5210A560-7FA2-4E09-9E9C-4C8FB56016AA}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheTvdbDotNet", "..\TheTvdbDotNet\src\TheTvdbDotNet\TheTvdbDotNet.csproj", "{1DDEF817-E341-4773-81AF-77FA596FEE07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TVSorter.Test", "TVSorter.Test\TVSorter.Test.csproj", "{6551555C-2B88-4359-8CEF-ECB89FFC8205}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F9BA680F-EC4B-4E02-8B07-2C20944D9744}"
 	ProjectSection(SolutionItems) = preProject
 		bin\TVSorter.xml = bin\TVSorter.xml
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D51275C0-FD11-4167-8349-CE87B606DA05}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C94BBC02-2944-4B15-B9B0-AB6E45CCE712}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheTvdbDotNet", "TheTvdbDotNet\TheTvdbDotNet.csproj", "{CBCE551B-A6F6-4ED3-A815-57BBC881D53A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheTvdbDotNet.Ninject", "TheTvdbDotNet.Ninject\TheTvdbDotNet.Ninject.csproj", "{C4D6FF77-8BFA-45BD-854B-270355EEB124}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,25 +36,28 @@ Global
 		{70096D06-63B7-4057-A40E-C5CCBE6BACE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70096D06-63B7-4057-A40E-C5CCBE6BACE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70096D06-63B7-4057-A40E-C5CCBE6BACE9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AB5BF33E-EA7D-4475-9B4B-5CE9CBFD32E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AB5BF33E-EA7D-4475-9B4B-5CE9CBFD32E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AB5BF33E-EA7D-4475-9B4B-5CE9CBFD32E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AB5BF33E-EA7D-4475-9B4B-5CE9CBFD32E4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6551555C-2B88-4359-8CEF-ECB89FFC8205}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6551555C-2B88-4359-8CEF-ECB89FFC8205}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6551555C-2B88-4359-8CEF-ECB89FFC8205}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6551555C-2B88-4359-8CEF-ECB89FFC8205}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5210A560-7FA2-4E09-9E9C-4C8FB56016AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5210A560-7FA2-4E09-9E9C-4C8FB56016AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5210A560-7FA2-4E09-9E9C-4C8FB56016AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5210A560-7FA2-4E09-9E9C-4C8FB56016AA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1DDEF817-E341-4773-81AF-77FA596FEE07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1DDEF817-E341-4773-81AF-77FA596FEE07}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1DDEF817-E341-4773-81AF-77FA596FEE07}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1DDEF817-E341-4773-81AF-77FA596FEE07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBCE551B-A6F6-4ED3-A815-57BBC881D53A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBCE551B-A6F6-4ED3-A815-57BBC881D53A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBCE551B-A6F6-4ED3-A815-57BBC881D53A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBCE551B-A6F6-4ED3-A815-57BBC881D53A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4D6FF77-8BFA-45BD-854B-270355EEB124}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4D6FF77-8BFA-45BD-854B-270355EEB124}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4D6FF77-8BFA-45BD-854B-270355EEB124}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4D6FF77-8BFA-45BD-854B-270355EEB124}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{90CB0336-FD4A-48CF-AAA3-92DD2F0CED94} = {D51275C0-FD11-4167-8349-CE87B606DA05}
+		{70096D06-63B7-4057-A40E-C5CCBE6BACE9} = {D51275C0-FD11-4167-8349-CE87B606DA05}
+		{6551555C-2B88-4359-8CEF-ECB89FFC8205} = {C94BBC02-2944-4B15-B9B0-AB6E45CCE712}
+		{CBCE551B-A6F6-4ED3-A815-57BBC881D53A} = {D51275C0-FD11-4167-8349-CE87B606DA05}
+		{C4D6FF77-8BFA-45BD-854B-270355EEB124} = {D51275C0-FD11-4167-8349-CE87B606DA05}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4A962E5E-1EB5-43F2-AAA0-88435DD9E1D6}

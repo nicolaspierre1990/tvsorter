@@ -52,7 +52,7 @@ public class SQLLiteProvider : IStorageProvider
 
     public Settings LoadSettings()
     {
-        var missingEpisodeSettings = dbContext.Settings.Find("MissingEpisodeSettings");
+        var missingEpisodeSettings = dbContext.Settings.Find(MissingEpisodeSettings.SETTING_NAME);
         if (missingEpisodeSettings == null)
         {
             MissingEpisodeSettings = MissingEpisodeSettings.GetDefault();
@@ -63,7 +63,7 @@ public class SQLLiteProvider : IStorageProvider
             MissingEpisodeSettings = JsonSerializer.Deserialize<MissingEpisodeSettings>(missingEpisodeSettings.SettingValue);
         }
 
-        var generalSettings = dbContext.Settings.Find("Settings");
+        var generalSettings = dbContext.Settings.Find(Settings.SETTING_NAME);
         if (generalSettings == null)
         {
             Settings = Settings.GetDefault();
@@ -95,12 +95,12 @@ public class SQLLiteProvider : IStorageProvider
 
     public void SaveMissingEpisodeSettings()
     {
-        var missingEpisodeSettings = dbContext.Settings.Find("MissingEpisodeSettings");
+        var missingEpisodeSettings = dbContext.Settings.Find(MissingEpisodeSettings.SETTING_NAME);
         var missingEpisodeSettingsValue = JsonSerializer.Serialize(MissingEpisodeSettings);
 
         if (missingEpisodeSettings == null)
         {
-            dbContext.Add(new Setting { SettingName = "MissingEpisodeSettings", SettingValue = missingEpisodeSettingsValue });
+            dbContext.Add(new Setting { SettingName = MissingEpisodeSettings.SETTING_NAME, SettingValue = missingEpisodeSettingsValue });
             dbContext.SaveChanges();
         }
         else
@@ -116,12 +116,12 @@ public class SQLLiteProvider : IStorageProvider
 
     public void SaveSettings()
     {
-        var settings = dbContext.Settings.Find("Settings");
+        var settings = dbContext.Settings.Find(Settings.SETTING_NAME);
         var settingsValue = JsonSerializer.Serialize(Settings);
 
         if (settings == null)
         {
-            dbContext.Add(new Setting { SettingName = "Settings", SettingValue = settingsValue });
+            dbContext.Add(new Setting { SettingName = Settings.SETTING_NAME, SettingValue = settingsValue });
         }
         else
         {

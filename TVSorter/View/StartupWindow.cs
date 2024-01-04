@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Ninject;
@@ -46,6 +47,22 @@ public partial class StartupWindow : Form
         while (!_storageProvider.IsAvailable)
         {
             Task.Delay(100).GetAwaiter().GetResult();
+        }
+
+        worker.ReportProgress(35, "Checking old xml file presence");
+
+        if (File.Exists(Path.Combine(Directory.GetCurrentDirectory(), "TVSorter.xml")))
+        {
+            var migration = CompositionRoot.Get<XMLToSQLMigration>();
+            migration.MigrateToSqlAsync().GetAwaiter().GetResult();
+
+            //remove .xsd files
+            foreach (var xmlSchemaPath in Directory.GetFiles(Directory.GetCurrentDirectory(), "*.xsd", SearchOption.TopDirectoryOnly))
+            {
+                File.Delete(xmlSchemaPath);
+            }
+
+            File.Delete(Path.Combine(Directory.GetCurrentDirectory(), "TVSorter.xml"));
         }
 
         worker.ReportProgress(50, "Loading Data");
