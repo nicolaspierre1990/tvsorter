@@ -147,6 +147,8 @@ public class SQLLiteProvider : IStorageProvider
             dbContext.TvShows.Add(show);
             OnTvShowAdded(show);
         }
+
+        dbContext.SaveChanges();
     }
 
     public void SaveShows(IEnumerable<TvShow> shows) => shows.ToList().ForEach(SaveShow);

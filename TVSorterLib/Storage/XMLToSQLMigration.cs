@@ -12,14 +12,14 @@ namespace TVSorter.Storage;
 public class XMLToSQLMigration
 {
     private readonly TvSorterDbContext _dataContext;
-    private readonly ITvShowRepository _tvShowRepository;
+    private readonly IStorageProvider _storageProvider;
 
     public event EventHandler<MigrationPartCompletedEventArgs> MigrationPartCompleted;
 
     public XMLToSQLMigration()
     {
         _dataContext = CompositionRoot.Get<TvSorterDbContext>();
-        _tvShowRepository = CompositionRoot.Get<ITvShowRepository>();
+        _storageProvider = CompositionRoot.Get<IStorageProvider>();
     }
 
     public async Task MigrateToSqlAsync()
@@ -59,7 +59,7 @@ public class XMLToSQLMigration
                 tvShow.Episodes.ForEach(e => e.ShowId = tvShow.TvdbId);
             }
 
-            _tvShowRepository.UpdateShows(tvShows.ToList());
+            _storageProvider.SaveShows(tvShows.ToList());
 
             OnMigrationPartCompleted(new MigrationPartCompletedEventArgs { MigrationPart = "Shows migrated" });
 
