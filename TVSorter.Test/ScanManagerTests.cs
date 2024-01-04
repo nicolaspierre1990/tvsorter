@@ -59,7 +59,7 @@ public class ScanManagerTests : ManagerTestBase
     /// </summary>
     /// <param name="format">The format being tested.</param>
     /// <param name="expectedResult">The expected result.</param>
-    [Theory(Skip = "Check values")]
+    [Theory]
     [InlineData(
         @"{FName}\Season {SNum(1)}\{SName(.)}.S{SNum(2)}E{ENum(2)}.{EName(.)}{Ext}",
         @"Alpha Folder\Season 1\Alpha.Show.S01E01.Episode.One.(1).avi")]
@@ -125,7 +125,7 @@ public class ScanManagerTests : ManagerTestBase
         StorageProvider.When(x => x.SaveShow(alpha))
             .Do(x => Assert.Contains("ShowName", x.Arg<TvShow>().AlternateNames));
 
-        var results = scanManager.Refresh(Root.FullName);
+        var results = scanManager.Refresh(Root);
 
         // There should be one result matching Delta Episode 1.
         results.Should().HaveCount(1, "There should be one result.");
@@ -159,7 +159,7 @@ public class ScanManagerTests : ManagerTestBase
         dataProvider.When(x => x.UpdateShow(delta)).Do(x => { delta.Episodes = [episode1]; });
 
         // Search the folder.
-        var results = scanManager.Refresh(Root.FullName);
+        var results = scanManager.Refresh(Root);
 
         // There should be one result matching Delta Episode 1.
         results.Should().HaveCount(1, "There should be one result.");
@@ -199,7 +199,7 @@ public class ScanManagerTests : ManagerTestBase
     {
         CreateTestFile(Root, "Alpha.S01E01-02.avi");
 
-        var results = scanManager.Refresh(Root.FullName);
+        var results = scanManager.Refresh(Root);
 
         results.Should().HaveCount(1, "There should be one result.");
         MatchesShow1(results[0]);
@@ -228,7 +228,7 @@ public class ScanManagerTests : ManagerTestBase
     {
         CreateTestFile(Root, "Alpha." + seasonEpisodeNumber + ".avi");
 
-        var results = scanManager.Refresh(Root.FullName);
+        var results = scanManager.Refresh(Root);
 
         results.Should().HaveCount(1, "There should be one result.");
         MatchesShow1(results[0]);
@@ -257,7 +257,7 @@ public class ScanManagerTests : ManagerTestBase
     {
         CreateTestFile(Root, showName + ".S01E01.avi");
 
-        var results = scanManager.Refresh(Root.FullName);
+        var results = scanManager.Refresh(Root);
 
         results.Should().HaveCount(1, "There should be one result.");
         MatchesShow1(results[0]);
@@ -272,7 +272,7 @@ public class ScanManagerTests : ManagerTestBase
         CreateTestFile(Root, "Alpha.avi");
         CreateTestFile(Root, "Alpha.S01E01.noext");
 
-        var results = scanManager.Refresh(Root.FullName);
+        var results = scanManager.Refresh(Root);
 
         results.Should().HaveCount(0, "There should be one result.");
     }
@@ -285,7 +285,7 @@ public class ScanManagerTests : ManagerTestBase
     {
         var sub = CreateTestDirectory(Root, "Sub");
         CreateTestFile(sub[0], "Alpha.S01E01.avi");
-        var results = scanManager.Refresh(Root.FullName);
+        var results = scanManager.Refresh(Root);
         results.Should().HaveCount(0, "There should be one result.");
     }
 
@@ -300,7 +300,7 @@ public class ScanManagerTests : ManagerTestBase
 
         StorageProvider.Settings.RecurseSubdirectories = true;
 
-        var results = scanManager.Refresh(Root.FullName);
+        var results = scanManager.Refresh(Root);
         results.Should().HaveCount(1, "There should be one result.");
         MatchesShow1(results[0]);
     }
@@ -355,7 +355,7 @@ public class ScanManagerTests : ManagerTestBase
     {
         CreateTestFile(Root, "Alpha." + seasonEpisodeNumber + ".avi");
 
-        var results = scanManager.Refresh(Root.FullName);
+        var results = scanManager.Refresh(Root);
 
         results.Should().HaveCount(1, "There should be one result.");
         MatchesShow1(results[0]);
@@ -370,7 +370,7 @@ public class ScanManagerTests : ManagerTestBase
     {
         CreateTestFile(Root, "Alpha.S01E01.avi");
 
-        var results = scanManager.Refresh(Root.FullName);
+        var results = scanManager.Refresh(Root);
 
         results.Should().HaveCount(1, "There should be one result.");
         MatchesShow1(results[0]);
@@ -388,7 +388,7 @@ public class ScanManagerTests : ManagerTestBase
     {
         CreateTestFile(Root, "Alpha.S02E02.avi");
 
-        var results = scanManager.Refresh(Root.FullName);
+        var results = scanManager.Refresh(Root);
 
         results.Should().HaveCount(1, "There should be one result.");
         scanManager.ResetShow(results[0], TestShows.First(x => x.Name == "Beta Show"));
@@ -404,7 +404,7 @@ public class ScanManagerTests : ManagerTestBase
     {
         CreateTestFile(Root, "Alpha.S02E02.avi");
 
-        var results = scanManager.Refresh(Root.FullName);
+        var results = scanManager.Refresh(Root);
 
         results.Should().HaveCount(1, "There should be one result.");
         scanManager.ResetShow(results[0], null);

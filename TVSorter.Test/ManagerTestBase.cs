@@ -99,6 +99,8 @@ public abstract class ManagerTestBase
         // Set Load TvShows to return the TestShows.
         StorageProvider.LoadTvShows().Returns(TestShows);
 
+        var defaultSettings = Settings.GetDefault();
+
         // When LoadSettings is called, set the settings.
         StorageProvider.Settings.Returns(
             new Settings
@@ -109,6 +111,9 @@ public abstract class ManagerTestBase
                 DestinationDirectories = ["TV"],
                 DefaultDestinationDirectory = "TV",
                 AddUnmatchedShows = true,
+                RegularExpressions = defaultSettings.RegularExpressions,
+                IgnoredDirectories = [],
+                DefaultOutputFormat = defaultSettings.DefaultOutputFormat
             });
 
         Root = CreateTestDirectory(null, "TV")[0];
