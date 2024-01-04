@@ -1,9 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using TVSorter.Data;
 using TVSorter.Model;
 using TVSorter.Repostitory;
+using static TVSorter.Storage.XMLToSQLMigration;
 
 namespace TVSorter.Storage;
 
@@ -11,6 +13,8 @@ public class XMLToSQLMigration
 {
     private readonly TvSorterDbContext _dataContext;
     private readonly ITvShowRepository _tvShowRepository;
+
+    public event EventHandler<MigrationPartCompletedEventArgs> MigrationPartCompleted;
 
     public XMLToSQLMigration()
     {
@@ -36,6 +40,8 @@ public class XMLToSQLMigration
                 missingEpisodeSettings.SettingValue = JsonSerializer.Serialize(_xmlDocument.MissingEpisodeSettings);
             }
 
+            OnMigrationPartCompleted(new MigrationPartCompletedEventArgs { MigrationPart = "MissingEpisodeSettings migrated" });
+
             var generalSettings = _dataContext.Settings.Find(Settings.SETTING_NAME);
             if (generalSettings == null)
             {
@@ -46,13 +52,26 @@ public class XMLToSQLMigration
                 generalSettings.SettingValue = JsonSerializer.Serialize(_xmlDocument.Settings);
             }
 
+            OnMigrationPartCompleted(new MigrationPartCompletedEventArgs { MigrationPart = "General settings migrated" });
+
             foreach (TvShow tvShow in tvShows)
             {
                 tvShow.Episodes.ForEach(e => e.ShowId = tvShow.TvdbId);
             }
 
             _tvShowRepository.UpdateShows(tvShows.ToList());
+
+            OnMigrationPartCompleted(new MigrationPartCompletedEventArgs { MigrationPart = "Shows migrated" });
+
             _dataContext.SaveChanges();
         });
+    }
+
+    protected virtual void OnMigrationPartCompleted(MigrationPartCompletedEventArgs e) 
+        => MigrationPartCompleted?.Invoke(this, e);
+
+    public sealed class MigrationPartCompletedEventArgs : EventArgs
+    {
+        public string MigrationPart { get; set; }
     }
 }

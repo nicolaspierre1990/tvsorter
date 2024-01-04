@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<ProductVersion>8.0.30703</ProductVersion>
 		<AssemblyName>TVSorterTest</AssemblyName>
-		<TargetFramework>net8.0</TargetFramework>
+		<TargetFramework>net8.0-windows</TargetFramework>
 		<AssemblyTitle>TVSorterTest</AssemblyTitle>
 		<Product>TVSorterTest</Product>
 		<Copyright>Copyright ©  2012</Copyright>

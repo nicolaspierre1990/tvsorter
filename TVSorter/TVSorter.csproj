@@ -7,7 +7,7 @@
 		<AssemblyTitle>TVSorter</AssemblyTitle>
 		<Product>TVSorter</Product>
 		<Copyright>Copyright © 2024</Copyright>
-		<Version>2.0.0-beta</Version>
+		<Version>1.6.0</Version>
 		<OutputPath>..\bin\</OutputPath>
 		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
 	</PropertyGroup>

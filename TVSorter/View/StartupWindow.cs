@@ -40,20 +40,28 @@ public partial class StartupWindow : Form
 
     private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
     {
+        int progressCounter = 0;
         BackgroundWorker worker = sender as BackgroundWorker;
 
-        worker.ReportProgress(25, "Loading DataProvider");
+        progressCounter = 25;
+        worker.ReportProgress(progressCounter, "Loading DataProvider");
 
         while (!_storageProvider.IsAvailable)
         {
             Task.Delay(100).GetAwaiter().GetResult();
         }
 
-        worker.ReportProgress(35, "Checking old xml file presence");
+        progressCounter = 35;
+        worker.ReportProgress(progressCounter, "Checking old xml file presence");
 
         if (File.Exists(Path.Combine(Directory.GetCurrentDirectory(), "TVSorter.xml")))
         {
             var migration = CompositionRoot.Get<XMLToSQLMigration>();
+            migration.MigrationPartCompleted += (sender, args) =>
+            {
+                progressCounter += 5;
+                worker.ReportProgress(progressCounter, args.MigrationPart);
+            };
             migration.MigrateToSqlAsync().GetAwaiter().GetResult();
 
             //remove .xsd files
@@ -65,11 +73,13 @@ public partial class StartupWindow : Form
             File.Delete(Path.Combine(Directory.GetCurrentDirectory(), "TVSorter.xml"));
         }
 
-        worker.ReportProgress(50, "Loading Data");
+        progressCounter += 5;
+        worker.ReportProgress(progressCounter, "Loading Data");
 
         Task.Delay(100).GetAwaiter().GetResult();
 
-        worker.ReportProgress(100, "Loading UI");
+        progressCounter = 95;
+        worker.ReportProgress(progressCounter, "Loading UI");
     }
 
     private void StartupWindow_Shown(object sender, EventArgs e)

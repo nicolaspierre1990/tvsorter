@@ -30,6 +30,7 @@ internal static class Program
             new InterfaceModule(),
             new LibraryModule(),
             new TheTvdbDotNetModule("1c1cc44893259628eca511dfbe4ebc52"));
+
         CompositionRoot.SetKernel(kernel);
 
         Application.EnableVisualStyles();

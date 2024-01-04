@@ -512,9 +512,9 @@ namespace TVSorter.View
             addUnmatchedShowsCheck.Location = new Point(304, 5);
             addUnmatchedShowsCheck.Margin = new Padding(4, 5, 4, 5);
             addUnmatchedShowsCheck.Name = "addUnmatchedShowsCheck";
-            addUnmatchedShowsCheck.Size = new Size(323, 24);
+            addUnmatchedShowsCheck.Size = new Size(281, 24);
             addUnmatchedShowsCheck.TabIndex = 3;
-            addUnmatchedShowsCheck.Text = "Add Unmatched Shows Automatically (PRO)";
+            addUnmatchedShowsCheck.Text = "Add Unmatched Shows Automatically";
             toolTip.SetToolTip(addUnmatchedShowsCheck, resources.GetString("addUnmatchedShowsCheck.ToolTip"));
             addUnmatchedShowsCheck.UseVisualStyleBackColor = true;
             // 
