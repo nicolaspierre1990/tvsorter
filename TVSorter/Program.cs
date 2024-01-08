@@ -35,8 +35,6 @@ internal static class Program
 
         Application.EnableVisualStyles();
         Application.SetCompatibleTextRenderingDefault(false);
-
-
         Application.Run(kernel.Get<StartupWindow>());
     }
 }

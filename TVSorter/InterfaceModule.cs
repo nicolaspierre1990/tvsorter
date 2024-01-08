@@ -1,5 +1,6 @@
 ﻿using Ninject.Modules;
 using TVSorter.Controller;
+using TVSorter.Controls;
 using TVSorter.View;
 
 namespace TVSorter;
@@ -8,6 +9,8 @@ public class InterfaceModule : NinjectModule
 {
     public override void Load()
     {
+        Bind<VisualStyleManager>().ToSelf();
+
         Bind<AddShowController>().ToSelf();
         Bind<LogController>().ToSelf();
         Bind<MissingDuplicateController>().ToSelf();

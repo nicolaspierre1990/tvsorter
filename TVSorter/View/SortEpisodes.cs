@@ -36,6 +36,9 @@ public partial class SortEpisodes : UserControl, IView
         InitializeComponent();
         setEpisodeButton.Enabled = false;
         setShowButton.Enabled = false;
+        copyButton.Enabled = false;
+        moveButton.Enabled = false;
+        deselectAllButton.Enabled = false;
 
         fileResultManager = CompositionRoot.Get<IFileResultManager>();
     }
@@ -158,7 +161,10 @@ public partial class SortEpisodes : UserControl, IView
 
         if (controller.Results.Any(p => p.Checked))
         {
-            setShowButton.Enabled = true;
+            setShowButton.Enabled = true;   
+            moveButton.Enabled = true;
+            copyButton.Enabled = true;
+            deselectAllButton.Enabled = true;
         }
 
         if (controller.Results.Count(p => p.Checked) == 1)
@@ -174,6 +180,9 @@ public partial class SortEpisodes : UserControl, IView
         {
             setEpisodeButton.Enabled = false;
             setShowButton.Enabled = false;
+            moveButton.Enabled = false;
+            copyButton.Enabled = false;
+            deselectAllButton.Enabled = false;
         }
     }
 
