@@ -242,6 +242,7 @@ public class FileManager(
     /// </param>
     private void ProcessFile(SortType type, FileResult file, IDirectoryInfo destination)
     {
+        string originalFileName = file.InputFile.Name;
         var destinationInfo = fileResultManager.GetFullPath(file, destination);
         if (destinationInfo.Directory != null && !destinationInfo.Directory.Exists)
         {
@@ -284,6 +285,7 @@ public class FileManager(
 
         foreach (var episode in file.Episodes)
         {
+            episode.OriginalFileName = originalFileName;
             episode.FileCount++;
             episode.Save(storageProvider);
         }

@@ -90,7 +90,17 @@ public class SQLLiteProvider : IStorageProvider
 
     public void SaveEpisode(Episode episode)
     {
-        throw new NotImplementedException();
+        if (dbContext.Episodes.Any(x => x.TvdbId == episode.TvdbId))
+        { 
+            dbContext.Episodes.Update(episode);
+            dbContext.SaveChanges();
+        }
+        else
+        {
+
+            dbContext.Episodes.Add(episode);
+            dbContext.SaveChanges();
+        }
     }
 
     public void SaveMissingEpisodeSettings()
