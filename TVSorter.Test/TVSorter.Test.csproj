@@ -5,9 +5,10 @@
 		<TargetFramework>net8.0-windows</TargetFramework>
 		<AssemblyTitle>TVSorterTest</AssemblyTitle>
 		<Product>TVSorterTest</Product>
-		<Copyright>Copyright ©  2012</Copyright>
-		<CodeAnalysisRuleSet>..\Stylecop.ruleset</CodeAnalysisRuleSet>
+		<Copyright>Copyright ©  2024</Copyright>
 		<OutputPath>..\bin\</OutputPath>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 		<DebugType>full</DebugType>
