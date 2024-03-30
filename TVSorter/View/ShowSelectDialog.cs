@@ -9,6 +9,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using TVSorter.Model;
 
@@ -32,7 +33,7 @@ namespace TVSorter.View
         /// </param>
         public ShowSelectDialog(List<TvShow> shows)
         {
-            this.shows = shows;
+            this.shows = [.. shows.OrderBy(x => x.Name)];
             InitializeComponent();
         }
 
