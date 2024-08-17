@@ -87,7 +87,7 @@ namespace TVSorter.View
             // table
             // 
             table.ColumnCount = 2;
-            table.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 124F));
+            table.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 108F));
             table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             table.Controls.Add(flowButtons, 0, 2);
             table.Controls.Add(episodeNumber, 1, 1);
@@ -96,13 +96,13 @@ namespace TVSorter.View
             table.Controls.Add(episodeLabel, 0, 1);
             table.Dock = DockStyle.Fill;
             table.Location = new Point(0, 0);
-            table.Margin = new Padding(4, 5, 4, 5);
+            table.Margin = new Padding(4);
             table.Name = "table";
             table.RowCount = 2;
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 38F));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 38F));
-            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 86F));
-            table.Size = new Size(284, 125);
+            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
+            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 28F));
+            table.RowStyles.Add(new RowStyle(SizeType.Absolute, 64F));
+            table.Size = new Size(248, 94);
             table.TabIndex = 3;
             // 
             // flowButtons
@@ -112,18 +112,18 @@ namespace TVSorter.View
             flowButtons.Controls.Add(cancelButton);
             flowButtons.Dock = DockStyle.Fill;
             flowButtons.FlowDirection = FlowDirection.RightToLeft;
-            flowButtons.Location = new Point(0, 76);
+            flowButtons.Location = new Point(0, 56);
             flowButtons.Margin = new Padding(0);
             flowButtons.Name = "flowButtons";
-            flowButtons.Size = new Size(284, 86);
+            flowButtons.Size = new Size(248, 64);
             flowButtons.TabIndex = 0;
             // 
             // okButton
             // 
-            okButton.Location = new Point(180, 5);
-            okButton.Margin = new Padding(4, 5, 4, 5);
+            okButton.Location = new Point(156, 4);
+            okButton.Margin = new Padding(4);
             okButton.Name = "okButton";
-            okButton.Size = new Size(100, 35);
+            okButton.Size = new Size(88, 26);
             okButton.TabIndex = 1;
             okButton.Text = "OK";
             okButton.UseVisualStyleBackColor = true;
@@ -131,10 +131,10 @@ namespace TVSorter.View
             // 
             // cancelButton
             // 
-            cancelButton.Location = new Point(72, 5);
-            cancelButton.Margin = new Padding(4, 5, 4, 5);
+            cancelButton.Location = new Point(60, 4);
+            cancelButton.Margin = new Padding(4);
             cancelButton.Name = "cancelButton";
-            cancelButton.Size = new Size(100, 35);
+            cancelButton.Size = new Size(88, 26);
             cancelButton.TabIndex = 2;
             cancelButton.Text = "Cancel";
             cancelButton.UseVisualStyleBackColor = true;
@@ -143,29 +143,29 @@ namespace TVSorter.View
             // episodeNumber
             // 
             episodeNumber.Dock = DockStyle.Fill;
-            episodeNumber.Location = new Point(128, 43);
-            episodeNumber.Margin = new Padding(4, 5, 4, 5);
+            episodeNumber.Location = new Point(112, 32);
+            episodeNumber.Margin = new Padding(4);
             episodeNumber.Name = "episodeNumber";
-            episodeNumber.Size = new Size(152, 27);
+            episodeNumber.Size = new Size(132, 23);
             episodeNumber.TabIndex = 1;
             // 
             // seasonNumber
             // 
             seasonNumber.Dock = DockStyle.Fill;
-            seasonNumber.Location = new Point(128, 5);
-            seasonNumber.Margin = new Padding(4, 5, 4, 5);
+            seasonNumber.Location = new Point(112, 4);
+            seasonNumber.Margin = new Padding(4);
             seasonNumber.Name = "seasonNumber";
-            seasonNumber.Size = new Size(152, 27);
+            seasonNumber.Size = new Size(132, 23);
             seasonNumber.TabIndex = 0;
             // 
             // seasonLabel
             // 
             seasonLabel.Anchor = AnchorStyles.Right;
             seasonLabel.AutoSize = true;
-            seasonLabel.Location = new Point(6, 9);
+            seasonLabel.Location = new Point(12, 6);
             seasonLabel.Margin = new Padding(4, 0, 4, 0);
             seasonLabel.Name = "seasonLabel";
-            seasonLabel.Size = new Size(114, 20);
+            seasonLabel.Size = new Size(92, 15);
             seasonLabel.TabIndex = 2;
             seasonLabel.Text = "Season number:";
             // 
@@ -173,22 +173,22 @@ namespace TVSorter.View
             // 
             episodeLabel.Anchor = AnchorStyles.Right;
             episodeLabel.AutoSize = true;
-            episodeLabel.Location = new Point(54, 38);
+            episodeLabel.Location = new Point(8, 34);
             episodeLabel.Margin = new Padding(4, 0, 4, 0);
             episodeLabel.Name = "episodeLabel";
-            episodeLabel.Size = new Size(66, 38);
+            episodeLabel.Size = new Size(96, 15);
             episodeLabel.TabIndex = 3;
             episodeLabel.Text = "Episode number:";
             // 
             // NumberInputDialog
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(284, 125);
+            ClientSize = new Size(248, 94);
             ControlBox = false;
             Controls.Add(table);
             FormBorderStyle = FormBorderStyle.FixedDialog;
-            Margin = new Padding(4, 5, 4, 5);
+            Margin = new Padding(4);
             Name = "NumberInputDialog";
             ShowIcon = false;
             ShowInTaskbar = false;

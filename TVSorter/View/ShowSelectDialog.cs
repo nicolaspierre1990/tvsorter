@@ -26,6 +26,11 @@ namespace TVSorter.View
         private readonly List<TvShow> shows;
 
         /// <summary>
+        /// The filtered tv shows
+        /// </summary>
+        private List<TvShow> filteredTvShows;
+
+        /// <summary>
         ///     Initialises a new instance of the <see cref="ShowSelectDialog" /> class.
         /// </summary>
         /// <param name="shows">
@@ -33,7 +38,8 @@ namespace TVSorter.View
         /// </param>
         public ShowSelectDialog(List<TvShow> shows)
         {
-            this.shows = [.. shows.OrderBy(x => x.Name)];
+            this.shows = shows;
+            this.filteredTvShows = [.. this.shows.OrderBy(x => x.Name)];
             InitializeComponent();
         }
 
@@ -85,7 +91,27 @@ namespace TVSorter.View
         private void ShowSelectDialogLoad(object sender, EventArgs e)
         {
             showList.DisplayMember = "Name";
-            showList.DataSource = shows;
+            showList.DataSource = filteredTvShows;
+        }
+
+        /// <summary>
+        /// Filters the text box changed.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void FilterTextBoxChanged(object sender, EventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+
+            if(textBox.Text.Length >= 3)
+            {
+                filteredTvShows = [.. shows.Where(t => t.Name.Contains(filterTextBox.Text, StringComparison.InvariantCultureIgnoreCase)).OrderBy(x => x.Name)];
+                showList.DataSource = filteredTvShows;
+            }
+            else
+            {
+                showList.DataSource = shows.OrderBy(x => x.Name).ToList();
+            }
         }
     }
 }

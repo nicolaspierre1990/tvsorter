@@ -68,71 +68,89 @@ namespace TVSorter.View
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.FlowLayoutPanel buttonsFlow;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShowSelectDialog));
-            this.selectButton = new System.Windows.Forms.Button();
-            this.closeButton = new System.Windows.Forms.Button();
-            this.showList = new System.Windows.Forms.ListBox();
-            buttonsFlow = new System.Windows.Forms.FlowLayoutPanel();
+            FlowLayoutPanel buttonsFlow;
+            ComponentResourceManager resources = new ComponentResourceManager(typeof(ShowSelectDialog));
+            selectButton = new Button();
+            closeButton = new Button();
+            showList = new ListBox();
+            filterTextBox = new TextBox();
+            buttonsFlow = new FlowLayoutPanel();
             buttonsFlow.SuspendLayout();
-            this.SuspendLayout();
+            SuspendLayout();
             // 
             // buttonsFlow
             // 
-            buttonsFlow.Controls.Add(this.selectButton);
-            buttonsFlow.Controls.Add(this.closeButton);
-            buttonsFlow.Dock = System.Windows.Forms.DockStyle.Bottom;
-            buttonsFlow.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            buttonsFlow.Location = new System.Drawing.Point(0, 312);
+            buttonsFlow.Controls.Add(selectButton);
+            buttonsFlow.Controls.Add(closeButton);
+            buttonsFlow.Dock = DockStyle.Bottom;
+            buttonsFlow.FlowDirection = FlowDirection.RightToLeft;
+            buttonsFlow.Location = new Point(0, 576);
+            buttonsFlow.Margin = new Padding(4, 3, 4, 3);
             buttonsFlow.Name = "buttonsFlow";
-            buttonsFlow.Size = new System.Drawing.Size(221, 30);
+            buttonsFlow.Size = new Size(449, 35);
             buttonsFlow.TabIndex = 1;
             // 
             // selectButton
             // 
-            this.selectButton.Location = new System.Drawing.Point(143, 3);
-            this.selectButton.Name = "selectButton";
-            this.selectButton.Size = new System.Drawing.Size(75, 23);
-            this.selectButton.TabIndex = 0;
-            this.selectButton.Text = "Select";
-            this.selectButton.UseVisualStyleBackColor = true;
-            this.selectButton.Click += new System.EventHandler(this.SelectButtonClick);
+            selectButton.Location = new Point(357, 3);
+            selectButton.Margin = new Padding(4, 3, 4, 3);
+            selectButton.Name = "selectButton";
+            selectButton.Size = new Size(88, 27);
+            selectButton.TabIndex = 0;
+            selectButton.Text = "Select";
+            selectButton.UseVisualStyleBackColor = true;
+            selectButton.Click += SelectButtonClick;
             // 
             // closeButton
             // 
-            this.closeButton.Location = new System.Drawing.Point(62, 3);
-            this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(75, 23);
-            this.closeButton.TabIndex = 1;
-            this.closeButton.Text = "Close";
-            this.closeButton.UseVisualStyleBackColor = true;
-            this.closeButton.Click += new System.EventHandler(this.CloseButtonClick);
+            closeButton.Location = new Point(261, 3);
+            closeButton.Margin = new Padding(4, 3, 4, 3);
+            closeButton.Name = "closeButton";
+            closeButton.Size = new Size(88, 27);
+            closeButton.TabIndex = 1;
+            closeButton.Text = "Close";
+            closeButton.UseVisualStyleBackColor = true;
+            closeButton.Click += CloseButtonClick;
             // 
             // showList
             // 
-            this.showList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.showList.FormattingEnabled = true;
-            this.showList.Location = new System.Drawing.Point(0, 0);
-            this.showList.Name = "showList";
-            this.showList.Size = new System.Drawing.Size(221, 342);
-            this.showList.TabIndex = 0;
+            showList.FormattingEnabled = true;
+            showList.ItemHeight = 15;
+            showList.Location = new Point(0, 29);
+            showList.Margin = new Padding(4, 3, 4, 3);
+            showList.Name = "showList";
+            showList.Size = new Size(449, 544);
+            showList.TabIndex = 0;
+            // 
+            // filterTextBox
+            // 
+            filterTextBox.Dock = DockStyle.Top;
+            filterTextBox.Location = new Point(0, 0);
+            filterTextBox.Name = "filterTextBox";
+            filterTextBox.Size = new Size(449, 23);
+            filterTextBox.TabIndex = 2;
+            filterTextBox.Text = "Find show";
+            filterTextBox.TextChanged += FilterTextBoxChanged;
             // 
             // ShowSelectDialog
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(221, 342);
-            this.Controls.Add(buttonsFlow);
-            this.Controls.Add(this.showList);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "ShowSelectDialog";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Select Show";
-            this.Load += new System.EventHandler(this.ShowSelectDialogLoad);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(449, 611);
+            Controls.Add(filterTextBox);
+            Controls.Add(buttonsFlow);
+            Controls.Add(showList);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(4, 3, 4, 3);
+            Name = "ShowSelectDialog";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Select Show";
+            Load += ShowSelectDialogLoad;
             buttonsFlow.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            ResumeLayout(false);
+            PerformLayout();
         }
 
+        private TextBox filterTextBox;
     }
 }
