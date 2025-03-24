@@ -10,27 +10,26 @@
 using System;
 using TVSorter.Model;
 
-namespace TVSorter
+namespace TVSorter;
+
+/// <summary>
+///     Arguments for a TV Show related event.
+/// </summary>
+public class TvShowEventArgs : EventArgs
 {
     /// <summary>
-    ///     Arguments for a TV Show related event.
+    ///     Initialises a new instance of the <see cref="TvShowEventArgs" /> class.
     /// </summary>
-    public class TvShowEventArgs : EventArgs
+    /// <param name="tvShow">
+    ///     The TV Show for the event.
+    /// </param>
+    public TvShowEventArgs(TvShow tvShow)
     {
-        /// <summary>
-        ///     Initialises a new instance of the <see cref="TvShowEventArgs" /> class.
-        /// </summary>
-        /// <param name="tvShow">
-        ///     The TV Show for the event.
-        /// </param>
-        public TvShowEventArgs(TvShow tvShow)
-        {
-            TvShow = tvShow;
-        }
-
-        /// <summary>
-        ///     Gets the TV Show for the event.
-        /// </summary>
-        public TvShow TvShow { get; }
+        TvShow = tvShow;
     }
+
+    /// <summary>
+    ///     Gets the TV Show for the event.
+    /// </summary>
+    public TvShow TvShow { get; }
 }

@@ -1,11 +1,10 @@
 ﻿using System.IO;
 
-namespace TVSorter.Storage
-{
-    public interface ITextReaderProvider
-    {
-        TextReader GetTextReader(string path);
+namespace TVSorter.Storage;
 
-        bool CanGetTextReader(string path);
-    }
+public interface ITextReaderProvider
+{
+    TextReader GetTextReader(string path);
+
+    bool CanGetTextReader(string path);
 }

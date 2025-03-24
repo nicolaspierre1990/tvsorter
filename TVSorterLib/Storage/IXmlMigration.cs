@@ -1,9 +1,8 @@
 ﻿using System.Xml.Linq;
 
-namespace TVSorter.Storage
+namespace TVSorter.Storage;
+
+public interface IXmlMigration
 {
-    public interface IXmlMigration
-    {
-        void MigrateIfRequired(XDocument document, string xmlFile);
-    }
+    void MigrateIfRequired(XDocument document, string xmlFile);
 }

@@ -9,16 +9,15 @@
 
 using System.Reflection;
 
-namespace TVSorter
+namespace TVSorter;
+
+/// <summary>
+///     Contains the version information about TVSorter.
+/// </summary>
+public static class Version
 {
     /// <summary>
-    ///     Contains the version information about TVSorter.
+    ///     The current version of TVSorter.
     /// </summary>
-    public static class Version
-    {
-        /// <summary>
-        ///     The current version of TVSorter.
-        /// </summary>
-        public const string CurrentVersion = "1.5.1";
-    }
+    public const string CurrentVersion = "1.5.1";
 }

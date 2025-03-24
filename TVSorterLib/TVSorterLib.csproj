@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<ProductVersion>8.0.30703</ProductVersion>
 		<RootNamespace>TVSorter</RootNamespace>
@@ -16,17 +16,16 @@
 		<DebugType>pdbonly</DebugType>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="DotNetZip" Version="1.16.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
+		<PackageReference Include="Microsoft.EntityFrameworkCore" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0" />
-		<PackageReference Include="Ninject" Version="3.3.6" />
-		<PackageReference Include="Ninject.Extensions.Interception" Version="3.3.5" />
-		<PackageReference Include="Ninject.Extensions.Interception.DynamicProxy" Version="3.3.5" />
-		<PackageReference Include="System.Drawing.Common" Version="8.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
+		<PackageReference Include="Ninject" />
+		<PackageReference Include="Ninject.Extensions.Interception" />
+		<PackageReference Include="Ninject.Extensions.Interception.DynamicProxy" />
+		<PackageReference Include="System.Drawing.Common" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="TVSorter-5.0.xsd">
@@ -51,6 +50,6 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\..\TheTvdbDotNet\src\TheTvdbDotNet\TheTvdbDotNet.csproj" />
+	  <ProjectReference Include="..\TheTvdbDotNet\TheTvdbDotNet.csproj" />
 	</ItemGroup>
 </Project>

@@ -4,21 +4,20 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace TVSorter
+namespace TVSorter;
+
+/// <summary>
+///     The type of the log message.
+/// </summary>
+public enum LogType
 {
     /// <summary>
-    ///     The type of the log message.
+    ///     An information log message.
     /// </summary>
-    public enum LogType
-    {
-        /// <summary>
-        ///     An information log message.
-        /// </summary>
-        Info,
+    Info,
 
-        /// <summary>
-        ///     An error log message.
-        /// </summary>
-        Error,
-    }
+    /// <summary>
+    ///     An error log message.
+    /// </summary>
+    Error,
 }

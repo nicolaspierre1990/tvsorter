@@ -9,16 +9,15 @@
 
 using System;
 
-namespace TVSorter.Controller
+namespace TVSorter.Controller;
+
+/// <summary>
+///     The public interface of the progress task.
+/// </summary>
+public interface IProgressTask
 {
     /// <summary>
-    ///     The public interface of the progress task.
+    ///     Occurs when the task is complete.
     /// </summary>
-    public interface IProgressTask
-    {
-        /// <summary>
-        ///     Occurs when the task is complete.
-        /// </summary>
-        event EventHandler TaskComplete;
-    }
+    event EventHandler TaskComplete;
 }

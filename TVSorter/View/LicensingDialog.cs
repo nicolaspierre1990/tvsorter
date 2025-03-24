@@ -8,13 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TVSorter.View
+namespace TVSorter.View;
+
+public partial class LicensingDialog : Form
 {
-    public partial class LicensingDialog : Form
+    public LicensingDialog()
     {
-        public LicensingDialog()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

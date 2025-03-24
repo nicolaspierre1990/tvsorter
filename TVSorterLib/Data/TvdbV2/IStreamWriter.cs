@@ -1,9 +1,8 @@
 ﻿using System.IO;
 
-namespace TVSorter.Data.TvdbV2
+namespace TVSorter.Data.TvdbV2;
+
+public interface IStreamWriter
 {
-    public interface IStreamWriter
-    {
-        void WriteStream(Stream stream, string path);
-    }
+    void WriteStream(Stream stream, string path);
 }
