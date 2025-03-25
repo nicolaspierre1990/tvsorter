@@ -139,18 +139,14 @@ public static class StringExtensions
     /// <returns>
     ///     The processed string.
     /// </returns>
-    internal static string RemoveSpecialChars(this string str)
-    {
-        return SpecialChars.Aggregate(str.RemoveSpacerChars(), (current, ch) => current.Replace(ch, '\0'));
-    }
+    internal static string RemoveSpecialChars(this string str) 
+        => SpecialChars.Aggregate(str.RemoveSpacerChars(), (current, ch) => current.Replace(ch, '\0'));
 
     /// <summary>
     ///     Removes special characters and spaces from the string.
     /// </summary>
     /// <param name="str">The string to process.</param>
     /// <returns>The processed string.</returns>
-    internal static string AlphaNumericOnly(this string str)
-    {
-        return new string(str.Where(char.IsLetterOrDigit).ToArray());
-    }
+    internal static string AlphaNumericOnly(this string str) 
+        => new([.. str.Where(char.IsLetterOrDigit)]);
 }

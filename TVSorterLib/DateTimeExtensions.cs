@@ -14,7 +14,7 @@ public static class DateTimeExtensions
     /// <returns>Parse result.</returns>
     public static bool ValidateTime(this string dateInString)
     {
-        if (DateTime.TryParse(dateInString, out DateTime temp))
+        if (DateTime.TryParse(dateInString, out _))
         {
             return true;
         }

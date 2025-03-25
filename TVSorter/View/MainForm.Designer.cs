@@ -137,17 +137,18 @@ public partial class MainForm
         // 
         // sortEpisodesPage
         // 
+        sortEpisodesPage.Controls.Add(new SortEpisodes());
         sortEpisodesPage.Location = new Point(4, 29);
         sortEpisodesPage.Margin = new Padding(4, 5, 4, 5);
         sortEpisodesPage.Name = "sortEpisodesPage";
         sortEpisodesPage.Padding = new Padding(4, 5, 4, 5);
-        sortEpisodesPage.Size = new Size(1248, 945);
         sortEpisodesPage.TabIndex = 1;
         sortEpisodesPage.Text = "Sort Episode Files";
         sortEpisodesPage.UseVisualStyleBackColor = true;
         // 
         // tvShowsPage
         // 
+        tvShowsPage.Controls.Add(new TvShows());
         tvShowsPage.Location = new Point(4, 29);
         tvShowsPage.Margin = new Padding(4, 5, 4, 5);
         tvShowsPage.Name = "tvShowsPage";
@@ -178,6 +179,7 @@ public partial class MainForm
         // 
         // settingsPage
         // 
+        settingsPage.Controls.Add(new Settings());
         settingsPage.Location = new Point(4, 29);
         settingsPage.Margin = new Padding(4, 5, 4, 5);
         settingsPage.Name = "settingsPage";
@@ -188,6 +190,7 @@ public partial class MainForm
         // 
         // logPage
         // 
+        logPage.Controls.Add(new Log());
         logPage.Location = new Point(4, 29);
         logPage.Margin = new Padding(4, 5, 4, 5);
         logPage.Name = "logPage";

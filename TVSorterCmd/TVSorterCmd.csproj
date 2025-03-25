@@ -23,9 +23,6 @@
 	<ItemGroup>
 		<PackageReference Include="CommandLineParser" />
 		<PackageReference Include="Ninject" />
-		<PackageReference Include="StyleCop.Analyzers">
-			<PrivateAssets>all</PrivateAssets>
-		</PackageReference>
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\TheTvdbDotNet\src\TheTvdbDotNet.Ninject\TheTvdbDotNet.Ninject.csproj" />

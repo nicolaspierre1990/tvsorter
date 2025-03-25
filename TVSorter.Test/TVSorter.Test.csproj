@@ -6,7 +6,6 @@
 		<AssemblyTitle>TVSorterTest</AssemblyTitle>
 		<Product>TVSorterTest</Product>
 		<Copyright>Copyright ©  2012</Copyright>
-		<CodeAnalysisRuleSet>..\Stylecop.ruleset</CodeAnalysisRuleSet>
 		<OutputPath>..\bin\</OutputPath>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
