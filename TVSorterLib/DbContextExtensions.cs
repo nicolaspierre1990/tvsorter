@@ -24,5 +24,7 @@ internal static class DbContextExtensions
         {
             dbSet.Add(entity);
         }
+
+        context.SaveChanges();
     }
 }
