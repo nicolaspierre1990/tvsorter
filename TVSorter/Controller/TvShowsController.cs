@@ -282,7 +282,11 @@ internal class TvShowsController(
     /// <param name="e">
     ///     The arguments of the event.
     /// </param>
-    private void OnTvShowAdded(object sender, TvShowEventArgs e) => Shows.Add(e.TvShow);
+    private void OnTvShowAdded(object sender, TvShowEventArgs e)
+    {
+        Shows.Add(e.TvShow);
+        SelectedShow = e.TvShow;
+    }
 
     /// <summary>
     ///     Handles the TVShow's OnTvShowChanged event.

@@ -90,7 +90,22 @@ public class SQLLiteProvider : IStorageProvider
 
     public void SaveEpisode(Episode episode)
     {
-        throw new NotImplementedException();
+        var current = dbContext.Episodes.Find(episode.TvdbId);
+
+        if (current == null)
+        {
+            dbContext.Episodes.Add(episode);
+        }
+        else
+        {
+            current.Name = episode.Name;
+            current.SeasonNumber = episode.SeasonNumber;
+            current.TvdbId = episode.TvdbId;
+            current.FirstAir = episode.FirstAir;
+            current.FileCount = episode.FileCount;
+        }
+
+        dbContext.SaveChanges();
     }
 
     public void SaveMissingEpisodeSettings()
@@ -147,6 +162,8 @@ public class SQLLiteProvider : IStorageProvider
             dbContext.TvShows.Add(show);
             OnTvShowAdded(show);
         }
+
+        dbContext.SaveChanges();
     }
 
     public void SaveShows(IEnumerable<TvShow> shows) => shows.ToList().ForEach(SaveShow);

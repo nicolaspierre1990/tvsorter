@@ -137,7 +137,10 @@ public partial class MainForm
         // 
         // sortEpisodesPage
         // 
-        sortEpisodesPage.Controls.Add(new SortEpisodes());
+        var sortEpisodes = new SortEpisodes();
+        sortEpisodes.Dock = DockStyle.Fill;
+
+        sortEpisodesPage.Controls.Add(sortEpisodes);
         sortEpisodesPage.Location = new Point(4, 29);
         sortEpisodesPage.Margin = new Padding(4, 5, 4, 5);
         sortEpisodesPage.Name = "sortEpisodesPage";
@@ -148,7 +151,10 @@ public partial class MainForm
         // 
         // tvShowsPage
         // 
-        tvShowsPage.Controls.Add(new TvShows());
+        var tvShows = new TvShows();
+        tvShows.Dock = DockStyle.Fill;
+
+        tvShowsPage.Controls.Add(tvShows);
         tvShowsPage.Location = new Point(4, 29);
         tvShowsPage.Margin = new Padding(4, 5, 4, 5);
         tvShowsPage.Name = "tvShowsPage";
@@ -179,7 +185,10 @@ public partial class MainForm
         // 
         // settingsPage
         // 
-        settingsPage.Controls.Add(new Settings());
+        var settings = new Settings();
+        settings.Dock = DockStyle.Fill;
+
+        settingsPage.Controls.Add(settings);
         settingsPage.Location = new Point(4, 29);
         settingsPage.Margin = new Padding(4, 5, 4, 5);
         settingsPage.Name = "settingsPage";
@@ -190,7 +199,11 @@ public partial class MainForm
         // 
         // logPage
         // 
-        logPage.Controls.Add(new Log());
+
+        var log = new Log();
+        log.Dock = DockStyle.Fill;
+
+        logPage.Controls.Add(log);
         logPage.Location = new Point(4, 29);
         logPage.Margin = new Padding(4, 5, 4, 5);
         logPage.Name = "logPage";

@@ -7,23 +7,23 @@
     <PackageVersion Include="Castle.Core" Version="5.2.1" />
     <PackageVersion Include="CommandLineParser" Version="2.9.1" />
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
-    <PackageVersion Include="AwesomeAssertions" Version="8.0.2" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.14" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.14" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.14" />
+    <PackageVersion Include="AwesomeAssertions" Version="8.2.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.15" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.15" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.15" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageVersion Include="Ninject" Version="3.3.6" />
     <PackageVersion Include="Ninject.Extensions.Interception" Version="3.3.5" />
     <PackageVersion Include="Ninject.Extensions.Interception.DynamicProxy" Version="3.3.5" />
     <PackageVersion Include="NSubstitute" Version="5.3.0" />
-    <PackageVersion Include="System.Diagnostics.EventLog" Version="9.0.3" />
-    <PackageVersion Include="System.Drawing.Common" Version="9.0.3" />
+    <PackageVersion Include="System.Diagnostics.EventLog" Version="9.0.5" />
+    <PackageVersion Include="System.Drawing.Common" Version="9.0.5" />
     <PackageVersion Include="System.Reflection.Emit" Version="4.7.0" />
-    <PackageVersion Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.1" />
+    <PackageVersion Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.2" />
     <PackageVersion Include="System.Security.Principal.Windows" Version="5.0.0" />
-    <PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.6.2" />
+    <PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
     <PackageVersion Include="xunit" Version="2.9.3" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.2" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.0" />
   </ItemGroup>
 </Project>
