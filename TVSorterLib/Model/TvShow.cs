@@ -9,7 +9,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using TVSorter.Wrappers;
 
 namespace TVSorter.Model;
@@ -172,6 +174,7 @@ public class TvShow : IEquatable<TvShow>
         UseDvdOrder = false;
         UseCustomDestination = false;
         CustomDestinationDir = string.Empty;
+        FolderName = SanitizeFolderName(Name);
     }
 
     /// <summary>
@@ -193,5 +196,12 @@ public class TvShow : IEquatable<TvShow>
             yield return name.RemoveSpecialChars();
             yield return name.AlphaNumericOnly();
         }
+    }
+
+    public static string SanitizeFolderName(string name)
+    {
+        string regexSearch = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
+        var r = new Regex(string.Format("[{0}]", Regex.Escape(regexSearch)));
+        return r.Replace(name, "");
     }
 }

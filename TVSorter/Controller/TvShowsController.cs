@@ -142,7 +142,7 @@ internal class TvShowsController(
     {
         tvView = view;
         settings = storageProvider.Settings;
-        Shows = new BindingList<TvShow>(tvShowRepository.GetTvShows().ToList());
+        Shows = new BindingList<TvShow>([.. tvShowRepository.GetTvShows().OrderBy(x => x.Name)]);
         DestinationDirectories = new BindingList<string>(settings.DestinationDirectories);
         Shows.ListChanged += (sender, e) => OnPropertyChanged("Shows");
         TvShowSelected(0);
