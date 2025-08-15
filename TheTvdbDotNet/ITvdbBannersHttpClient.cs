@@ -1,10 +1,9 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 
-namespace TheTvdbDotNet.Http
+namespace TheTvdbDotNet.Http;
+
+public interface ITvdbBannersHttpClient
 {
-    public interface ITvdbBannersHttpClient
-    {
-        Task<Stream> GetStreamAsync(Request request);
-    }
+    Task<Stream> GetStreamAsync(Request request);
 }

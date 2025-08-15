@@ -10,6 +10,7 @@
 using System;
 using System.Windows.Forms;
 using Ninject;
+using Ninject.Extensions.Logging.Serilog;
 using TheTvdbDotNet.Ninject;
 using TVSorter.View;
 

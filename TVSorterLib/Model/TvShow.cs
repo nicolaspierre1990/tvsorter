@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using TVSorter.Extensions;
 using TVSorter.Wrappers;
 
 namespace TVSorter.Model;

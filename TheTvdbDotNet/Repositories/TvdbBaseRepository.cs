@@ -1,16 +1,15 @@
 ﻿using TheTvdbDotNet.Http;
 
-namespace TheTvdbDotNet.Repositories
+namespace TheTvdbDotNet.Repositories;
+
+public abstract class TvdbBaseRepository
 {
-    public abstract class TvdbBaseRepository
+    private readonly IAuthenticatedTvdbHttpClient httpClient;
+
+    public TvdbBaseRepository(IAuthenticatedTvdbHttpClient httpClient)
     {
-        private readonly IAuthenticatedTvdbHttpClient httpClient;
-
-        public TvdbBaseRepository(IAuthenticatedTvdbHttpClient httpClient)
-        {
-            this.httpClient = httpClient;
-        }
-
-        protected IAuthenticatedTvdbHttpClient HttpClient => httpClient;
+        this.httpClient = httpClient;
     }
+
+    protected IAuthenticatedTvdbHttpClient HttpClient => httpClient;
 }

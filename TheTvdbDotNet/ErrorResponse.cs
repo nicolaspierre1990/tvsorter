@@ -1,10 +1,9 @@
 ﻿using Newtonsoft.Json;
 
-namespace TheTvdbDotNet
+namespace TheTvdbDotNet;
+
+public class ErrorResponse
 {
-    public class ErrorResponse
-    {
-        [JsonProperty("error")]
-        public string Error { get; set; }
-    }
+    [JsonProperty("error")]
+    public string Error { get; set; }
 }

@@ -18,14 +18,16 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
 		<PackageReference Include="Ninject" />
 		<PackageReference Include="Ninject.Extensions.Interception" />
 		<PackageReference Include="Ninject.Extensions.Interception.DynamicProxy" />
+		<PackageReference Include="Ninject.Extensions.Logging.Serilog" />
 		<PackageReference Include="System.Drawing.Common" />
+		<PackageReference Include="Serilog"/>
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="TVSorter-5.0.xsd">
@@ -50,6 +52,6 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\TheTvdbDotNet\TheTvdbDotNet.csproj" />
+		<ProjectReference Include="..\TheTvdbDotNet\TheTvdbDotNet.csproj" />
 	</ItemGroup>
 </Project>

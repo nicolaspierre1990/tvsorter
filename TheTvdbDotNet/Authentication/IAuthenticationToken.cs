@@ -1,13 +1,12 @@
-﻿namespace TheTvdbDotNet.Authentication
+﻿namespace TheTvdbDotNet.Authentication;
+
+public interface IAuthenticationToken
 {
-    public interface IAuthenticationToken
-    {
-        Token Token { get; }
+    Token Token { get; }
 
-        string TokenString { get; }
+    string TokenString { get; }
 
-        bool IsAuthenticated { get; }
+    bool IsAuthenticated { get; }
 
-        void SetToken(string token);
-    }
+    void SetToken(string token);
 }

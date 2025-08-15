@@ -1,4 +1,8 @@
-﻿using Ninject.Modules;
+﻿using Microsoft.Extensions.Logging;
+using Ninject;
+using Ninject.Extensions.Logging.Serilog.Infrastructure;
+using Ninject.Modules;
+using Serilog;
 using TVSorter.Data;
 using TVSorter.Data.TvdbV2;
 using TVSorter.Files;

@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 
-namespace TheTvdbDotNet
+namespace TheTvdbDotNet;
+
+public interface ITvdbSearch
 {
-    public interface ITvdbSearch
-    {
-        Task<SeriesSearch> SeriesSearchAsync(string name = null, string tvdbId = null, string zap2itId = null);
-    }
+    Task<SeriesSearch> SeriesSearchAsync(string name = null, string tvdbId = null, string zap2itId = null);
 }

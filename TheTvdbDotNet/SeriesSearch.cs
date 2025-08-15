@@ -1,10 +1,9 @@
 ﻿using Newtonsoft.Json;
 
-namespace TheTvdbDotNet
+namespace TheTvdbDotNet;
+
+public class SeriesSearch
 {
-    public class SeriesSearch
-    {
-        [JsonProperty("data")]
-        public SeriesSearchData[] Data { get; set; }
-    }
+    [JsonProperty("data")]
+    public SeriesSearchData[] Data { get; set; }
 }

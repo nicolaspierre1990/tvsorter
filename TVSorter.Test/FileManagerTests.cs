@@ -7,12 +7,11 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using AwesomeAssertions;
+using NSubstitute;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using FluentAssertions;
-using NSubstitute;
-using TVSorter.Data;
 using TVSorter.Files;
 using TVSorter.Model;
 using TVSorter.Wrappers;

@@ -1,37 +1,36 @@
 ﻿using Newtonsoft.Json;
 
-namespace TheTvdbDotNet
+namespace TheTvdbDotNet;
+
+public class BasicEpisode
 {
-    public class BasicEpisode
-    {
-        [JsonProperty("absoluteNumber")]
-        public int? AbsoluteNumber { get; set; }
+    [JsonProperty("absoluteNumber")]
+    public int? AbsoluteNumber { get; set; }
 
-        [JsonProperty("airedEpisodeNumber")]
-        public int? AiredEpisodeNumber { get; set; }
+    [JsonProperty("airedEpisodeNumber")]
+    public int? AiredEpisodeNumber { get; set; }
 
-        [JsonProperty("airedSeason")]
-        public int? AiredSeason { get; set; }
+    [JsonProperty("airedSeason")]
+    public int? AiredSeason { get; set; }
 
-        [JsonProperty("dvdEpisodeNumber")]
-        public int? DvdEpisodeNumber { get; set; }
+    [JsonProperty("dvdEpisodeNumber")]
+    public int? DvdEpisodeNumber { get; set; }
 
-        [JsonProperty("dvdSeason")]
-        public int? DvdSeason { get; set; }
+    [JsonProperty("dvdSeason")]
+    public int? DvdSeason { get; set; }
 
-        [JsonProperty("episodeName")]
-        public string EpisodeName { get; set; }
+    [JsonProperty("episodeName")]
+    public string EpisodeName { get; set; }
 
-        [JsonProperty("firstAired")]
-        public string FirstAired { get; set; }
+    [JsonProperty("firstAired")]
+    public string FirstAired { get; set; }
 
-        [JsonProperty("id")]
-        public int? Id { get; set; }
+    [JsonProperty("id")]
+    public int? Id { get; set; }
 
-        [JsonProperty("lastUpdated")]
-        public long? LastUpdated { get; set; }
+    [JsonProperty("lastUpdated")]
+    public long? LastUpdated { get; set; }
 
-        [JsonProperty("overview")]
-        public string Overview { get; set; }
-    }
+    [JsonProperty("overview")]
+    public string Overview { get; set; }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TVSorter;
+namespace TVSorter.Extensions;
 
 /// <summary>
 /// Provide extensions for DateTime Purposes.

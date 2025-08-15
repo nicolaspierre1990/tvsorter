@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using TheTvdbDotNet;
+using TVSorter.Extensions;
 using TVSorter.Model;
 
 namespace TVSorter.Data.TvdbV2;

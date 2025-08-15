@@ -17,6 +17,7 @@ using CommandLine;
 using CommandLine.Text;
 using Ninject;
 using TheTvdbDotNet.Ninject;
+using TVSorter.Extensions;
 using TVSorter.Files;
 using TVSorter.Repostitory;
 

@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-namespace TVSorter;
+namespace TVSorter.Extensions;
 
 internal static class DbContextExtensions
 {

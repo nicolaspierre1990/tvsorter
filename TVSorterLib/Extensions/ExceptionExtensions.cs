@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TVSorter;
+namespace TVSorter.Extensions;
 
 public static class ExceptionExtensions
 {
@@ -36,11 +36,11 @@ public static class ExceptionExtensions
 
         if (ex is AggregateException ax)
         {
-            foreach (var i in ax.InnerExceptions.SelectMany(ie => GetInnerExceptions(ie, maxDepth - 1)))
+            foreach (var i in ax.InnerExceptions.SelectMany(ie => ie.GetInnerExceptions(maxDepth - 1)))
                 yield return i;
         }
 
-        foreach (var i in GetInnerExceptions(ex.InnerException, maxDepth - 1))
+        foreach (var i in ex.InnerException.GetInnerExceptions(maxDepth - 1))
             yield return i;
     }
 }

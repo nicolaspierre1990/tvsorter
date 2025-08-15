@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace TheTvdbDotNet
+namespace TheTvdbDotNet;
+
+public interface ITvdbUpdate
 {
-    public interface ITvdbUpdate
-    {
-        Task<UpdateData> GetUpdatesAsync(DateTime fromTime, DateTime? toTime = default(DateTime?));
-    }
+    Task<UpdateData> GetUpdatesAsync(DateTime fromTime, DateTime? toTime = default(DateTime?));
 }

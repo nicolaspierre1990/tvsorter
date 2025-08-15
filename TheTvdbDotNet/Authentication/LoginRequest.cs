@@ -1,10 +1,9 @@
 ﻿using Newtonsoft.Json;
 
-namespace TheTvdbDotNet.Authentication
+namespace TheTvdbDotNet.Authentication;
+
+public class LoginRequest
 {
-    public class LoginRequest
-    {
-        [JsonProperty("apiKey")]
-        public string ApiKey { get; set; }
-    }
+    [JsonProperty("apiKey")]
+    public string ApiKey { get; set; }
 }
