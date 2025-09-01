@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="bin/TVSorter.xml" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="TheTvdbDotNet.Ninject/TheTvdbDotNet.Ninject.csproj" />
+    <Project Path="TheTvdbDotNet/TheTvdbDotNet.csproj" />
+    <Project Path="tvsorter/TVSorter.csproj" />
+    <Project Path="TVSorterLib/TVSorterLib.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="TVSorter.Test/TVSorter.Test.csproj" />
+  </Folder>
+</Solution>

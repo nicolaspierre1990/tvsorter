@@ -148,6 +148,10 @@
 		<None Include="Resources\lock.png" />
 	</ItemGroup>
 	<ItemGroup>
+	  <PackageReference Include="System.Net.Http" />
+	  <PackageReference Include="System.Text.RegularExpressions" />
+	</ItemGroup>
+	<ItemGroup>
 		<ProjectReference Include="..\TheTvdbDotNet.Ninject\TheTvdbDotNet.Ninject.csproj" />
 		<ProjectReference Include="..\TVSorterLib\TVSorterLib.csproj" />
 	</ItemGroup>
