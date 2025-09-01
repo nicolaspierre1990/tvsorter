@@ -53,38 +53,53 @@ namespace TVSorter.View
         /// </summary>
         private void InitializeComponent()
         {
-            this.log = new System.Windows.Forms.ListBox();
-            this.SuspendLayout();
+            log = new ListBox();
+            exitbtn = new Button();
+            SuspendLayout();
             // 
             // log
             // 
-            this.log.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.log.FormattingEnabled = true;
-            this.log.Location = new System.Drawing.Point(0, 0);
-            this.log.Name = "log";
-            this.log.Size = new System.Drawing.Size(440, 92);
-            this.log.TabIndex = 0;
+            log.FormattingEnabled = true;
+            log.ItemHeight = 15;
+            log.Location = new Point(0, 0);
+            log.Margin = new Padding(4, 3, 4, 3);
+            log.Name = "log";
+            log.Size = new Size(513, 94);
+            log.TabIndex = 0;
+            // 
+            // exitbtn
+            // 
+            exitbtn.Location = new Point(426, 100);
+            exitbtn.Name = "exitbtn";
+            exitbtn.Size = new Size(75, 23);
+            exitbtn.TabIndex = 1;
+            exitbtn.Text = "Exit";
+            exitbtn.UseVisualStyleBackColor = true;
+            exitbtn.Click += Exitbtn_Click;
             // 
             // ProgressDialog
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(440, 92);
-            this.ControlBox = false;
-            this.Controls.Add(this.log);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "ProgressDialog";
-            this.ShowIcon = false;
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Task";
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(513, 131);
+            ControlBox = false;
+            Controls.Add(exitbtn);
+            Controls.Add(log);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            Margin = new Padding(4, 3, 4, 3);
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "ProgressDialog";
+            ShowIcon = false;
+            ShowInTaskbar = false;
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Task";
+            ResumeLayout(false);
 
         }
 
 
         private ListBox log;
+        private Button exitbtn;
     }
 }

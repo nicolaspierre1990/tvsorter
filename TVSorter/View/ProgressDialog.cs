@@ -52,9 +52,9 @@ public partial class ProgressDialog : Form
     private void OnLogMessage(object sender, LogMessageEventArgs e)
     {
         if (log.InvokeRequired)
-        { 
+        {
             AddToLogCallBack log = new(OnLogMessage);
-            this.Invoke(log, new object[] { sender, e });
+            this.Invoke(log, [sender, e]);
         }
         else
         {
@@ -76,13 +76,15 @@ public partial class ProgressDialog : Form
         if (this.InvokeRequired)
         {
             OnProgressTaskOnTaskCompleteCallBack callBack = new(OnProgressTaskOnTaskComplete);
-            Invoke(callBack, new object[] { sender, e });
+            Invoke(callBack, [sender, e]);
         }
         else
-        { 
+        {
             progressTask.TaskComplete -= OnProgressTaskOnTaskComplete;
             Logger.LogMessage -= OnLogMessage;
             Close();
         }
     }
+
+    private void Exitbtn_Click(object sender, EventArgs e) => this.Close();
 }
