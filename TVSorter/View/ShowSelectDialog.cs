@@ -9,6 +9,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using TVSorter.Model;
 
@@ -32,7 +33,7 @@ public partial class ShowSelectDialog : Form
     /// </param>
     public ShowSelectDialog(List<TvShow> shows)
     {
-        this.shows = shows;
+        this.shows = [.. shows.OrderBy(x => x.Name)];
         InitializeComponent();
     }
 
@@ -85,5 +86,16 @@ public partial class ShowSelectDialog : Form
     {
         showList.DisplayMember = "Name";
         showList.DataSource = shows;
+    }
+
+    private void SearchTxt_TextChanged(object sender, EventArgs e)
+    {
+        if(sender is TextBox txt && txt.Text.Length >= 3)
+        {
+            var filteredShows = shows
+                .Where(show => show.Name.Contains(txt.Text, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+            showList.DataSource = filteredShows;
+        }
     }
 }
