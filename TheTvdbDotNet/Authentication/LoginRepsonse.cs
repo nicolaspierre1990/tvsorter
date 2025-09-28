@@ -1,10 +1,9 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TheTvdbDotNet.Authentication
+namespace TheTvdbDotNet.Authentication;
+
+public class LoginResponse
 {
-    public class LoginResponse
-    {
-        [JsonPropertyName("token")]
-        public string Token { get; set; }
-    }
+    [JsonPropertyName("token")]
+    public string Token { get; set; }
 }

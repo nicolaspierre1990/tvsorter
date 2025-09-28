@@ -1,14 +1,13 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TheTvdbDotNet
+namespace TheTvdbDotNet;
+
+public class SeriesData
 {
-    public class SeriesData
-    {
-        [JsonPropertyName("data")]
-        public Series Data { get; set; }
+    [JsonPropertyName("data")]
+    public Series Data { get; set; }
 
-        [JsonPropertyName("errors")]
-        public JsonErrors Errors { get; set; }
+    [JsonPropertyName("errors")]
+    public JsonErrors Errors { get; set; }
 
-    }
 }

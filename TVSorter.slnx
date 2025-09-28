@@ -6,6 +6,7 @@
   <Folder Name="/src/">
     <Project Path="TheTvdbDotNet.Ninject/TheTvdbDotNet.Ninject.csproj" />
     <Project Path="TheTvdbDotNet/TheTvdbDotNet.csproj" />
+    <Project Path="TVSorter.Ui/TVSorter.Ui.csproj" Id="4a2fbdc9-b886-44ed-93ff-200d8321e5ce" />
     <Project Path="tvsorter/TVSorter.csproj" />
     <Project Path="TVSorterLib/TVSorterLib.csproj" />
   </Folder>

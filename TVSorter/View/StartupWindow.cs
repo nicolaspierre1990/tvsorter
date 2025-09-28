@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Ninject;
 using TVSorter.Storage;
 
 namespace TVSorter.View;
@@ -21,6 +20,7 @@ public partial class StartupWindow : Form
         this.pictureBox1.Image = new System.Drawing.Bitmap(Resources.Resources.logo_no_background, 500, 100);
 
         this.versionLabel.Text = $"v{CompositionRoot.Version}";
+        this.copyLabel.Text = "© 2012 - 2025";
         _storageProvider = CompositionRoot.Get<IStorageProvider>();
     }
 

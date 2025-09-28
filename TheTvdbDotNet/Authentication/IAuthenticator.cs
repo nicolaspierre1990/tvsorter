@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 
-namespace TheTvdbDotNet.Authentication
+namespace TheTvdbDotNet.Authentication;
+
+public interface IAuthenticator
 {
-    public interface IAuthenticator
-    {
-        Task AuthenticateIfNecessaryAsync();
-    }
+    Task AuthenticateIfNecessaryAsync();
 }

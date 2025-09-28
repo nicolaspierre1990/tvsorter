@@ -1,14 +1,13 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 
-namespace TheTvdbDotNet.Http
+namespace TheTvdbDotNet.Http;
+
+public interface IAuthenticatedTvdbHttpClient
 {
-    public interface IAuthenticatedTvdbHttpClient
-    {
-        Task<T> GetAsync<T>(Request request);
+    Task<T> GetAsync<T>(Request request);
 
-        Task<T> PostAsync<T>(Request request, object postData);
+    Task<T> PostAsync<T>(Request request, object postData);
 
-        Task<Stream> GetStreamAsync(Request request);
-    }
+    Task<Stream> GetStreamAsync(Request request);
 }

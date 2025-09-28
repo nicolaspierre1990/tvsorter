@@ -1,10 +1,9 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TheTvdbDotNet
+namespace TheTvdbDotNet;
+
+public class SeriesSearch
 {
-    public class SeriesSearch
-    {
-        [JsonPropertyName("data")]
-        public SeriesSearchData[] Data { get; set; }
-    }
+    [JsonPropertyName("data")]
+    public SeriesSearchData[] Data { get; set; }
 }

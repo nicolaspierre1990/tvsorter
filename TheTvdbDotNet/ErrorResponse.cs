@@ -1,10 +1,9 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TheTvdbDotNet
+namespace TheTvdbDotNet;
+
+public class ErrorResponse
 {
-    public class ErrorResponse
-    {
-        [JsonPropertyName("error")]
-        public string Error { get; set; }
-    }
+    [JsonPropertyName("error")]
+    public string Error { get; set; }
 }

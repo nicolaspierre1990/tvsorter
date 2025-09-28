@@ -2,27 +2,26 @@
 
 #nullable disable
 
-namespace TVSorter.Migrations
+namespace TVSorter.Migrations;
+
+/// <inheritdoc />
+public partial class AT_Episodes : Migration
 {
     /// <inheritdoc />
-    public partial class AT_Episodes : Migration
+    protected override void Up(MigrationBuilder migrationBuilder)
     {
-        /// <inheritdoc />
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.AddColumn<string>(
-                name: "OriginalFileName",
-                table: "Episodes",
-                type: "TEXT",
-                nullable: true);
-        }
+        migrationBuilder.AddColumn<string>(
+            name: "OriginalFileName",
+            table: "Episodes",
+            type: "TEXT",
+            nullable: true);
+    }
 
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropColumn(
-                name: "OriginalFileName",
-                table: "Episodes");
-        }
+    /// <inheritdoc />
+    protected override void Down(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.DropColumn(
+            name: "OriginalFileName",
+            table: "Episodes");
     }
 }

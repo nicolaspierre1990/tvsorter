@@ -1,51 +1,50 @@
 ﻿using System.Threading.Tasks;
 using TheTvdbDotNet.Http;
 
-namespace TheTvdbDotNet.Authentication
+namespace TheTvdbDotNet.Authentication;
+
+public class Authenticator : IAuthenticator
 {
-    public class Authenticator : IAuthenticator
+    private readonly ITvdbHttpClient httpClient;
+    private readonly IAuthenticationToken authenticationToken;
+    private readonly string apiKey;
+
+    public Authenticator(ITvdbHttpClient httpClient, IAuthenticationToken authenticationToken, string apiKey)
     {
-        private readonly ITvdbHttpClient httpClient;
-        private readonly IAuthenticationToken authenticationToken;
-        private readonly string apiKey;
+        this.httpClient = httpClient;
+        this.authenticationToken = authenticationToken;
+        this.apiKey = apiKey;
+    }
 
-        public Authenticator(ITvdbHttpClient httpClient, IAuthenticationToken authenticationToken, string apiKey)
+    public Task AuthenticateIfNecessaryAsync()
+    {
+        if (authenticationToken.IsAuthenticated)
         {
-            this.httpClient = httpClient;
-            this.authenticationToken = authenticationToken;
-            this.apiKey = apiKey;
+            return Task.CompletedTask;
         }
 
-        public Task AuthenticateIfNecessaryAsync()
-        {
-            if (authenticationToken.IsAuthenticated)
-            {
-                return Task.CompletedTask;
-            }
+        return AuthenticateAsync();
+    }
 
-            return AuthenticateAsync();
-        }
+    private async Task AuthenticateAsync()
+    {
+        var response = await LoginAsync().ConfigureAwait(false);
+        SetToken(response.Token);
+        httpClient.SetAuthorizationHeader(authenticationToken.TokenString);
+    }
 
-        private async Task AuthenticateAsync()
-        {
-            var response = await LoginAsync().ConfigureAwait(false);
-            SetToken(response.Token);
-            httpClient.SetAuthorizationHeader(authenticationToken.TokenString);
-        }
+    private Task<LoginResponse> LoginAsync()
+    {
+        var loginRequest = new LoginRequest { ApiKey = apiKey };
+        return httpClient.PostResponseAsync<LoginResponse>("login", loginRequest);
+    }
 
-        private Task<LoginResponse> LoginAsync()
+    private void SetToken(string token)
+    {
+        authenticationToken.SetToken(token);
+        if (!authenticationToken.IsAuthenticated)
         {
-            var loginRequest = new LoginRequest { ApiKey = apiKey };
-            return httpClient.PostResponseAsync<LoginResponse>("login", loginRequest);
-        }
-
-        private void SetToken(string token)
-        {
-            authenticationToken.SetToken(token);
-            if (!authenticationToken.IsAuthenticated)
-            {
-                throw new TvdbRequestException("Failed to authenticate");
-            }
+            throw new TvdbRequestException("Failed to authenticate");
         }
     }
 }

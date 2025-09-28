@@ -1,10 +1,9 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TheTvdbDotNet.Authentication
+namespace TheTvdbDotNet.Authentication;
+
+public class LoginRequest
 {
-    public class LoginRequest
-    {
-        [JsonPropertyName("apiKey")]
-        public string ApiKey { get; set; }
-    }
+    [JsonPropertyName("apiKey")]
+    public string ApiKey { get; set; }
 }

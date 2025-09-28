@@ -1,11 +1,10 @@
 ﻿using System;
 
-namespace TheTvdbDotNet
+namespace TheTvdbDotNet;
+
+public class TvdbRequestException : Exception
 {
-    public class TvdbRequestException : Exception
+    public TvdbRequestException(string message) : base(message)
     {
-        public TvdbRequestException(string message) : base(message)
-        {
-        }
     }
 }
