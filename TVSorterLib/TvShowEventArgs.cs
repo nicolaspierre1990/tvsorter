@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="TvShowEventArgs.cs" company="TVSorter">
-//   2012 - Andrew Jackson
+//   2025 - Andrew Jackson & Nicolas Pierre
 // </copyright>
 // <summary>
 //   Arguments for a TV Show related event.

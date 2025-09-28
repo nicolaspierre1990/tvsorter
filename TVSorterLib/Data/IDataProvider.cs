@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="IDataProvider.cs" company="TVSorter">
-//   2012 - Andrew Jackson
+//   2025 - Andrew Jackson & Nicolas Pierre
 // </copyright>
 // <summary>
 //   Interface for getting show data.

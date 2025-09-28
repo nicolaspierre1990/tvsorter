@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="FileManagerTests.cs" company="TVSorter">
-//   2012 - Andrew Jackson
+//   2025 - Andrew Jackson & Nicolas Pierre
 // </copyright>
 // <summary>
 //   Tests for the

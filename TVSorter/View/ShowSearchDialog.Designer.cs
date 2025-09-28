@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright company="TVSorter" file="ShowSearchDialog.Designer.cs">
-//   2012 - Andrew Jackson
+//   2025 - Andrew Jackson & Nicolas Pierre
 // </copyright>
 // <summary>
 //   Dialog for searching for a show.

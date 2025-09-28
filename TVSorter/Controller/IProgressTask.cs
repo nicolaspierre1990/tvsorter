@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright company="TVSorter" file="IProgressTask.cs">
-//   2012 - Andrew Jackson
+//   2025 - Andrew Jackson & Nicolas Pierre
 // </copyright>
 // <summary>
 //   The public interface of the progress task.
