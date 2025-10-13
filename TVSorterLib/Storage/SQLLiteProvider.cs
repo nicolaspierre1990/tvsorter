@@ -78,7 +78,7 @@ public class SQLLiteProvider : IStorageProvider
     }
 
     public IEnumerable<TvShow> LoadTvShows() 
-        => dbContext.TvShows.Include(x => x.Episodes).AsEnumerable();
+        => dbContext.TvShows.Include(x => x.Episodes).OrderBy(x => x.Name).AsEnumerable();
 
     public void RemoveShow(TvShow show)
     {

@@ -5,6 +5,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Splat;
 using TVSorter.Ui.ViewModels;
 using TVSorter.Ui.Views;
 
@@ -21,13 +22,62 @@ public partial class App : Application
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = new MainWindow()
-            {
-                DataContext = new MainWindowViewModel()
-            };
+            // Show splash screen first
+            ShowSplashScreenAndInitialize(desktop);
         }
 
         base.OnFrameworkInitializationCompleted();
+    }
+
+    private async void ShowSplashScreenAndInitialize(IClassicDesktopStyleApplicationLifetime desktop)
+    {
+        try
+        {
+            // Resolve dependencies from Splat DI container
+            var splashViewModel = Locator.Current.GetService<SplashScreenViewModel>();
+            if (splashViewModel == null)
+            {
+                throw new InvalidOperationException("SplashScreenViewModel is not registered in DI container");
+            }
+
+            var splashScreen = new SplashScreenView
+            {
+                DataContext = splashViewModel
+            };
+
+            splashScreen.Show();
+
+            // Initialize in background
+            await splashViewModel.InitializeAsync();
+
+            // Small delay to show completion
+            await Task.Delay(500);
+
+            // Create main window
+            var mainWindow = new MainWindow
+            {
+                DataContext = new MainWindowViewModel()
+            };
+
+            // Set as main window and show
+            desktop.MainWindow = mainWindow;
+            mainWindow.Show();
+
+            // Close splash screen
+            splashScreen.Close();
+        }
+        catch (Exception ex)
+        {
+            // Log error and show main window anyway
+            Console.WriteLine($"Error during splash screen initialization: {ex}");
+            
+            // Fallback to main window
+            desktop.MainWindow = new MainWindow
+            {
+                DataContext = new MainWindowViewModel()
+            };
+            desktop.MainWindow.Show();
+        }
     }
 
     public static Task? ShowDialog(object data, Window owner = null)
@@ -68,7 +118,7 @@ public partial class App : Application
     {
         get
         {
-            var version = Assembly.GetEntryAssembly()?.GetName().Version ?? new Version(0, 0, 0, 0);
+            var version = Assembly.GetEntryAssembly()?.GetName().Version ?? new System.Version(0, 0, 0, 0);
             return $"v{version.Major}.{version.Minor}.{version.Build}";
         }
     }

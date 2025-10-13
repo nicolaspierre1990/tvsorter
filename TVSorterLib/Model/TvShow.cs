@@ -9,7 +9,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using TVSorter.Wrappers;
 
 namespace TVSorter.Model;
@@ -17,72 +19,170 @@ namespace TVSorter.Model;
 /// <summary>
 ///     The tv show.
 /// </summary>
-public class TvShow : IEquatable<TvShow>
+public class TvShow : IEquatable<TvShow>, INotifyPropertyChanged
 {
+    private List<string> _alternateNames;
+    private string _banner;
+    private string _customFormat;
+    private List<Episode> _episodes;
+    private string _folderName;
+    private DateTime _lastUpdated;
+    private bool _locked;       
+    private string _name;   
+    private int _tvdbId;
+    private bool _useCustomFormat;
+    private bool _useDvdOrder;
+    private bool _useCustomDestination;
+    private string _customDestinationDir;
+
+    /// <summary>
+    ///     Occurs when a property value changes.
+    /// </summary>
+    public event PropertyChangedEventHandler PropertyChanged;
+
     /// <summary>
     ///     Gets or sets AlternateNames.
     /// </summary>
-    public List<string> AlternateNames { get; set; }
+    public List<string> AlternateNames
+    {
+        get => _alternateNames;
+        set => SetField(ref _alternateNames, value);
+    }
 
     /// <summary>
     ///     Gets or sets Banner.
     /// </summary>
-    public string Banner { get; set; }
+    public string Banner
+    {
+        get => _banner;
+        set => SetField(ref _banner, value);
+    }
 
     /// <summary>
     ///     Gets or sets CustomFormat.
     /// </summary>
-    public string CustomFormat { get; set; }
+    public string CustomFormat
+    {
+        get => _customFormat;
+        set => SetField(ref _customFormat, value);
+    }
 
     /// <summary>
     ///     Gets the episodes of the show.
     /// </summary>
-    public List<Episode> Episodes { get; set; }
+    public List<Episode> Episodes
+    {
+        get => _episodes;
+        set => SetField(ref _episodes, value);
+    }
 
     /// <summary>
     ///     Gets or sets FolderName.
     /// </summary>
-    public string FolderName { get; set; }
+    public string FolderName
+    {
+        get => _folderName;
+        set => SetField(ref _folderName, value);
+    }
 
     /// <summary>
     ///     Gets or sets LastUpdated.
     /// </summary>
-    public DateTime LastUpdated { get; set; }
+    public DateTime LastUpdated
+    {
+        get => _lastUpdated;
+        set => SetField(ref _lastUpdated, value);
+    }
 
     /// <summary>
     ///     Gets or sets a value indicating whether Locked.
     /// </summary>
-    public bool Locked { get; set; }
+    public bool Locked
+    {
+        get => _locked;
+        set => SetField(ref _locked, value);
+    }
 
     /// <summary>
     ///     Gets or sets Name.
     /// </summary>
-    public string Name { get; set; }
+    public string Name
+    {
+        get => _name;
+        set => SetField(ref _name, value);
+    }
 
     /// <summary>
     ///     Gets or sets the TVDB ID.
     /// </summary>
-    public int TvdbId { get; set; }
+    public int TvdbId
+    {
+        get => _tvdbId;
+        set => SetField(ref _tvdbId, value);
+    }
 
     /// <summary>
     ///     Gets or sets a value indicating whether to Use Custom Format.
     /// </summary>
-    public bool UseCustomFormat { get; set; }
+    public bool UseCustomFormat
+    {
+        get => _useCustomFormat;
+        set => SetField(ref _useCustomFormat, value);
+    }
 
     /// <summary>
     ///     Gets or sets a value indicating whether to use DVD Order.
     /// </summary>
-    public bool UseDvdOrder { get; set; }
+    public bool UseDvdOrder
+    {
+        get => _useDvdOrder;
+        set => SetField(ref _useDvdOrder, value);
+    }
 
     /// <summary>
     ///     Gets or sets a value indicating whether to use a custom destination.
     /// </summary>
-    public bool UseCustomDestination { get; set; }
+    public bool UseCustomDestination
+    {
+        get => _useCustomDestination;
+        set => SetField(ref _useCustomDestination, value);
+    }
 
     /// <summary>
     ///     Gets or sets the custom output destination directory to use.
     /// </summary>
-    public string CustomDestinationDir { get; set; }
+    public string CustomDestinationDir
+    {
+        get => _customDestinationDir;
+        set => SetField(ref _customDestinationDir, value);
+    }
+
+    /// <summary>
+    ///     Raises the PropertyChanged event.
+    /// </summary>
+    /// <param name="propertyName">The name of the property that changed.</param>
+    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    /// <summary>
+    ///     Sets a field and raises PropertyChanged if the value has changed.
+    /// </summary>
+    /// <typeparam name="T">The type of the field.</typeparam>
+    /// <param name="field">The backing field.</param>
+    /// <param name="value">The new value.</param>
+    /// <param name="propertyName">The name of the property.</param>
+    /// <returns>True if the value was changed; otherwise, false.</returns>
+    protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+    {
+        if (EqualityComparer<T>.Default.Equals(field, value))
+            return false;
+
+        field = value;
+        OnPropertyChanged(propertyName);
+        return true;
+    }
 
     /// <summary>
     ///     Indicates whether the current object is equal to another object of the same type.

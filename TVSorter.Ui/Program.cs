@@ -1,9 +1,12 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.ReactiveUI;
 using Serilog;
+using Splat;
+using TVSorter.Ui.DependencyInjection;
 
 namespace TVSorter.Ui;
 
@@ -16,11 +19,15 @@ internal class Program
     public static void Main(string[] args)
     {
         var logger = new LoggerConfiguration()
+            .WriteTo.File(Path.Combine(LoggingBootstrapper.LogFolder, "application-log-.txt"), rollingInterval: RollingInterval.Day)
             .CreateLogger();
 
         try
         {
             logger.Verbose("Starting TVSorter application {version}", Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "0.0.0.0");
+
+
+            RegisterDependencies(Locator.CurrentMutable, Locator.Current);
 
             BuildAvaloniaApp()
                 .StartWithClassicDesktopLifetime(args, ShutdownMode.OnMainWindowClose);
@@ -31,6 +38,13 @@ internal class Program
         }
     }
 
+    private static void RegisterDependencies(IMutableDependencyResolver services, IReadonlyDependencyResolver resolver)
+    {
+        ConfigurationBootstrapper.RegisterConfiguration(services, resolver);
+        LoggingBootstrapper.RegisterLogging(services, resolver);
+        ServicesBootstrapper.RegisterServices(services, resolver);
+    }
+
     // Avalonia configuration, don't remove; also used by visual designer.
     public static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>()
@@ -39,4 +53,3 @@ internal class Program
             .LogToTrace()
             .UseReactiveUI();
 }
-

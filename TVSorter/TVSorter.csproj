@@ -6,7 +6,7 @@
 		<AssemblyTitle>TVSorter</AssemblyTitle>
 		<Product>TVSorter</Product>
 		<Copyright>Copyright © 2024</Copyright>
-		<Version>1.6.0</Version>
+		<Version>2.0.0</Version>
 		<OutputPath>..\bin\</OutputPath>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>

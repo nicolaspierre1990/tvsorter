@@ -1,0 +1,121 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:controls="clr-namespace:TVSorter.Ui.Controls"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="TVSorter.Ui.Views.ShowsView">
+	<Grid ColumnDefinitions="250,4 , *" RowDefinitions="Auto, *">
+		<StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Spacing="10" Margin="5">
+			<Button Content="Update All" Command="{Binding UpdateAllCommand}" />
+			<TextBox Text="{Binding FilterText}"
+			         Watermark="Filter shows..."
+			         Width="200"
+			         VerticalAlignment="Center"/>
+		</StackPanel>
+		<ListBox ItemsSource="{Binding Shows}" Grid.Row="1" Grid.Column="0" SelectedItem="{Binding SelectedShow}" Margin="5">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding Name}"/>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+		<GridSplitter Grid.Row="1" Grid.Column="1" Background="Black" ResizeDirection="Columns"/>
+		<!-- Show Details Panel -->
+		<ScrollViewer Grid.Column="2" Grid.Row="1" Margin="10">
+			<StackPanel Spacing="10"
+								DataContext="{Binding SelectedShow}"
+								IsVisible="{Binding Converter={x:Static ObjectConverters.IsNotNull}}">
+				
+				<!-- Banner Image - Simpler version -->
+				<Border BorderBrush="Gray" BorderThickness="1" CornerRadius="4">
+					<Image Source="{Binding $parent[UserControl].DataContext.SelectedShowImage}"
+						   Stretch="Uniform"
+						   MaxHeight="200"/>
+				</Border>
+
+				<!-- Show Name -->
+				<TextBlock Text="{Binding Name}"
+				           FontSize="24"
+				           FontWeight="Bold"/>
+
+				<!-- TVDB ID -->
+				<StackPanel Orientation="Horizontal" Spacing="5">
+					<TextBlock Text="TVDB ID:" FontWeight="SemiBold" Width="120"/>
+					<TextBlock Text="{Binding TvdbId}"/>
+				</StackPanel>
+
+				<!-- Folder Name -->
+				<StackPanel Orientation="Horizontal" Spacing="5">
+					<TextBlock Text="Folder Name:" FontWeight="SemiBold" Width="120" VerticalAlignment="Center"/>
+					<TextBox Text="{Binding FolderName, Mode=TwoWay}" 
+					         MinWidth="500"
+					         Watermark="Enter folder name..."/>
+				</StackPanel>
+
+				<!-- Last Updated -->
+				<StackPanel Orientation="Horizontal" Spacing="5">
+					<TextBlock Text="Last Updated:" FontWeight="SemiBold" Width="120"/>
+					<TextBlock Text="{Binding LastUpdated, StringFormat='{}{0:yyyy-MM-dd HH:mm:ss}'}"/>
+				</StackPanel>
+
+				<!-- Episodes Count -->
+				<StackPanel Orientation="Horizontal" Spacing="5">
+					<TextBlock Text="Episodes:" FontWeight="SemiBold" Width="120"/>
+					<TextBlock Text="{Binding Episodes.Count}"/>
+				</StackPanel>
+
+				<!-- Flags Section -->
+				<Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="4" Padding="10">
+					<StackPanel Spacing="5">
+						<TextBlock Text="Options" FontWeight="Bold" FontSize="16"/>
+
+						<CheckBox Content="Locked" IsChecked="{Binding Locked, Mode=TwoWay}" />
+						<CheckBox Content="Use Custom Format" IsChecked="{Binding UseCustomFormat, Mode=TwoWay}" IsEnabled="{Binding !Locked}"/>
+						<CheckBox Content="Use DVD Order" IsChecked="{Binding UseDvdOrder, Mode=TwoWay}" IsEnabled="{Binding !Locked}" />
+						<CheckBox Content="Use Custom Destination" IsChecked="{Binding UseCustomDestination, Mode=TwoWay}" IsEnabled="{Binding !Locked}"/>
+					</StackPanel>
+				</Border>
+
+				<!-- Custom Format -->
+				<StackPanel Spacing="5" IsVisible="{Binding UseCustomFormat}">
+					<TextBlock Text="Custom Format:" FontWeight="SemiBold"/>
+					<TextBox Text="{Binding CustomFormat, Mode=TwoWay}" Background="Transparent"/>
+				</StackPanel>
+
+				<!-- Custom Destination Directory -->
+				<StackPanel Spacing="5" IsVisible="{Binding UseCustomDestination}">
+					<TextBlock Text="Custom Destination:" FontWeight="SemiBold"/>
+					<TextBox Text="{Binding CustomDestinationDir}" IsReadOnly="True" Background="Transparent"/>
+				</StackPanel>
+
+				<!-- Alternate Names -->
+				<StackPanel Spacing="5" IsVisible="{Binding AlternateNames.Count, Converter={x:Static ObjectConverters.IsNotNull}}">
+					<TextBlock Text="Alternate Names:" FontWeight="SemiBold"/>
+					<Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="4" Padding="5">
+						<ItemsControl ItemsSource="{Binding AlternateNames}">
+							<ItemsControl.ItemTemplate>
+								<DataTemplate>
+									<TextBlock Text="{Binding}" Margin="2"/>
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+						</ItemsControl>
+					</Border>
+				</StackPanel>
+
+				<!-- Action Buttons -->
+				<StackPanel Orientation="Horizontal" Spacing="10" Margin="0,10,0,0">
+					<Button Content="Save Show" 
+					        Command="{Binding $parent[UserControl].DataContext.SaveShowCommand}"
+					        Padding="20,10"/>
+					<Button Content="Update Show from TVDB" 
+					        Command="{Binding $parent[UserControl].DataContext.UpdateShowCommand}"
+					        Padding="20,10"
+					        IsEnabled="{Binding !Locked}"/>
+				</StackPanel>
+
+			</StackPanel>
+		</ScrollViewer>
+		<controls:Loader IsVisible="{Binding IsBusy}" Grid.RowSpan="2" Grid.ColumnSpan="3"></controls:Loader>
+	</Grid>
+</UserControl>

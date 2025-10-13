@@ -4,8 +4,6 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using TVSorter.Data;
 using TVSorter.Model;
-using TVSorter.Repostitory;
-using static TVSorter.Storage.XMLToSQLMigration;
 
 namespace TVSorter.Storage;
 
