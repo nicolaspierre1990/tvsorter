@@ -1,14 +1,14 @@
 <Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:vm="clr-namespace:TVSorter.Ui.ViewModels"
 		xmlns:controls="using:TVSorter.Ui.Views"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="TVSorter.Ui.Views.MainWindow"
+		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		x:Class="TVSorter.Ui.Views.MainWindow"
 		WindowStartupLocation="CenterScreen" WindowState="Maximized"
-        Title="{Binding Title}"
-        Icon="/Assets/tvsorter.ico">
+		Title="{Binding Title}"
+		Icon="/Assets/tvsorter.ico">
 	<Design.DataContext>
 		<vm:MainWindowViewModel/>
 	</Design.DataContext>
@@ -18,15 +18,15 @@
 		<Style Selector="Menu">
 			<Setter Property="Background" Value="#F0F0F0"/>
 		</Style>
-		
+
 		<Style Selector="MenuItem">
 			<Setter Property="Foreground" Value="#333333"/>
 		</Style>
-		
+
 		<Style Selector="MenuItem:pointerover /template/ Border#PART_LayoutRoot">
 			<Setter Property="Background" Value="#E0E0E0"/>
 		</Style>
-		
+
 		<Style Selector="MenuItem:selected /template/ Border#PART_LayoutRoot">
 			<Setter Property="Background" Value="#D0D0D0"/>
 		</Style>
@@ -36,7 +36,7 @@
 			<Setter Property="Background" Value="#FAFAFA"/>
 			<Setter Property="Padding" Value="8,4,8,0"/>
 		</Style>
-		
+
 		<Style Selector="TabItem">
 			<Setter Property="FontSize" Value="13"/>
 			<Setter Property="Padding" Value="16,8"/>
@@ -47,19 +47,19 @@
 			<Setter Property="Margin" Value="0,0,4,0"/>
 			<Setter Property="CornerRadius" Value="4,4,0,0"/>
 		</Style>
-		
+
 		<Style Selector="TabItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
 			<Setter Property="Background" Value="#E8E8E8"/>
 		</Style>
-		
+
 		<Style Selector="TabItem:pointerover">
 			<Setter Property="Foreground" Value="#333333"/>
 		</Style>
-		
+
 		<Style Selector="TabItem:selected /template/ ContentPresenter#PART_ContentPresenter">
 			<Setter Property="Background" Value="White"/>
 		</Style>
-		
+
 		<Style Selector="TabItem:selected">
 			<Setter Property="Foreground" Value="#0078D4"/>
 			<Setter Property="FontWeight" Value="SemiBold"/>
@@ -75,17 +75,17 @@
 			<Setter Property="Padding" Value="12,6"/>
 			<Setter Property="FontSize" Value="13"/>
 		</Style>
-		
+
 		<Style Selector="Button:pointerover">
 			<Setter Property="Background" Value="#005A9E"/>
 			<Setter Property="BorderBrush" Value="#005A9E"/>
 		</Style>
-		
+
 		<Style Selector="Button:pressed">
 			<Setter Property="Background" Value="#004578"/>
 			<Setter Property="BorderBrush" Value="#004578"/>
 		</Style>
-		
+
 		<Style Selector="Button:disabled">
 			<Setter Property="Background" Value="#CCCCCC"/>
 			<Setter Property="BorderBrush" Value="#CCCCCC"/>
@@ -102,12 +102,12 @@
 			<Setter Property="Foreground" Value="#333333"/>
 			<Setter Property="FontSize" Value="13"/>
 		</Style>
-		
+
 		<Style Selector="TextBox:focus">
 			<Setter Property="BorderBrush" Value="#0078D4"/>
 			<Setter Property="BorderThickness" Value="2"/>
 		</Style>
-		
+
 		<Style Selector="TextBox:pointerover">
 			<Setter Property="BorderBrush" Value="#999999"/>
 		</Style>
@@ -147,6 +147,11 @@
 		<TabControl Grid.Row="1">
 			<TabControl.Items>
 				<TabItem Header="Sorting">
+					<TabItem.ContentTemplate>
+						<DataTemplate>
+							<controls:ShowSorterView/>
+						</DataTemplate>
+					</TabItem.ContentTemplate>
 				</TabItem>
 				<TabItem Header="Shows">
 					<TabItem.ContentTemplate>
@@ -156,20 +161,27 @@
 					</TabItem.ContentTemplate>
 				</TabItem>
 				<TabItem Header="Logs"/>
+				<TabItem Header="Settings">
+					<TabItem.ContentTemplate>
+						<DataTemplate>
+							<controls:SettingsView/>
+						</DataTemplate>
+					</TabItem.ContentTemplate>
+				</TabItem>
 			</TabControl.Items>
 		</TabControl>
 
 		<!-- Status Bar (placeholder for future use) -->
-		<Border Grid.Row="2" 
-		        Background="#F0F0F0" 
-		        BorderBrush="#E0E0E0" 
-		        BorderThickness="0,1,0,0" 
-		        Padding="10,4"
-		        Height="28">
-			<TextBlock Text="Ready" 
-			           FontSize="12" 
-			           Foreground="#666666"
-			           VerticalAlignment="Center"/>
+		<Border Grid.Row="2"
+				Background="#F0F0F0"
+				BorderBrush="#E0E0E0"
+				BorderThickness="0,1,0,0"
+				Padding="10,4"
+				Height="28">
+			<TextBlock Text="Ready"
+					   FontSize="12"
+					   Foreground="#666666"
+					   VerticalAlignment="Center"/>
 		</Border>
 	</Grid>
 </Window>

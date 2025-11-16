@@ -80,7 +80,7 @@ public partial class App : Application
         }
     }
 
-    public static Task? ShowDialog(object data, Window owner = null)
+    public static Task? ShowDialog(object data, string dialogTitle, Window? owner = null, EventHandler? onClosedAction = null)
     {
         if (owner == null)
         {
@@ -94,10 +94,33 @@ public partial class App : Application
         if (dialog is not null)
         {
             dialog.DataContext = data;
+            dialog.Title = dialogTitle;
+            
+            if (onClosedAction != null)
+            {
+                dialog.Closed += onClosedAction;
+            }
+
             return dialog.ShowDialog(owner);
         }
 
         return null;
+    }
+
+    public static Task CloseDialog(object data, bool result = true)
+    {
+        if (Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime { MainWindow: { } mainWindow })
+        {
+            foreach (var window in mainWindow.OwnedWindows)
+            {
+                if (window.DataContext == data)
+                {
+                    window.Close(result);
+                    return Task.CompletedTask;
+                }
+            }
+        }
+        return Task.CompletedTask;
     }
 
     public static object? CreateViewForViewModel(object data)

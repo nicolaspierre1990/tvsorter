@@ -10,6 +10,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using TVSorter.Data;
 using TVSorter.Model;
 using TVSorter.Storage;
@@ -100,6 +102,9 @@ public class TvShowRepository : ITvShowRepository
     /// </param>
     public void Save(TvShow show) => storageProvider.SaveShow(show);
 
+    public Task SaveAsync(TvShow show, CancellationToken cancellationToken = default) 
+        => storageProvider.SaveShowAsync(show, cancellationToken);
+
     /// <summary>
     ///     Updates the specified show.
     /// </summary>
@@ -111,6 +116,16 @@ public class TvShowRepository : ITvShowRepository
         dataProvider.UpdateShow(show);
         LockIfNoEpisodes(show);
         Save(show);
+    }
+
+    public Task<TvShow> UpdateAsync(TvShow show, CancellationToken cancellationToken = default)
+    {
+        return dataProvider.UpdateShowAsync(show, cancellationToken).ContinueWith(t =>
+        {
+            LockIfNoEpisodes(show);
+            Save(show);
+            return show;
+        }, cancellationToken);
     }
 
     /// <summary>
@@ -131,6 +146,8 @@ public class TvShowRepository : ITvShowRepository
     ///     The results of the search.
     /// </returns>
     public List<TvShow> SearchShow(string name) => dataProvider.SearchShow(name);
+
+    public Task<List<TvShow>> SearchShowAsync(string name, CancellationToken cancellationToken = default) => dataProvider.SearchShowAsync(name, cancellationToken);
 
     /// <summary>
     ///     Updates the specified collection of shows.

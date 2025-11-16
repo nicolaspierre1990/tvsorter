@@ -10,7 +10,7 @@ public class ConfigurationBootstrapper
     {
         services.RegisterLazySingleton(() => new ConfigurationBuilder()
                 .SetBasePath(Environment.CurrentDirectory)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddEnvironmentVariables("DOTNET_").Build(), typeof(IConfiguration));
 
         return services;

@@ -2,6 +2,8 @@
 using System.Reactive;
 using System.Threading.Tasks;
 using ReactiveUI;
+using Splat;
+using TVSorter.Ui.DependencyInjection;
 
 namespace TVSorter.Ui.ViewModels;
 
@@ -26,6 +28,10 @@ public class MainWindowViewModel : ViewModelBase
 
     private async Task OpenAddShowsDialogAsync()
     {
-        await App.ShowDialog(new AddShowsDialogViewModel());
+        var task = App.ShowDialog(Locator.Current.GetRequiredService<AddShowsDialogViewModel>(), AddShowsDialogViewModel.DialogTitle);
+        if(task != null)
+        {
+            await task;
+        }
     }
 }

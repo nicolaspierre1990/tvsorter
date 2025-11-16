@@ -8,8 +8,10 @@ using System.Windows.Input;
 using Avalonia.Media.Imaging;
 using Microsoft.Extensions.Logging;
 using ReactiveUI;
+using Splat;
 using TVSorter.Model;
 using TVSorter.Repostitory;
+using TVSorter.Ui.DependencyInjection;
 
 namespace TVSorter.Ui.ViewModels;
 
@@ -27,6 +29,7 @@ public class ShowsViewModel : ViewModelBase
     {
         _logger = logger;
         _showRepository = tvShowRepository;
+        AddShowCommand = ReactiveCommand.Create(ExecuteAddShowAsync);
         UpdateAllCommand = ReactiveCommand.CreateFromTask(ExecuteUpdateAllAsync);
         SaveShowCommand = ReactiveCommand.CreateFromTask(ExecuteSaveShowAsync, 
             this.WhenAnyValue(x => x.SelectedShow, (TvShow? show) => show != null));
@@ -45,6 +48,7 @@ public class ShowsViewModel : ViewModelBase
         SetIsBusy(false);
     }
 
+    public ICommand AddShowCommand { get; }
     public ICommand UpdateAllCommand { get; }
     public ICommand SaveShowCommand { get; }
     public ICommand UpdateShowCommand { get; }
@@ -196,20 +200,7 @@ public class ShowsViewModel : ViewModelBase
                 SelectedShow.Name, SelectedShow.TvdbId);
 
             // Save the show (persists current property values)
-            await Task.Run(() => _showRepository.Save(SelectedShow));
-
-            // Update in both collections to ensure consistency
-            var indexInAll = _allShows.ToList().FindIndex(s => s.TvdbId == SelectedShow.TvdbId);
-            if (indexInAll >= 0)
-            {
-                _allShows[indexInAll] = SelectedShow;
-            }
-
-            var indexInFiltered = _shows.ToList().FindIndex(s => s.TvdbId == SelectedShow.TvdbId);
-            if (indexInFiltered >= 0)
-            {
-                _shows[indexInFiltered] = SelectedShow;
-            }
+            await _showRepository.SaveAsync(SelectedShow);
 
             _logger.LogInformation("Successfully saved show: {ShowName}", SelectedShow.Name);
         }
@@ -272,4 +263,21 @@ public class ShowsViewModel : ViewModelBase
             SetIsBusy(false);
         }
     }
+
+    private async Task ExecuteAddShowAsync()
+    {
+        var dialogTask = App.ShowDialog(Locator.Current.GetRequiredService<AddShowsDialogViewModel>(), AddShowsDialogViewModel.DialogTitle);
+
+        if(dialogTask != null)
+        {
+            await dialogTask;
+            // Refresh shows after adding new ones
+            SetIsBusy(true);
+            var shows = await Task.Run(() => _showRepository.GetTvShows()); 
+            _allShows = new ObservableCollection<TvShow>(shows);
+            ApplyFilter();
+            SetIsBusy(false);
+        }
+    }
+
 }

@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Schema;
@@ -22,6 +24,7 @@ namespace TVSorter.Storage;
 /// <summary>
 ///     Class that manages access to the XML file.
 /// </summary>
+[Obsolete("Outdated Legacy")]
 public class Xml : IStorageProvider, IDisposable
 {
     private const string XmlFile = "TVSorter.xml";
@@ -406,5 +409,10 @@ public class Xml : IStorageProvider, IDisposable
     {
         document = null;
         GC.SuppressFinalize(this);
+    }
+
+    public Task SaveShowAsync(TvShow show, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
     }
 }

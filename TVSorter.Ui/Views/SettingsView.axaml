@@ -1,0 +1,151 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:TVSorter.Ui.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+             x:Class="TVSorter.Ui.Views.SettingsView"
+             x:DataType="vm:SettingsViewModel">
+    <ScrollViewer>
+        <StackPanel Spacing="20">
+            <!-- Directories Section -->
+            <StackPanel Spacing="12">
+                <TextBlock Text="Directories" FontSize="18" FontWeight="Bold"/>
+                <Separator/>
+                
+                <!-- Source Directory -->
+                <StackPanel Margin="0,8,0,0">
+                    <TextBlock Text="Source Directory:" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <TextBox Grid.Column="0" Text="{Binding Settings.SourceDirectory}" Margin="0,0,8,0"/>
+                        <Button Grid.Column="1" Content="Browse..." Command="{Binding BrowseSourceDirectoryCommand}"/>
+                    </Grid>
+                </StackPanel>
+
+                <!-- Destination Directories -->
+                <StackPanel>
+                    <TextBlock Text="Destination Directories:" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
+                        <ListBox Grid.Column="0" Grid.Row="0" 
+                                 Height="100" 
+                                 ItemsSource="{Binding DestinationDirectories}"
+                                 SelectedItem="{Binding SelectedDestinationDirectory}"/>
+                        <StackPanel Grid.Column="1" Grid.Row="0" Margin="8,0,0,0" Spacing="4">
+                            <Button Content="Add" Command="{Binding AddDestinationDirectoryCommand}"/>
+                            <Button Content="Remove" Command="{Binding RemoveDestinationDirectoryCommand}"/>
+                        </StackPanel>
+                        
+                        <StackPanel Grid.Column="0" Grid.Row="1" Margin="0,8,0,0">
+                            <TextBlock Text="Default Destination:" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                            <ComboBox ItemsSource="{Binding DestinationDirectories}" 
+                                      SelectedItem="{Binding Settings.DefaultDestinationDirectory}"
+                                      HorizontalAlignment="Stretch"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+
+                <!-- Ignored Directories -->
+                <StackPanel>
+                    <TextBlock Text="Ignored Directories:" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <ListBox Grid.Column="0" 
+                                 Height="100" 
+                                 ItemsSource="{Binding IgnoredDirectories}"
+                                 SelectedItem="{Binding SelectedIgnoredDirectory}"/>
+                        <StackPanel Grid.Column="1" Margin="8,0,0,0" Spacing="4">
+                            <Button Content="Add" Command="{Binding AddIgnoredDirectoryCommand}"/>
+                            <Button Content="Remove" Command="{Binding RemoveIgnoredDirectoryCommand}"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- File Options Section -->
+            <StackPanel Spacing="12">
+                <TextBlock Text="File Options" FontSize="18" FontWeight="Bold" Margin="0,0,0,8"/>
+                <Separator/>
+                
+                <!-- File Extensions -->
+                <StackPanel Margin="0,8,0,0">
+                    <TextBlock Text="File Extensions:" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <ListBox Grid.Column="0" 
+                                 Height="100" 
+                                 ItemsSource="{Binding FileExtensions}"
+                                 SelectedItem="{Binding SelectedFileExtension}"/>
+                        <StackPanel Grid.Column="1" Margin="8,0,0,0" Spacing="4">
+                            <Button Content="Add" Command="{Binding AddFileExtensionCommand}"/>
+                            <Button Content="Remove" Command="{Binding RemoveFileExtensionCommand}"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+
+                <!-- Output Format -->
+                <StackPanel>
+                    <TextBlock Text="Default Output Format:" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                    <TextBox Text="{Binding Settings.DefaultOutputFormat}" 
+                             Watermark="e.g., {FName}\Season {SNum(1)}\{SName(.)}.S{SNum(2)}E{ENum(2)}.{EName(.)}{Ext}"/>
+                </StackPanel>
+
+                <!-- Overwrite Keywords -->
+                <StackPanel>
+                    <TextBlock Text="Overwrite Keywords:" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <ListBox Grid.Column="0" 
+                                 Height="100" 
+                                 ItemsSource="{Binding OverwriteKeywords}"
+                                 SelectedItem="{Binding SelectedOverwriteKeyword}"/>
+                        <StackPanel Grid.Column="1" Margin="8,0,0,0" Spacing="4">
+                            <Button Content="Add" Command="{Binding AddOverwriteKeywordCommand}"/>
+                            <Button Content="Remove" Command="{Binding RemoveOverwriteKeywordCommand}"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Regular Expressions Section -->
+            <StackPanel Spacing="12">
+                <TextBlock Text="Regular Expressions" FontSize="18" FontWeight="Bold" Margin="0,0,0,8"/>
+                <Separator/>
+                
+                <Grid ColumnDefinitions="*,Auto" Margin="0,8,0,0">
+                    <ListBox Grid.Column="0" 
+                             Height="150" 
+                             ItemsSource="{Binding RegularExpressions}"
+                             SelectedItem="{Binding SelectedRegularExpression}"/>
+                    <StackPanel Grid.Column="1" Margin="8,0,0,0" Spacing="4">
+                        <Button Content="Add" Command="{Binding AddRegularExpressionCommand}"/>
+                        <Button Content="Remove" Command="{Binding RemoveRegularExpressionCommand}"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+
+            <!-- Behavior Options Section -->
+            <StackPanel Spacing="12">
+                <TextBlock Text="Behavior Options" FontSize="18" FontWeight="Bold" Margin="0,0,0,8"/>
+                <Separator/>
+                
+                <StackPanel Spacing="8" Margin="0,8,0,0">
+                    <CheckBox Content="Recurse Subdirectories" 
+                              IsChecked="{Binding Settings.RecurseSubdirectories}"/>
+                    <CheckBox Content="Delete Empty Subdirectories" 
+                              IsChecked="{Binding Settings.DeleteEmptySubdirectories}"/>
+                    <CheckBox Content="Rename If Exists" 
+                              IsChecked="{Binding Settings.RenameIfExists}"/>
+                    <CheckBox Content="Add Unmatched Shows" 
+                              IsChecked="{Binding Settings.AddUnmatchedShows}"/>
+                    <CheckBox Content="Unlock Matched Shows" 
+                              IsChecked="{Binding Settings.UnlockMatchedShows}"/>
+                    <CheckBox Content="Lock Shows With No Episodes" 
+                              IsChecked="{Binding Settings.LockShowsWithNoEpisodes}"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Action Buttons -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8" Margin="0,16,0,0">
+                <Button Content="Revert" Command="{Binding RevertCommand}" Width="100"/>
+                <Button Content="Save" Command="{Binding SaveCommand}" Width="100"/>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

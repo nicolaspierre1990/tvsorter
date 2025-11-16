@@ -9,6 +9,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using TVSorter.Model;
 
 namespace TVSorter.Storage;
@@ -113,6 +115,8 @@ public interface IStorageProvider
     ///     The show to save.
     /// </param>
     void SaveShow(TvShow show);
+
+    Task SaveShowAsync(TvShow show, CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     Saves a collection of shows.

@@ -1,15 +1,17 @@
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
 using Splat;
 using TVSorter.Ui.ViewModels;
 
 namespace TVSorter.Ui.Views;
 
-public partial class AddShowsDialogView : Window
+public partial class ShowSorterView : UserControl
 {
-    public AddShowsDialogView()
+    public ShowSorterView()
     {
         InitializeComponent();
-        var viewModel = Locator.Current.GetService<AddShowsDialogViewModel>();
+        var viewModel = Locator.Current.GetService<ShowSorterViewModel>();
         DataContext = viewModel;
 
         AttachedToVisualTree += async (s, e) =>

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TVSorter.Data;
 using TVSorter.Model;
@@ -145,6 +147,11 @@ public class SQLLiteProvider : IStorageProvider
 
     public void SaveShow(TvShow show)
     {
+        SaveShowAsync(show).GetAwaiter().GetResult();
+    }
+
+    public Task SaveShowAsync(TvShow show, CancellationToken cancellationToken = default)
+    {
         Logger.OnLogMessage(this, $"Saving {show.Name}", LogType.Info);
 
         if (dbContext.TvShows.Any(x => x.TvdbId == show.TvdbId))
@@ -158,7 +165,7 @@ public class SQLLiteProvider : IStorageProvider
             OnTvShowAdded(show);
         }
 
-        dbContext.SaveChanges();
+        return dbContext.SaveChangesAsync(cancellationToken);
     }
 
     public void SaveShows(IEnumerable<TvShow> shows) => shows.ToList().ForEach(SaveShow);

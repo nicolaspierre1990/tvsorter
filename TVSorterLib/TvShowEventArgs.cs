@@ -8,6 +8,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using TVSorter.Data;
 using TVSorter.Model;
 
 namespace TVSorter;
@@ -28,4 +29,12 @@ public class TvShowEventArgs(TvShow tvShow) : EventArgs
     ///     Gets the TV Show for the event.
     /// </summary>
     public TvShow TvShow { get; } = tvShow;
+}
+
+public class SettingsEventArgs(Setting settings) : EventArgs
+{
+    /// <summary>
+    ///     Gets the Settings for the event.
+    /// </summary>
+    public Setting Settings { get; } = settings;
 }

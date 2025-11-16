@@ -248,7 +248,7 @@ public class TvShow : IEquatable<TvShow>, INotifyPropertyChanged
     ///     Gets all the possible names of this show.
     /// </summary>
     /// <returns>The possible names of the show.</returns>
-    internal IEnumerable<string> GetShowNames() => GetNames(new[] { Name, FolderName }.Concat(AlternateNames)).Distinct();
+    internal IEnumerable<string> GetShowNames() => GetNames(new[] { Name, FolderName }.Concat(AlternateNames ??= [])).Distinct();
 
     /// <summary>
     ///     Gets the custom destination directory for the show.

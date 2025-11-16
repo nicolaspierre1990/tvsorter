@@ -9,6 +9,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using TVSorter.Model;
 
 namespace TVSorter.Repostitory;
@@ -58,6 +60,8 @@ public interface ITvShowRepository
     /// <param name="show">The show to save.</param>
     void Save(TvShow show);
 
+    Task SaveAsync(TvShow show, CancellationToken cancellationToken = default);
+
     /// <summary>
     ///     Searches for shows with the specified name.
     /// </summary>
@@ -65,11 +69,15 @@ public interface ITvShowRepository
     /// <returns>The collection of search results.</returns>
     List<TvShow> SearchShow(string name);
 
+    Task<List<TvShow>> SearchShowAsync(string name, CancellationToken cancellationToken = default);
+
     /// <summary>
     ///     Updates the data of the specified show.
     /// </summary>
     /// <param name="show">The show to update.</param>
     void Update(TvShow show);
+
+    Task<TvShow> UpdateAsync(TvShow show, CancellationToken cancellationToken = default);
 
     /// <summary>
     ///     Updates the specified collection of show's data.

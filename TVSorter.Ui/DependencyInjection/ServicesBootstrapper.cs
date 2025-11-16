@@ -20,6 +20,8 @@ public static class ServicesBootstrapper
 {
     public static IMutableDependencyResolver RegisterServices(this IMutableDependencyResolver services, IReadonlyDependencyResolver resolver)
     {
+        var apiKey = resolver.GetRequiredService<IConfiguration>().GetSection("tvdb").GetValue<string>("apiKey") ?? string.Empty;
+
 
         // TVSorterLib registrations (from LibraryModule)
         services.RegisterLazySingleton(() => new SQLLiteProvider(resolver.GetRequiredService<TvSorterDbContext>()), typeof(IStorageProvider));
@@ -38,6 +40,7 @@ public static class ServicesBootstrapper
         services.RegisterLazySingleton(() => new FileManager(resolver.GetRequiredService<IStorageProvider>(), resolver.GetRequiredService<IScanManager>(), resolver.GetRequiredService<IFileResultManager>()), typeof(IFileManager));
         services.RegisterLazySingleton(() => new FileSearch(resolver.GetRequiredService<IStorageProvider>(), resolver.GetRequiredService<IDataProvider>(), resolver.GetRequiredService<IScanManager>(), resolver.GetRequiredService<IFileManager>()), typeof(IFileSearch));
         services.RegisterLazySingleton(() => new TvShowRepository(resolver.GetRequiredService<IStorageProvider>(), resolver.GetRequiredService<IDataProvider>()), typeof(ITvShowRepository));
+        services.RegisterLazySingleton(() => new SettingsRepository(resolver.GetRequiredService<TvSorterDbContext>()), typeof(ISettingsRepository));
         services.RegisterLazySingleton(() => new StreamWriter(), typeof(IStreamWriter));
 
         services.Register(() => new TvSorterDbContext(), typeof(TvSorterDbContext)); // Transient
@@ -45,7 +48,8 @@ public static class ServicesBootstrapper
 
         // TheTvdbDotNet registrations (from TheTvdbDotNetModule)
         services.RegisterLazySingleton(() => new AuthenticationToken(), typeof(IAuthenticationToken));
-        services.RegisterLazySingleton(() => new Authenticator(resolver.GetRequiredService<ITvdbHttpClient>(), resolver.GetRequiredService<IAuthenticationToken>(), resolver.GetRequiredService<IConfiguration>().GetSection("appSettings").ToString()), typeof(IAuthenticator));
+        services.RegisterLazySingleton(() => new Authenticator(resolver.GetRequiredService<ITvdbHttpClient>(), resolver.GetRequiredService<IAuthenticationToken>(),
+            apiKey), typeof(IAuthenticator));
         services.RegisterLazySingleton(() => new TvdbHttpClient(), typeof(ITvdbHttpClient));
         services.RegisterLazySingleton(() => new AuthenticatedTvdbHttpClient(resolver.GetRequiredService<ITvdbHttpClient>(), resolver.GetRequiredService<IAuthenticator>()), typeof(IAuthenticatedTvdbHttpClient));
         services.RegisterLazySingleton(() => new TvdbBannersHttpClient(), typeof(ITvdbBannersHttpClient));
@@ -61,6 +65,22 @@ public static class ServicesBootstrapper
         services.RegisterLazySingleton(() => new SplashScreenViewModel(
             resolver.GetRequiredService<ILoggerFactory>().CreateLogger<SplashScreenViewModel>(),
             resolver.GetRequiredService<IStorageProvider>()), typeof(SplashScreenViewModel));
+
+        services.RegisterLazySingleton(() => new MainWindowViewModel(), typeof(MainWindowViewModel));
+
+        services.RegisterLazySingleton(() => new AddShowsDialogViewModel(
+            resolver.GetRequiredService<ILoggerFactory>().CreateLogger<AddShowsDialogViewModel>(),
+            resolver.GetRequiredService<ITvShowRepository>()), typeof(AddShowsDialogViewModel));
+
+        services.RegisterLazySingleton(() => new ShowSorterViewModel(
+            resolver.GetRequiredService<ILoggerFactory>().CreateLogger<ShowSorterViewModel>(),
+            resolver.GetRequiredService<ISettingsRepository>(),
+            resolver.GetRequiredService<IFileResultManager>(),
+            resolver.GetRequiredService<IFileSearch>()), typeof(ShowSorterViewModel));
+
+        services.RegisterLazySingleton(() => new SettingsViewModel(
+            resolver.GetRequiredService<ILoggerFactory>().CreateLogger<SettingsViewModel>(),
+            resolver.GetRequiredService<ISettingsRepository>()), typeof(SettingsViewModel));
 
         return services;
     }

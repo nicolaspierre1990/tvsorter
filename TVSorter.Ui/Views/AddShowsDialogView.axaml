@@ -2,8 +2,38 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="TVSorter.Ui.Views.AddShowsDialogView"
-        Title="AddShowsDialogView">
-  Welcome to Avalonia!
+		xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="TVSorter.Ui.Views.AddShowsDialogView">
+	<Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="Auto,*,Auto" Margin="24">
+		<!-- Show Name -->
+		<TextBlock Grid.Row="0" Grid.Column="0" Text="Show Name:" VerticalAlignment="Center" Margin="0,0,8,8"/>
+		<TextBox Grid.Row="0" Grid.Column="1" Margin="0,0,0,8"
+                 Watermark="Enter show name"
+                 Text="{Binding ShowName, Mode=TwoWay}"/>
+		<Button Grid.Row="0" Grid.Column="2" Content="Search" Margin="8,0,0,8"
+				Command="{Binding SearchCommand}" />
+
+		<!-- Results -->
+		<ListBox Grid.Row="1" Grid.ColumnSpan="3" Margin="0,0,0,8"
+				 ItemsSource="{Binding SearchResults}"
+				 SelectedItem="{Binding SelectedShow, Mode=TwoWay}">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<StackPanel Orientation="Horizontal" Spacing="8" Margin="4">
+						<asyncImageLoader:AdvancedImage Source="{Binding Banner}" Stretch="UniformToFill" />
+						<TextBlock VerticalAlignment="Center" Text="{Binding Name}" FontSize="16"/>
+					</StackPanel>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+
+		<!-- Buttons -->
+		<StackPanel Grid.Row="3" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
+			<Button Content="Add" Width="80" IsDefault="True"
+                    Command="{Binding AddCommand}" />
+			<Button Content="Cancel" Width="80" IsCancel="True"
+                    Command="{Binding CancelCommand}" />
+		</StackPanel>
+	</Grid>
 </Window>
