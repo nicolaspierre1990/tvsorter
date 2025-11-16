@@ -164,7 +164,8 @@ public partial class FileResultManager(IStorageProvider storageProvider) : IFile
             case "ENum":
                 try
                 {
-                    return FormatNum(arg, fileResult.Episodes.Select(x => x.EpisodeNumber).ToArray());
+                    return FormatNum(arg, [.. fileResult.Episodes.Where(x => x is not null)
+                        .Select(x => x.EpisodeNumber)]);
                 }
                 catch
                 {
@@ -174,7 +175,8 @@ public partial class FileResultManager(IStorageProvider storageProvider) : IFile
             case "SNum":
                 try
                 {
-                    return FormatNum(arg, fileResult.Episodes.Select(x => x.SeasonNumber).ToArray());
+                    return FormatNum(arg, [.. fileResult.Episodes.Where(x => x is not null)
+                        .Select(x => x.SeasonNumber)]);
                 }
                 catch
                 {
@@ -295,7 +297,7 @@ public partial class FileResultManager(IStorageProvider storageProvider) : IFile
     private string GetEpisodeName(FileResult fileResult)
     {
         // If there is only one episode on the match then return it.
-        if (fileResult.Episodes.Count == 1)
+        if (fileResult.Episodes.Where(x => x is not null).Count() == 1)
         {
             return fileResult.Episode.Name;
         }

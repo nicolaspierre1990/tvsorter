@@ -88,6 +88,15 @@ public partial class ShowSelectDialog : Form
         showList.DataSource = shows;
     }
 
+    /// <summary>
+    ///     Handles the search text changed event.
+    /// </summary>
+    /// <param name="sender">
+    ///     The sender of the event.
+    /// </param>
+    /// <param name="e">
+    ///     The arguments of the event.
+    /// </param>
     private void SearchTxt_TextChanged(object sender, EventArgs e)
     {
         if(sender is TextBox txt && txt.Text.Length >= 3)
