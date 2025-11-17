@@ -76,6 +76,7 @@ public static class ServicesBootstrapper
             resolver.GetRequiredService<ILoggerFactory>().CreateLogger<ShowSorterViewModel>(),
             resolver.GetRequiredService<ISettingsRepository>(),
             resolver.GetRequiredService<IFileResultManager>(),
+            resolver.GetRequiredService<IFileManager>(),
             resolver.GetRequiredService<IFileSearch>()), typeof(ShowSorterViewModel));
 
         services.RegisterLazySingleton(() => new SettingsViewModel(
