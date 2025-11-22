@@ -27,6 +27,7 @@ public class ShowSorterViewModel : ViewModelBase
 
     public ICommand ScanFoldersCommand { get; set; }
     public ICommand SortShowsCommand { get; set; }
+    public ICommand SetShowCommand { get; set; }
     public ICommand ToggleSelectAllCommand { get; set; }
     public ICommand SelectAllCommand { get; set; }
 
@@ -56,6 +57,7 @@ public class ShowSorterViewModel : ViewModelBase
         SortShowsCommand = ReactiveCommand.CreateFromTask(SortShowsAsync);
         SelectAllCommand = ReactiveCommand.CreateFromTask(() => ToggleSelect(true));
         UnselectAllCommand = ReactiveCommand.CreateFromTask(() => ToggleSelect(false));
+        SetShowCommand = ReactiveCommand.CreateFromTask(() => SetShowAsync(), this.WhenAnyValue(x => x.FileResults.Any(x => x.IsChecked)));
     }
 
     public override async Task InitializeView(CancellationToken cancellationToken)
@@ -86,6 +88,12 @@ public class ShowSorterViewModel : ViewModelBase
         }
 
     }
+
+    private async Task SetShowAsync()
+    {
+        throw new NotImplementedException();
+    }
+
 
     private IEnumerable<FileResultItem> FomatFileResults(List<FileResult> fileResults)
     {
