@@ -22,7 +22,7 @@ public class ShowSorterViewModel : ViewModelBase
     private readonly IFileSearch _fileSearch;
     private readonly IFileResultManager _fileResultManager;
     private readonly IFileManager _fileManager;
-    private ObservableCollection<FileResultItem> _fileResults;
+    private ObservableCollection<FileResultItem> _fileResults = new ObservableCollection<FileResultItem>();
     private Settings _sorterSettings;
 
     public ICommand ScanFoldersCommand { get; set; }
@@ -57,7 +57,7 @@ public class ShowSorterViewModel : ViewModelBase
         SortShowsCommand = ReactiveCommand.CreateFromTask(SortShowsAsync);
         SelectAllCommand = ReactiveCommand.CreateFromTask(() => ToggleSelect(true));
         UnselectAllCommand = ReactiveCommand.CreateFromTask(() => ToggleSelect(false));
-        SetShowCommand = ReactiveCommand.CreateFromTask(() => SetShowAsync(), this.WhenAnyValue(x => x.FileResults.Any(x => x.IsChecked)));
+        //SetShowCommand = ReactiveCommand.CreateFromTask(() => SetShowAsync(), this.WhenAnyValue(x => x.FileResults.Any(x => x.IsChecked)));
     }
 
     public override async Task InitializeView(CancellationToken cancellationToken)
