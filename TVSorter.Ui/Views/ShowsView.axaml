@@ -1,18 +1,18 @@
 <UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:controls="clr-namespace:TVSorter.Ui.Controls"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="TVSorter.Ui.Views.ShowsView">
-	<Grid ColumnDefinitions="250,4 , *" RowDefinitions="Auto, *">
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Class="TVSorter.Ui.Views.ShowsView">
+	<Grid ColumnDefinitions="250,4,*" RowDefinitions="Auto, *">
 		<StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Spacing="10" Margin="5">
 			<Button Content="Update All" Command="{Binding UpdateAllCommand}" />
 			<Button Content="Add Show" Command="{Binding AddShowCommand}" />
 			<TextBox Text="{Binding FilterText}"
-			         Watermark="Filter shows..."
-			         Width="200"
-			         VerticalAlignment="Center"/>
+					 Watermark="Filter shows..."
+					 Width="200"
+					 VerticalAlignment="Center"/>
 		</StackPanel>
 		<ListBox ItemsSource="{Binding Shows}" Grid.Row="1" Grid.Column="0" SelectedItem="{Binding SelectedShow}" Margin="5">
 			<ListBox.ItemTemplate>
@@ -25,9 +25,9 @@
 		<!-- Show Details Panel -->
 		<ScrollViewer Grid.Column="2" Grid.Row="1" Margin="10">
 			<StackPanel Spacing="10"
-								DataContext="{Binding SelectedShow}"
-								IsVisible="{Binding Converter={x:Static ObjectConverters.IsNotNull}}">
-				
+						DataContext="{Binding SelectedShow}"
+						IsVisible="{Binding Converter={x:Static ObjectConverters.IsNotNull}}">
+
 				<!-- Banner Image - Simpler version -->
 				<Border BorderBrush="Gray" BorderThickness="1" CornerRadius="4">
 					<Image Source="{Binding $parent[UserControl].DataContext.SelectedShowImage}"
@@ -37,8 +37,8 @@
 
 				<!-- Show Name -->
 				<TextBlock Text="{Binding Name}"
-				           FontSize="24"
-				           FontWeight="Bold"/>
+						   FontSize="24"
+						   FontWeight="Bold"/>
 
 				<!-- TVDB ID -->
 				<StackPanel Orientation="Horizontal" Spacing="5">
@@ -49,9 +49,9 @@
 				<!-- Folder Name -->
 				<StackPanel Orientation="Horizontal" Spacing="5">
 					<TextBlock Text="Folder Name:" FontWeight="SemiBold" Width="120" VerticalAlignment="Center"/>
-					<TextBox Text="{Binding FolderName, Mode=TwoWay}" 
-					         MinWidth="500"
-					         Watermark="Enter folder name..."/>
+					<TextBox Text="{Binding FolderName, Mode=TwoWay}"
+							 MinWidth="500"
+							 Watermark="Enter folder name..."/>
 				</StackPanel>
 
 				<!-- Last Updated -->
@@ -91,28 +91,42 @@
 				</StackPanel>
 
 				<!-- Alternate Names -->
-				<StackPanel Spacing="5" IsVisible="{Binding AlternateNames.Count, Converter={x:Static ObjectConverters.IsNotNull}}">
+
+				<StackPanel Grid.Column="0" Spacing="5" IsVisible="{Binding AlternateNames.Count, Converter={x:Static ObjectConverters.IsNotNull}}">
 					<TextBlock Text="Alternate Names:" FontWeight="SemiBold"/>
-					<Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="4" Padding="5">
-						<ItemsControl ItemsSource="{Binding AlternateNames}">
-							<ItemsControl.ItemTemplate>
-								<DataTemplate>
-									<TextBlock Text="{Binding}" Margin="2"/>
-								</DataTemplate>
-							</ItemsControl.ItemTemplate>
-						</ItemsControl>
-					</Border>
+					<Grid ColumnDefinitions="*,50">
+						<Border Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" CornerRadius="4" Padding="5">
+							<ListBox ItemsSource="{Binding AlternateNames}" SelectedItem="{Binding SelectedAlternateName}">
+								<ListBox.ItemTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding}" Margin="2"/>
+									</DataTemplate>
+								</ListBox.ItemTemplate>
+							</ListBox>
+						</Border>
+						<StackPanel Grid.Column="1" Orientation="Vertical" Spacing="5" Margin="5,0,0,0"
+							HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+							<Button Content="+" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch"></Button>
+							<Button Content="-" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch"></Button>
+						</StackPanel>
+					</Grid>
+
 				</StackPanel>
 
 				<!-- Action Buttons -->
 				<StackPanel Orientation="Horizontal" Spacing="10" Margin="0,10,0,0">
-					<Button Content="Save Show" 
-					        Command="{Binding $parent[UserControl].DataContext.SaveShowCommand}"
-					        Padding="20,10"/>
-					<Button Content="Update Show from TVDB" 
-					        Command="{Binding $parent[UserControl].DataContext.UpdateShowCommand}"
-					        Padding="20,10"
-					        IsEnabled="{Binding !Locked}"/>
+					<Button Content="Save Show"
+							Command="{Binding $parent[UserControl].DataContext.SaveShowCommand}"
+							Padding="20,10"/>
+					<Button Content="Update Show from TVDB"
+							Command="{Binding $parent[UserControl].DataContext.UpdateShowCommand}"
+							Padding="20,10"
+							IsEnabled="{Binding !Locked}"/>
+					<Button Content="Show Details"
+							Command="{Binding $parent[UserControl].DataContext.ViewShowDetailsCommand}"
+							Padding="20,10">
+
+					</Button>
 				</StackPanel>
 
 			</StackPanel>

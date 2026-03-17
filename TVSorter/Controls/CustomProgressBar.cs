@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -9,6 +10,7 @@ public class CustomProgressBar: ProgressBar
     /// <summary>
     /// Gets or sets the text associated with this control.
     /// </summary>
+    [DefaultValue("Progress")]
     public string CustomText { get; set; }
 
     public CustomProgressBar() =>

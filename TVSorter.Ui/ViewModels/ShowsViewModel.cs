@@ -24,6 +24,7 @@ public class ShowsViewModel : ViewModelBase
     private TvShow? _selectedShow;
     private Bitmap? _selectedShowImage;
     private string? _filterText;
+    private string? _selectedAlternateName;
 
     public ShowsViewModel(ILogger<ShowsViewModel> logger, ITvShowRepository tvShowRepository)
     {
@@ -35,6 +36,8 @@ public class ShowsViewModel : ViewModelBase
             this.WhenAnyValue(x => x.SelectedShow, (TvShow? show) => show != null));
         UpdateShowCommand = ReactiveCommand.CreateFromTask(ExecuteUpdateShowAsync,
             this.WhenAnyValue(x => x.SelectedShow, (TvShow? show) => show != null && !show.Locked));
+        ViewShowDetailsCommand = ReactiveCommand.CreateFromTask(ShowDetailDialogAsync,
+            this.WhenAnyValue(x => x.SelectedShow, (TvShow? show) => show != null));
     }
 
     public override async Task InitializeView(CancellationToken cancellationToken)
@@ -52,6 +55,7 @@ public class ShowsViewModel : ViewModelBase
     public ICommand UpdateAllCommand { get; }
     public ICommand SaveShowCommand { get; }
     public ICommand UpdateShowCommand { get; }
+    public ICommand ViewShowDetailsCommand { get; }
 
     public TvShow? SelectedShow
     {
@@ -76,6 +80,15 @@ public class ShowsViewModel : ViewModelBase
         {
             this.RaiseAndSetIfChanged(ref _filterText, value);
             ApplyFilter();
+        }
+    }
+
+    public string? SelectedAlternateName
+    {
+        get => _selectedAlternateName;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _selectedAlternateName, value);
         }
     }
 
@@ -211,6 +224,21 @@ public class ShowsViewModel : ViewModelBase
         finally
         {
             SetIsBusy(false);
+        }
+    }
+
+    private async Task ShowDetailDialogAsync()
+    {
+        if (SelectedShow == null)
+            return;
+        
+        var viewModel = Locator.Current.GetRequiredService<ShowDetailDialogViewModel>();
+        viewModel.SetShow(SelectedShow);
+
+        var dialogTask = App.ShowDialog(viewModel, string.Format(ShowDetailDialogViewModel.DialogTitle, SelectedShow.Name));
+        if (dialogTask != null)
+        {
+            await dialogTask;
         }
     }
 

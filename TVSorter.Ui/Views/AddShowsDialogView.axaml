@@ -1,16 +1,22 @@
 <Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
 		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="TVSorter.Ui.Views.AddShowsDialogView">
+		x:Class="TVSorter.Ui.Views.AddShowsDialogView">
 	<Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="Auto,*,Auto" Margin="24">
 		<!-- Show Name -->
 		<TextBlock Grid.Row="0" Grid.Column="0" Text="Show Name:" VerticalAlignment="Center" Margin="0,0,8,8"/>
 		<TextBox Grid.Row="0" Grid.Column="1" Margin="0,0,0,8"
-                 Watermark="Enter show name"
-                 Text="{Binding ShowName, Mode=TwoWay}"/>
+				 Watermark="Enter show name"
+				 Text="{Binding ShowName, Mode=TwoWay}">
+			<Interaction.Behaviors>
+				<KeyDownTrigger Key="Enter">
+					<InvokeCommandAction Command="{Binding SearchCommand}" />
+				</KeyDownTrigger>
+			</Interaction.Behaviors>
+		</TextBox>
 		<Button Grid.Row="0" Grid.Column="2" Content="Search" Margin="8,0,0,8"
 				Command="{Binding SearchCommand}" />
 
@@ -31,9 +37,9 @@
 		<!-- Buttons -->
 		<StackPanel Grid.Row="3" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
 			<Button Content="Add" Width="80" IsDefault="True"
-                    Command="{Binding AddCommand}" />
+					Command="{Binding AddCommand}" />
 			<Button Content="Cancel" Width="80" IsCancel="True"
-                    Command="{Binding CancelCommand}" />
+					Command="{Binding CancelCommand}" />
 		</StackPanel>
 	</Grid>
 </Window>

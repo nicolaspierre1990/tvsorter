@@ -1,11 +1,11 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
-using Avalonia.ReactiveUI;
+using ReactiveUI.Avalonia;
 using Serilog;
 using Splat;
+using System;
+using System.IO;
+using System.Reflection;
 using TVSorter.Ui.DependencyInjection;
 
 namespace TVSorter.Ui;

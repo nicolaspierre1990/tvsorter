@@ -83,6 +83,9 @@ public static class ServicesBootstrapper
             resolver.GetRequiredService<ILoggerFactory>().CreateLogger<SettingsViewModel>(),
             resolver.GetRequiredService<ISettingsRepository>()), typeof(SettingsViewModel));
 
+        services.RegisterLazySingleton(() => new ShowDetailDialogViewModel(
+            resolver.GetRequiredService<ILoggerFactory>().CreateLogger<ShowDetailDialogViewModel>()), typeof(ShowDetailDialogViewModel));
+
         return services;
     }
 }

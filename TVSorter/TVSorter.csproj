@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<Platform Condition=" '$(Platform)' == '' ">x86</Platform>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net8.0-windows</TargetFramework>
+		<TargetFramework>net10.0-windows</TargetFramework>
 		<AssemblyTitle>TVSorter</AssemblyTitle>
 		<Product>TVSorter</Product>
 		<Copyright>Copyright © 2024</Copyright>
@@ -146,10 +146,6 @@
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="Resources\lock.png" />
-	</ItemGroup>
-	<ItemGroup>
-	  <PackageReference Include="System.Net.Http" />
-	  <PackageReference Include="System.Text.RegularExpressions" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\TheTvdbDotNet.Ninject\TheTvdbDotNet.Ninject.csproj" />
