@@ -11,7 +11,7 @@ using ReactiveUI;
 using Splat;
 using TVSorter.Model;
 using TVSorter.Repostitory;
-using TVSorter.Ui.DependencyInjection;
+using TVSorter.Ui.Extensions;
 
 namespace TVSorter.Ui.ViewModels;
 

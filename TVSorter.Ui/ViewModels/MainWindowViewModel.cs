@@ -3,7 +3,7 @@ using System.Reactive;
 using System.Threading.Tasks;
 using ReactiveUI;
 using Splat;
-using TVSorter.Ui.DependencyInjection;
+using TVSorter.Ui.Extensions;
 
 namespace TVSorter.Ui.ViewModels;
 

@@ -14,8 +14,6 @@ public static class LoggingBootstrapper
 
     public static IMutableDependencyResolver RegisterLogging(this IMutableDependencyResolver services, IReadonlyDependencyResolver resolver)
     {
-        // Register your logging services here
-        // Example: services.Register<ILoggingService>(() => new LoggingService());
         services.RegisterLazySingleton<ILoggerFactory>(() =>
         {
             var configuration = resolver.GetService<IConfiguration>();

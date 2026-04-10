@@ -28,8 +28,6 @@
 		<PackageReference Include="Ninject.Extensions.Interception.DynamicProxy" />
 		<PackageReference Include="Standard.Licensing" />
 		<PackageReference Include="System.Drawing.Common" />
-		<PackageReference Include="System.Net.Http" />
-		<PackageReference Include="System.Text.RegularExpressions" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\TheTvdbDotNet\TheTvdbDotNet.csproj" />

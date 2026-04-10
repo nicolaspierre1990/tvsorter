@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Splat;
@@ -12,6 +11,7 @@ using TVSorter.Data.TvdbV2;
 using TVSorter.Files;
 using TVSorter.Repostitory;
 using TVSorter.Storage;
+using TVSorter.Ui.Extensions;
 using TVSorter.Ui.ViewModels;
 
 namespace TVSorter.Ui.DependencyInjection;
@@ -21,7 +21,6 @@ public static class ServicesBootstrapper
     public static IMutableDependencyResolver RegisterServices(this IMutableDependencyResolver services, IReadonlyDependencyResolver resolver)
     {
         var apiKey = resolver.GetRequiredService<IConfiguration>().GetSection("tvdb").GetValue<string>("apiKey") ?? string.Empty;
-
 
         // TVSorterLib registrations (from LibraryModule)
         services.RegisterLazySingleton(() => new SQLLiteProvider(resolver.GetRequiredService<TvSorterDbContext>()), typeof(IStorageProvider));
@@ -88,10 +87,4 @@ public static class ServicesBootstrapper
 
         return services;
     }
-}
-
-public static class IReadonlyDependencyResolverExtensions
-{
-    public static T GetRequiredService<T>(this IReadonlyDependencyResolver resolver) 
-        => resolver.GetService<T>() ?? throw new InvalidOperationException($"Service of type {typeof(T)} is not registered.");
 }

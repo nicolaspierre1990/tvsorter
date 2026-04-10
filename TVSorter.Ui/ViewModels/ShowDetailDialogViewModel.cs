@@ -1,7 +1,5 @@
-﻿using Castle.Core.Logging;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using ReactiveUI;
-using System;
 using TVSorter.Model;
 
 namespace TVSorter.Ui.ViewModels;
