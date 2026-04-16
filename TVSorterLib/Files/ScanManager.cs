@@ -380,6 +380,12 @@ public class ScanManager : IScanManager
             updatedShows.Add(show);
         }
 
+        if (show != null && show.LastUpdated < DateTime.Now.AddDays(-5)) 
+        {
+            tvShowRepository.Update(show);
+            Logger.OnLogMessage(this, "Updated show {0} as it was last updated over 5 days ago.", LogType.Info, show.Name);
+        }
+
         return show;
     }
 
