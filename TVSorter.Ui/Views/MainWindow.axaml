@@ -160,7 +160,14 @@
 						</DataTemplate>
 					</TabItem.ContentTemplate>
 				</TabItem>
-				<TabItem Header="Logs"/>
+				<TabItem Header="Logs">
+					<TabItem.ContentTemplate>
+						<DataTemplate>
+							<controls:LogView/>
+						</DataTemplate>
+					</TabItem.ContentTemplate>
+			</TabItem>
+
 				<TabItem Header="Settings">
 					<TabItem.ContentTemplate>
 						<DataTemplate>

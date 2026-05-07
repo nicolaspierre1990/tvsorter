@@ -19,12 +19,12 @@ public class SettingsViewModel : ViewModelBase
 {
     private readonly ILogger<SettingsViewModel> _logger;
     private readonly ISettingsRepository _settingsRepository;
-    private Settings _settings;
-    private string _selectedDestinationDirectory;
-    private string _selectedIgnoredDirectory;
-    private string _selectedFileExtension;
-    private string _selectedRegularExpression;
-    private string _selectedOverwriteKeyword;
+    private Settings _settings = default!;
+    private string _selectedDestinationDirectory = default!;
+    private string _selectedIgnoredDirectory = default!;
+    private string _selectedFileExtension = default!;
+    private string _selectedRegularExpression = default!;
+    private string _selectedOverwriteKeyword = default!;
 
     public SettingsViewModel(ILogger<SettingsViewModel> logger, ISettingsRepository settingsRepository)
     {

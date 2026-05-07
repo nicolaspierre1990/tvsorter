@@ -85,6 +85,9 @@ public static class ServicesBootstrapper
         services.RegisterLazySingleton(() => new ShowDetailDialogViewModel(
             resolver.GetRequiredService<ILoggerFactory>().CreateLogger<ShowDetailDialogViewModel>()), typeof(ShowDetailDialogViewModel));
 
+        services.RegisterLazySingleton(() => new LogViewModel(
+            resolver.GetRequiredService<ILoggerFactory>().CreateLogger<LogViewModel>()), typeof(LogViewModel));
+
         return services;
     }
 }
