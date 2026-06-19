@@ -72,7 +72,7 @@ public class FileResult
     /// <summary>
     ///     Gets the file's show.
     /// </summary>
-    public TvShow Show { get; internal set; }
+    public TvShow Show { get; set; }
 
     /// <summary>
     ///     Gets the name of the show as seen by the program.

@@ -1,0 +1,19 @@
+<Window xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="100"
+			 Width="400" Height="100"
+			 x:Class="TVSorter.Ui.Views.SelectShowView">
+	<Grid ColumnDefinitions="50,*" RowDefinitions="*,*" Margin="10">
+		<Label Content="Show:" Grid.Row="0" Grid.Column="0" />
+		<ComboBox ItemsSource="{Binding Shows}" SelectedItem="{Binding SelectedShow}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch">
+			<ComboBox.ItemTemplate>
+				<DataTemplate>
+					<Label Content="{Binding Name}"/>
+				</DataTemplate>
+			</ComboBox.ItemTemplate>
+			</ComboBox>	
+		<Button Grid.ColumnSpan="2" Grid.Row="1" Command="{Binding ConfirmCommand}" Content="Confirm" HorizontalAlignment="Right"></Button>
+	</Grid>
+</Window>

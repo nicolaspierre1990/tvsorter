@@ -2,6 +2,7 @@
   <Folder Name="/Solution Items/">
     <File Path="bin/TVSorter.xml" />
     <File Path="Directory.Packages.props" />
+    <File Path="nuget.config" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="TheTvdbDotNet.Ninject/TheTvdbDotNet.Ninject.csproj" />

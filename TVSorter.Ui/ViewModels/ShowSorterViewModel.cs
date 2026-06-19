@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using ReactiveUI;
-using Serilog;
+using Splat;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,6 +12,8 @@ using System.Windows.Input;
 using TVSorter.Files;
 using TVSorter.Model;
 using TVSorter.Repostitory;
+using TVSorter.Ui.Extensions;
+using TVSorter.Ui.Models;
 
 namespace TVSorter.Ui.ViewModels;
 
@@ -20,17 +22,16 @@ public class ShowSorterViewModel : ViewModelBase
     private readonly ILogger<ShowSorterViewModel> _logger;
     private readonly ISettingsRepository _settingsRepository;
     private readonly IFileSearch _fileSearch;
+    private readonly IScanManager _scanManager;
     private readonly IFileResultManager _fileResultManager;
     private readonly IFileManager _fileManager;
     private ObservableCollection<FileResultItem> _fileResults = new ObservableCollection<FileResultItem>();
     private Settings _sorterSettings;
-
     public ICommand ScanFoldersCommand { get; set; }
     public ICommand SortShowsCommand { get; set; }
     public ICommand SetShowCommand { get; set; }
-    public ICommand ToggleSelectAllCommand { get; set; }
+    public ICommand SetEpisodeCommand { get; set; }
     public ICommand SelectAllCommand { get; set; }
-
     public ICommand UnselectAllCommand { get; set; }
 
     public ObservableCollection<FileResultItem> FileResults
@@ -44,54 +45,74 @@ public class ShowSorterViewModel : ViewModelBase
         ISettingsRepository settingsRepository,
         IFileResultManager fileResultManager,
         IFileManager fileManager,
-        IFileSearch fileSearch)
+        IFileSearch fileSearch,
+        IScanManager scanManager)
     {
         _logger = logger;
         _settingsRepository = settingsRepository;
-        _settingsRepository.SettingsUpdated += async (s, e) => _sorterSettings = JsonSerializer.Deserialize<Settings>(e.Settings.SettingValue);
+        _settingsRepository.SettingsUpdated += async (s, e) => _sorterSettings = JsonSerializer.Deserialize<Settings>(e.Settings.SettingValue) ?? throw new InvalidOperationException("Failed to deserialize settings.");
         _fileSearch = fileSearch;
+        _scanManager = scanManager;
         _fileResultManager = fileResultManager;
         _fileManager = fileManager;
 
         ScanFoldersCommand = ReactiveCommand.CreateFromTask(ScanFoldersAsync);
-        SortShowsCommand = ReactiveCommand.CreateFromTask(SortShowsAsync);
+        SortShowsCommand = ReactiveCommand.CreateFromTask(SortShowsAsync/*, this.WhenAnyValue(x => x.FileResults.Any(f => f.IsChecked))*/);
         SelectAllCommand = ReactiveCommand.CreateFromTask(() => ToggleSelect(true));
         UnselectAllCommand = ReactiveCommand.CreateFromTask(() => ToggleSelect(false));
-        //SetShowCommand = ReactiveCommand.CreateFromTask(() => SetShowAsync(), this.WhenAnyValue(x => x.FileResults.Any(x => x.IsChecked)));
+        SetShowCommand = ReactiveCommand.CreateFromTask(SetShowAsync);
+        SetEpisodeCommand = ReactiveCommand.CreateFromTask(SetEpisodeAsync);
     }
+
 
     public override async Task InitializeView(CancellationToken cancellationToken)
     {
         _sorterSettings = await _settingsRepository.LoadSettingsAsync<Settings>(Settings.SETTING_NAME, cancellationToken);
     }
 
-    private async Task ScanFoldersAsync()
+    private Task ScanFoldersAsync()
     {
         try
         {
             SetIsBusy(true);
 
-            await Task.Run(() =>
-            {
-                _fileSearch.Search(string.Empty);
-                FileResults = new ObservableCollection<FileResultItem>(FomatFileResults(_fileSearch.Results));
-            });
+            _fileSearch.Search(string.Empty);
+            FileResults = new ObservableCollection<FileResultItem>(FomatFileResults(_fileSearch.Results));
         }
         catch (Exception)
         {
-
-            throw;
+            Logger.OnLogMessage(this, "An error occurred while scanning folders.", LogType.Error);
         }
         finally
         {
             SetIsBusy(false);
         }
 
+        return Task.CompletedTask;
+    }
+
+    private async Task SetEpisodeAsync()
+    {
+        // TODO: implement set episode logic for the single checked item
+        var item = FileResults.SingleOrDefault(x => x.IsChecked);
+        if (item == null) return;
     }
 
     private async Task SetShowAsync()
     {
-        throw new NotImplementedException();
+        var viewModel = Locator.Current.GetRequiredService<SelectShowViewModel>();
+        var task = App.ShowDialog(viewModel, "Set Show");
+        if (task != null)
+        {
+            await task;
+
+            foreach (var fileResult in FileResults.Where(x => x.IsChecked))
+            {
+                _scanManager.ResetShow(fileResult.FileResult, viewModel.SelectedShow);
+                fileResult.DestinationPath = _fileResultManager.FormatOutputPath(fileResult.FileResult);
+                fileResult.Refresh();
+            }
+        }
     }
 
 
@@ -127,30 +148,6 @@ public class ShowSorterViewModel : ViewModelBase
         finally
         {
             SetIsBusy(false);
-        }
-    }
-}
-
-public class FileResultItem(FileResult fileResult, string destinationPath) : ReactiveObject
-{
-    private bool _isChecked = fileResult.Checked;
-
-    public FileResult FileResult => fileResult;
-
-    public string InputFileName { get; set; } = fileResult.InputFile.FullName;
-    public string ShowName { get; set; } = fileResult.Show?.Name ?? fileResult.ShowName;
-    public string? EpisodeName { get; set; } = fileResult.Episode?.Name ?? string.Empty;
-    public int? Season { get; set; } = fileResult.Episode?.SeasonNumber ?? null;
-    public int? Episode { get; set; } = fileResult.Episode?.EpisodeNumber ?? null;
-    public string? DestinationPath { get; set; } = destinationPath;
-
-    public bool IsChecked
-    {
-        get => _isChecked;
-        set
-        {
-            fileResult.Checked = value;
-            this.RaiseAndSetIfChanged(ref _isChecked, value);
         }
     }
 }

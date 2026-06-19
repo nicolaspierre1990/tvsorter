@@ -39,7 +39,7 @@ public static class Logger
     /// <param name="args">
     ///     The string format args.
     /// </param>
-    internal static void OnLogMessage(object sender, string message, LogType type, params object[] args)
+    public static void OnLogMessage(object sender, string message, LogType type, params object[] args)
     {
         message = string.Format(message, args);
         var eventArgs = new LogMessageEventArgs(message, DateTime.Now, type);

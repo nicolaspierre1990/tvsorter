@@ -54,6 +54,8 @@ public interface ITvShowRepository
     /// <returns>The collection of TV shows.</returns>
     IEnumerable<TvShow> GetTvShows();
 
+    Task<IEnumerable<TvShow>> GetTvShowsAsync(CancellationToken cancellationToken = default);
+
     /// <summary>
     ///     Saves the specified TV Show.
     /// </summary>

@@ -76,7 +76,8 @@ public static class ServicesBootstrapper
             resolver.GetRequiredService<ISettingsRepository>(),
             resolver.GetRequiredService<IFileResultManager>(),
             resolver.GetRequiredService<IFileManager>(),
-            resolver.GetRequiredService<IFileSearch>()), typeof(ShowSorterViewModel));
+            resolver.GetRequiredService<IFileSearch>(),
+            resolver.GetRequiredService<IScanManager>()), typeof(ShowSorterViewModel));
 
         services.RegisterLazySingleton(() => new SettingsViewModel(
             resolver.GetRequiredService<ILoggerFactory>().CreateLogger<SettingsViewModel>(),
@@ -88,6 +89,9 @@ public static class ServicesBootstrapper
         services.RegisterLazySingleton(() => new LogViewModel(
             resolver.GetRequiredService<ILoggerFactory>().CreateLogger<LogViewModel>()), typeof(LogViewModel));
 
+        services.RegisterLazySingleton(() => new SelectShowViewModel(
+            resolver.GetRequiredService<ILoggerFactory>().CreateLogger<SelectShowViewModel>(),
+            resolver.GetRequiredService<ITvShowRepository>()), typeof(SelectShowViewModel));
         return services;
     }
 }

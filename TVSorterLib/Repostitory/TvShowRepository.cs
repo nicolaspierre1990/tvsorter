@@ -227,4 +227,9 @@ public class TvShowRepository : ITvShowRepository
     ///     The arguments of the event.
     /// </param>
     private void OnTvShowRemoved(object sender, TvShowEventArgs e) => TvShowRemoved?.Invoke(sender, e);
+
+    public Task<IEnumerable<TvShow>> GetTvShowsAsync(CancellationToken cancellationToken = default)
+    {
+        return Task.FromResult(storageProvider.LoadTvShows());
+    }
 }

@@ -4,15 +4,23 @@ using TVSorter.Ui.ViewModels;
 
 namespace TVSorter.Ui.Views;
 
-public partial class ShowSorterView : UserControl
+public partial class SelectShowView : Window
 {
-    public ShowSorterView()
+    public SelectShowView()
     {
         InitializeComponent();
-        var viewModel = Locator.Current.GetService<ShowSorterViewModel>();
+        var viewModel = Locator.Current.GetService<SelectShowViewModel>();
         DataContext = viewModel;
 
         AttachedToVisualTree += async (s, e) =>
+        {
+            if (viewModel != null)
+            {
+                await viewModel.EnsureInitialized();
+            }
+        };
+
+        Loaded += async (s, e) =>
         {
             if (viewModel != null)
             {

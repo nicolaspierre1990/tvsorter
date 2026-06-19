@@ -11,7 +11,7 @@
 		<StackPanel Grid.Row="0" Orientation="Horizontal">
 			<Button Content="Scan Folders" Command="{Binding ScanFoldersCommand}" Margin="5"/>
 			<Button Content="Set Show" Command="{Binding SetShowCommand}" Margin="5"/>
-			<Button Content="Set Episode" Command="{Binding ScanFoldersCommand}" Margin="5"/>
+			<Button Content="Set Episode" Command="{Binding SetEpisodeCommand}" Margin="5"/>
 			<Button Content="Sort Shows" Command="{Binding SortShowsCommand}" Margin="5" />
 			<Button Content="Select All" Command="{Binding SelectAllCommand}" Margin="5" />
 			<Button Content="Unselect All" Command="{Binding UnselectAllCommand}" Margin="5" />
