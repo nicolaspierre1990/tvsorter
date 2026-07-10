@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using TVSorter.Data;
 using TVSorter.Model;
@@ -93,6 +94,13 @@ public class FileSearch(
         subDirectory ??= Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture);
 
         Results = scanManager.Refresh(subDirectory);
+        Logger.OnLogMessage(this, "Scan complete. Found {0} files.", LogType.Info, Results.Count);
+    }
+
+    public async Task SearchAsync(string subDirectory, CancellationToken cancellationToken)
+    {
+        subDirectory ??= Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture);
+        Results = await scanManager.RefreshAsync(subDirectory, cancellationToken);
         Logger.OnLogMessage(this, "Scan complete. Found {0} files.", LogType.Info, Results.Count);
     }
 

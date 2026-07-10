@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using TheTvdbDotNet.Http;
 
 namespace TheTvdbDotNet.Authentication;
@@ -16,27 +17,27 @@ public class Authenticator : IAuthenticator
         this.apiKey = apiKey;
     }
 
-    public Task AuthenticateIfNecessaryAsync()
+    public Task AuthenticateIfNecessaryAsync(CancellationToken cancellationToken = default)
     {
         if (authenticationToken.IsAuthenticated)
         {
             return Task.CompletedTask;
         }
 
-        return AuthenticateAsync();
+        return AuthenticateAsync(cancellationToken);
     }
 
-    private async Task AuthenticateAsync()
+    private async Task AuthenticateAsync(CancellationToken cancellationToken = default)
     {
-        var response = await LoginAsync().ConfigureAwait(false);
+        var response = await LoginAsync(cancellationToken).ConfigureAwait(false);
         SetToken(response.Token);
         httpClient.SetAuthorizationHeader(authenticationToken.TokenString);
     }
 
-    private Task<LoginResponse> LoginAsync()
+    private Task<LoginResponse> LoginAsync(CancellationToken cancellationToken = default)
     {
         var loginRequest = new LoginRequest { ApiKey = apiKey };
-        return httpClient.PostResponseAsync<LoginResponse>("login", loginRequest);
+        return httpClient.PostResponseAsync<LoginResponse>("login", loginRequest, cancellationToken);
     }
 
     private void SetToken(string token)

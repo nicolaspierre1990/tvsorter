@@ -47,6 +47,8 @@ public interface IFileSearch
     /// </param>
     void Search(string subDirectory);
 
+    Task SearchAsync(string subDirectory, CancellationToken cancellationToken);
+
     /// <summary>
     ///     Sets the episode of the checked results.
     /// </summary>

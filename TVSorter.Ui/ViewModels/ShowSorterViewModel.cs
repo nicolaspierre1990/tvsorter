@@ -70,13 +70,15 @@ public class ShowSorterViewModel : ViewModelBase
         _sorterSettings = await _settingsRepository.LoadSettingsAsync<Settings>(Settings.SETTING_NAME, cancellationToken);
     }
 
-    private Task ScanFoldersAsync()
+    private async Task ScanFoldersAsync()
     {
+        using var cts = new CancellationTokenSource();
+
         try
         {
             SetIsBusy(true);
 
-            _fileSearch.Search(string.Empty);
+            await _fileSearch.SearchAsync(string.Empty, cts.Token);
             FileResults = new ObservableCollection<FileResultItem>(FomatFileResults(_fileSearch.Results));
         }
         catch (Exception)
@@ -87,8 +89,6 @@ public class ShowSorterViewModel : ViewModelBase
         {
             SetIsBusy(false);
         }
-
-        return Task.CompletedTask;
     }
 
     private async Task SetEpisodeAsync()

@@ -8,6 +8,8 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using TVSorter.Model;
 using TVSorter.Wrappers;
 
@@ -28,6 +30,8 @@ public interface IScanManager
     ///     The list of files identified during the refresh operation.
     /// </returns>
     List<FileResult> Refresh(string subDirectory);
+
+    Task<List<FileResult>> RefreshAsync(string subDirectory, CancellationToken cancellationToken);
 
     /// <summary>
     ///     Searches for files in the output directory to set the file counts.

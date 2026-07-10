@@ -12,6 +12,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
 using TVSorter.Data;
 using TVSorter.Model;
 using TVSorter.Repostitory;
@@ -105,6 +107,12 @@ public class ScanManager : IScanManager
     {
         var root = new DirectoryInfoWrap(string.Concat(settings.SourceDirectory, subDirectory));
         return Refresh(root);
+    }
+
+    public async Task<List<FileResult>> RefreshAsync(string subDirectory, CancellationToken cancellationToken)
+    {
+        var root = new DirectoryInfoWrap(string.Concat(settings.SourceDirectory, subDirectory));
+        return await Task.Run(() => Refresh(root), cancellationToken);
     }
 
     /// <summary>

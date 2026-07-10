@@ -20,21 +20,22 @@ public class TvdbV2(ITvdbSeries series, ITvdbSearch search, ITvdbUpdate update, 
     /// <inheritdoc/>
     public List<TvShow> SearchShow(string name)
     {
-        try
-        {
-            return SearchShowAsync(name).GetAwaiter().GetResult();
-        }
-        catch (TvdbRequestException)
-        {
-            return [];
-        }
+        throw new NotSupportedException("Synchronous search is not supported. Use SearchShowAsync instead.");
+        //try
+        //{
+        //    return SearchShowAsync(name).GetAwaiter().GetResult();
+        //}
+        //catch (TvdbRequestException)
+        //{
+        //    return [];
+        //}
     }
 
     public async Task<List<TvShow>> SearchShowAsync(string name, CancellationToken cancellationToken = default)
     {
         try
         {
-            var series = await search.SeriesSearchAsync(name);
+            var series = await search.SeriesSearchAsync(name).ConfigureAwait(false);
             return [.. series.Data
                 .Select(x => new TvShow { Name = x.SeriesName, TvdbId = x.Id, FolderName = x.SeriesName, Banner = string.Format(TvDbArtWorkBaseUri, x.Banner) })];
         }

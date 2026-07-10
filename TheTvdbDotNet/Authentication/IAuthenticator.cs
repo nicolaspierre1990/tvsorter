@@ -1,8 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace TheTvdbDotNet.Authentication;
 
 public interface IAuthenticator
 {
-    Task AuthenticateIfNecessaryAsync();
+    Task AuthenticateIfNecessaryAsync(CancellationToken cancellationToken = default);
 }
