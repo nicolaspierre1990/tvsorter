@@ -26,6 +26,7 @@
 		<PackageReference Include="Ninject" />
 		<PackageReference Include="Ninject.Extensions.Interception" />
 		<PackageReference Include="Ninject.Extensions.Interception.DynamicProxy" />
+		<PackageReference Include="SQLitePCLRaw.lib.e_sqlite3" />
 		<PackageReference Include="Standard.Licensing" />
 		<PackageReference Include="System.Drawing.Common" />
 	</ItemGroup>

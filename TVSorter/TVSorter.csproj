@@ -148,6 +148,9 @@
 		<None Include="Resources\lock.png" />
 	</ItemGroup>
 	<ItemGroup>
+	  <PackageReference Include="SQLitePCLRaw.lib.e_sqlite3" />
+	</ItemGroup>
+	<ItemGroup>
 		<ProjectReference Include="..\TheTvdbDotNet.Ninject\TheTvdbDotNet.Ninject.csproj" />
 		<ProjectReference Include="..\TVSorterLib\TVSorterLib.csproj" />
 	</ItemGroup>

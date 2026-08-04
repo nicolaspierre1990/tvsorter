@@ -27,6 +27,7 @@
     <PackageVersion Include="ReactiveUI" Version="23.2.28" />
     <PackageVersion Include="Serilog" Version="4.4.0" />
     <PackageVersion Include="Serilog.Sinks.File" Version="7.0.0" />
+    <PackageVersion Include="SQLitePCLRaw.lib.e_sqlite3" Version="3.53.3" />
     <PackageVersion Include="Standard.Licensing" Version="1.2.2" />
     <PackageVersion Include="System.Diagnostics.EventLog" Version="10.0.9" />
     <PackageVersion Include="System.Drawing.Common" Version="10.0.9" />

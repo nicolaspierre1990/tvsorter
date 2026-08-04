@@ -7,7 +7,7 @@ public interface ITvdbSeries
 {
     Task<SeriesEpisodes> GetEpisodesAsync(int seriesId, string page = null);
 
-    Task<SeriesData> GetSeriesAsync(int seriesId);
+    Task<SeriesDataResponse> GetSeriesAsync(int seriesId);
 
     Task<SeriesEpisodes> QueryEpisodesAsync(
         int seriesId,

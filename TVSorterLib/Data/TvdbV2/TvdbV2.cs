@@ -37,7 +37,7 @@ public class TvdbV2(ITvdbSeries series, ITvdbSearch search, ITvdbUpdate update, 
         {
             var series = await search.SeriesSearchAsync(name).ConfigureAwait(false);
             return [.. series.Data
-                .Select(x => new TvShow { Name = x.SeriesName, TvdbId = x.Id, FolderName = x.SeriesName, Banner = string.Format(TvDbArtWorkBaseUri, x.Banner) })];
+                .Select(x => new TvShow { Name = x.SeriesName, TvdbId = x.Id, FolderName = x.SeriesName, Banner = x.Banner })];
         }
         catch (TvdbRequestException)
         {
@@ -50,28 +50,16 @@ public class TvdbV2(ITvdbSeries series, ITvdbSearch search, ITvdbUpdate update, 
     public async Task UpdateShowAsync(TvShow show, CancellationToken cancellationToken = default)
     {
         var newSeries = await series.GetSeriesAsync(show.TvdbId);
-        if (show.Banner != newSeries.Data.Banner)
-        {
-            show.Banner = newSeries.Data.Banner;
-            var banner = series.GetBannerAsnyc(newSeries.Data).Result;
-            var targetPath = $"Images{Path.DirectorySeparatorChar}{show.TvdbId}.jpg";
-            streamWriter.WriteStream(banner, targetPath);
-        }
-
         var newEpisodesResult = await series.GetAllEpisodesAsync(show.TvdbId, cancellationToken: cancellationToken);
         var newEpisodes = newEpisodesResult.Select(
                 x => new Episode
                 {
                     TvdbId = x.Id.ToString(),
                     ShowId = show.TvdbId,
-                    EpisodeNumber =
-                        show.UseDvdOrder && x.DvdEpisodeNumber.HasValue
-                            ? x.DvdEpisodeNumber.Value
-                            : x.AiredEpisodeNumber.Value,
-                    SeasonNumber =
-                        show.UseDvdOrder && x.DvdSeason.HasValue ? x.DvdSeason.Value : x.AiredSeason.Value,
-                    FirstAir = x.FirstAired.ValidateTime() ? DateTime.Parse(x.FirstAired) : DateTime.Parse("1970-01-01"),
-                    Name = x.EpisodeName ?? string.Empty,
+                    EpisodeNumber = x.EpisodeNumber,
+                    SeasonNumber = x.SeasonNumber,
+                    FirstAir = x.Aired.ValidateTime() ? DateTime.Parse(x.Aired) : DateTime.Parse("1970-01-01"),
+                    Name = x.Name ?? string.Empty,
                     Show = show,
                 })
             .ToList();

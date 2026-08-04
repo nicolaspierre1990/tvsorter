@@ -7,13 +7,14 @@ public class SeriesSearchData
     [JsonPropertyName("aliases")]
     public string[] Aliases { get; set; }
 
-    [JsonPropertyName("banner")]
+    [JsonPropertyName("image_url")]
     public string Banner { get; set; }
 
-    [JsonPropertyName("firstAired")]
+    [JsonPropertyName("first_air_time")]
     public string FirstAired { get; set; }
 
-    [JsonPropertyName("id")]
+    [JsonPropertyName("tvdb_id")]
+    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
     public int Id { get; set; }
 
     [JsonPropertyName("network")]
@@ -22,7 +23,7 @@ public class SeriesSearchData
     [JsonPropertyName("overview")]
     public string Overview { get; set; }
 
-    [JsonPropertyName("seriesName")]
+    [JsonPropertyName("name")]
     public string SeriesName { get; set; }
 
     [JsonPropertyName("status")]

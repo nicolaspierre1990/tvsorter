@@ -30,7 +30,7 @@ public class Authenticator : IAuthenticator
     private async Task AuthenticateAsync(CancellationToken cancellationToken = default)
     {
         var response = await LoginAsync(cancellationToken).ConfigureAwait(false);
-        SetToken(response.Token);
+        SetToken(response.Data.Token);
         httpClient.SetAuthorizationHeader(authenticationToken.TokenString);
     }
 

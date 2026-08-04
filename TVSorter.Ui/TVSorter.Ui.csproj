@@ -39,6 +39,7 @@
 		<PackageReference Include="Serilog.Extensions.Logging" />
 		<PackageReference Include="Serilog.Sinks.File" />
 		<PackageReference Include="AsyncImageLoader.Avalonia" />
+		<PackageReference Include="SQLitePCLRaw.lib.e_sqlite3" />
 		<PackageReference Include="Xaml.Behaviors.Avalonia" />
 	</ItemGroup>
 

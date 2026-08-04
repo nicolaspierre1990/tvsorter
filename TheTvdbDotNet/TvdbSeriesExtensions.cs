@@ -18,8 +18,8 @@ public static class TvdbSeriesExtensions
         Func<string, Task<SeriesEpisodes>> getEpisodes,
         CancellationToken cancellationToken = default)
     {
-        var episodeData = await getEpisodes("1").ConfigureAwait(false);
-        IEnumerable<BasicEpisode> episodes = episodeData.Data;
+        var episodeData = await getEpisodes("0").ConfigureAwait(false);
+        IEnumerable<BasicEpisode> episodes = episodeData.Data.Episodes;
         if (HasMorePages(episodeData))
         {
             var remainingPages = GetRemainingPagesAsync(getEpisodes, episodeData.Links.Last.Value, cancellationToken);
@@ -42,6 +42,6 @@ public static class TvdbSeriesExtensions
         var remainingPagesTasks = Enumerable.Range(2, lastPage - 1)
             .Select(page => getEpisodes(page.ToString()));
         var remainingPages = await Task.WhenAll(remainingPagesTasks).ConfigureAwait(false);
-        return remainingPages.SelectMany(x => x.Data);
+        return remainingPages.SelectMany(x => x.Data.Episodes);
     }
 }

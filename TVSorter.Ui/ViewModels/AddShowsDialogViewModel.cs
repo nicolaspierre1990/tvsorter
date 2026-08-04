@@ -76,9 +76,10 @@ public class AddShowsDialogViewModel : ViewModelBase
         {
             SearchResults = new ObservableCollection<TvShow>(await _tvShowRepository.SearchShowAsync(ShowName, cts.Token));
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            throw;
+            _logger.LogError(ex, "An error occurred while searching for TV shows.");
+            SetIsBusy(false);
         }
         finally
         {

@@ -20,6 +20,7 @@
 		<PackageReference Include="Castle.Core" />
 		<PackageReference Include="AwesomeAssertions" />
 		<PackageReference Include="NSubstitute" />
+		<PackageReference Include="SQLitePCLRaw.lib.e_sqlite3" />
 		<PackageReference Include="System.Diagnostics.EventLog" />
 		<PackageReference Include="System.Reflection.Emit" />
 		<PackageReference Include="System.Runtime.CompilerServices.Unsafe" />

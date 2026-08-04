@@ -5,11 +5,20 @@ namespace TheTvdbDotNet;
 public class SeriesEpisodes
 {
     [JsonPropertyName("data")]
-    public BasicEpisode[] Data { get; set; }
+    public SeriesEpisodesData Data { get; set; }
 
     [JsonPropertyName("errrors")]
     public JsonErrors Errors { get; set; }
 
     [JsonPropertyName("links")]
     public Links Links { get; set; }
+}
+
+public class SeriesEpisodesData
+{
+    [JsonPropertyName("episodes")]
+    public BasicEpisode[] Episodes { get; set; }
+
+    [JsonPropertyName("series")]
+    public Data Series { get; set; }
 }

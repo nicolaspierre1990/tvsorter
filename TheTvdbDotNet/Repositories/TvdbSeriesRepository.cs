@@ -14,15 +14,15 @@ public class TvdbSeriesRepository : TvdbBaseRepository, ITvdbSeries
         this.bannersHttpClient = bannersHttpClient;
     }
 
-    public Task<SeriesData> GetSeriesAsync(int seriesId)
+    public Task<SeriesDataResponse> GetSeriesAsync(int seriesId)
     {
         var request = new Request("series/{id}", seriesId);
-        return HttpClient.GetAsync<SeriesData>(request);
+        return HttpClient.GetAsync<SeriesDataResponse>(request);
     }
 
     public Task<SeriesEpisodes> GetEpisodesAsync(int seriesId, string page = null)
     {
-        var request = new Request("series/{id}/episodes", seriesId);
+        var request = new Request("series/{id}/episodes/default", seriesId);
         request.AddCriteriaIfNotNull("page", page);
         return HttpClient.GetAsync<SeriesEpisodes>(request);
     }

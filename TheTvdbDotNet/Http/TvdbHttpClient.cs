@@ -11,7 +11,7 @@ namespace TheTvdbDotNet.Http;
 
 public class TvdbHttpClient : ITvdbHttpClient
 {
-    private const string ApiUrl = "https://api.thetvdb.com/";
+    private const string ApiUrl = "https://api4.thetvdb.com/v4/";
 
     private readonly HttpClient httpClient;
 
