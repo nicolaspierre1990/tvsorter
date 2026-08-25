@@ -34,6 +34,8 @@ public class TvShow : IEquatable<TvShow>, INotifyPropertyChanged
     private bool _useDvdOrder;
     private bool _useCustomDestination;
     private string _customDestinationDir;
+    private string _year;
+    private string _overview;
 
     /// <summary>
     ///     Occurs when a property value changes.
@@ -155,6 +157,18 @@ public class TvShow : IEquatable<TvShow>, INotifyPropertyChanged
     {
         get => _customDestinationDir;
         set => SetField(ref _customDestinationDir, value);
+    }
+
+    public string Year
+    {
+        get => _year;
+        set => SetField(ref _year, value);
+    }
+
+    public string Overview
+    {
+        get => _overview;
+        set => SetField(ref _overview, value);
     }
 
     /// <summary>

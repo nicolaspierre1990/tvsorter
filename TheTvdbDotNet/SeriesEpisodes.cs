@@ -9,9 +9,6 @@ public class SeriesEpisodes
 
     [JsonPropertyName("errrors")]
     public JsonErrors Errors { get; set; }
-
-    [JsonPropertyName("links")]
-    public Links Links { get; set; }
 }
 
 public class SeriesEpisodesData

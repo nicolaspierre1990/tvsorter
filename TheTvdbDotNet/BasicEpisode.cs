@@ -18,7 +18,7 @@ public class BasicEpisode
     public string Aired { get; set; }
 
     [JsonPropertyName("runtime")]
-    public int Runtime { get; set; }
+    public int? Runtime { get; set; }
 
     [JsonPropertyName("nameTranslations")]
     public List<string> NameTranslations { get; set; }
@@ -33,7 +33,7 @@ public class BasicEpisode
     public string Image { get; set; }
 
     [JsonPropertyName("imageType")]
-    public int ImageType { get; set; }
+    public int? ImageType { get; set; }
 
     [JsonPropertyName("isMovie")]
     public int IsMovie { get; set; }

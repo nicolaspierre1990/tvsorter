@@ -35,7 +35,7 @@ public class Series
     public string NetworkId { get; set; }
 
     [JsonPropertyName("runtime")]
-    public string Runtime { get; set; }
+    public int? Runtime { get; set; }
 
     [JsonPropertyName("genre")]
     public string[] Genre { get; set; }

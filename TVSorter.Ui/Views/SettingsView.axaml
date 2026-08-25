@@ -6,146 +6,291 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
              x:Class="TVSorter.Ui.Views.SettingsView"
              x:DataType="vm:SettingsViewModel">
-    <ScrollViewer>
-        <StackPanel Spacing="20">
-            <!-- Directories Section -->
-            <StackPanel Spacing="12">
-                <TextBlock Text="Directories" FontSize="18" FontWeight="Bold"/>
-                <Separator/>
-                
-                <!-- Source Directory -->
-                <StackPanel Margin="0,8,0,0">
-                    <TextBlock Text="Source Directory:" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                    <Grid ColumnDefinitions="*,Auto">
-                        <TextBox Grid.Column="0" Text="{Binding Settings.SourceDirectory}" Margin="0,0,8,0"/>
-                        <Button Grid.Column="1" Content="Browse..." Command="{Binding BrowseSourceDirectoryCommand}"/>
-                    </Grid>
-                </StackPanel>
 
-                <!-- Destination Directories -->
-                <StackPanel>
-                    <TextBlock Text="Destination Directories:" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
-                        <ListBox Grid.Column="0" Grid.Row="0" 
-                                 Height="100" 
-                                 ItemsSource="{Binding DestinationDirectories}"
-                                 SelectedItem="{Binding SelectedDestinationDirectory}"/>
-                        <StackPanel Grid.Column="1" Grid.Row="0" Margin="8,0,0,0" Spacing="4">
-                            <Button Content="Add" Command="{Binding AddDestinationDirectoryCommand}"/>
-                            <Button Content="Remove" Command="{Binding RemoveDestinationDirectoryCommand}"/>
-                        </StackPanel>
-                        
-                        <StackPanel Grid.Column="0" Grid.Row="1" Margin="0,8,0,0">
-                            <TextBlock Text="Default Destination:" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                            <ComboBox ItemsSource="{Binding DestinationDirectories}" 
-                                      SelectedItem="{Binding Settings.DefaultDestinationDirectory}"
-                                      HorizontalAlignment="Stretch"/>
-                        </StackPanel>
-                    </Grid>
-                </StackPanel>
+    <Grid RowDefinitions="Auto,*,Auto">
 
-                <!-- Ignored Directories -->
-                <StackPanel>
-                    <TextBlock Text="Ignored Directories:" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                    <Grid ColumnDefinitions="*,Auto">
-                        <ListBox Grid.Column="0" 
-                                 Height="100" 
-                                 ItemsSource="{Binding IgnoredDirectories}"
-                                 SelectedItem="{Binding SelectedIgnoredDirectory}"/>
-                        <StackPanel Grid.Column="1" Margin="8,0,0,0" Spacing="4">
-                            <Button Content="Add" Command="{Binding AddIgnoredDirectoryCommand}"/>
-                            <Button Content="Remove" Command="{Binding RemoveIgnoredDirectoryCommand}"/>
-                        </StackPanel>
-                    </Grid>
-                </StackPanel>
-            </StackPanel>
+        <!-- ── Page header ── -->
+        <Border Grid.Row="0"
+                Background="#F5F5F5"
+                BorderBrush="#E0E0E0"
+                BorderThickness="0,0,0,1"
+                Padding="20,14">
+            <TextBlock Text="Settings"
+                       FontSize="20"
+                       FontWeight="SemiBold"
+                       Foreground="#1A1A1A"/>
+        </Border>
 
-            <!-- File Options Section -->
-            <StackPanel Spacing="12">
-                <TextBlock Text="File Options" FontSize="18" FontWeight="Bold" Margin="0,0,0,8"/>
-                <Separator/>
-                
-                <!-- File Extensions -->
-                <StackPanel Margin="0,8,0,0">
-                    <TextBlock Text="File Extensions:" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                    <Grid ColumnDefinitions="*,Auto">
-                        <ListBox Grid.Column="0" 
-                                 Height="100" 
-                                 ItemsSource="{Binding FileExtensions}"
-                                 SelectedItem="{Binding SelectedFileExtension}"/>
-                        <StackPanel Grid.Column="1" Margin="8,0,0,0" Spacing="4">
-                            <Button Content="Add" Command="{Binding AddFileExtensionCommand}"/>
-                            <Button Content="Remove" Command="{Binding RemoveFileExtensionCommand}"/>
-                        </StackPanel>
-                    </Grid>
-                </StackPanel>
+        <!-- ── Tab sections ── -->
+        <TabControl Grid.Row="1" Margin="16,12">
 
-                <!-- Output Format -->
-                <StackPanel>
-                    <TextBlock Text="Default Output Format:" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                    <TextBox Text="{Binding Settings.DefaultOutputFormat}" 
-                             Watermark="e.g., {FName}\Season {SNum(1)}\{SName(.)}.S{SNum(2)}E{ENum(2)}.{EName(.)}{Ext}"/>
-                </StackPanel>
+            <!-- ════ Directories ════ -->
+            <TabItem Header="Directories">
+                <ScrollViewer Padding="4,8,4,4">
+                    <StackPanel Spacing="16">
 
-                <!-- Overwrite Keywords -->
-                <StackPanel>
-                    <TextBlock Text="Overwrite Keywords:" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                    <Grid ColumnDefinitions="*,Auto">
-                        <ListBox Grid.Column="0" 
-                                 Height="100" 
-                                 ItemsSource="{Binding OverwriteKeywords}"
-                                 SelectedItem="{Binding SelectedOverwriteKeyword}"/>
-                        <StackPanel Grid.Column="1" Margin="8,0,0,0" Spacing="4">
-                            <Button Content="Add" Command="{Binding AddOverwriteKeywordCommand}"/>
-                            <Button Content="Remove" Command="{Binding RemoveOverwriteKeywordCommand}"/>
-                        </StackPanel>
-                    </Grid>
-                </StackPanel>
-            </StackPanel>
+                        <!-- Source Directory card -->
+                        <Border Background="White"
+                                BorderBrush="#E0E0E0"
+                                BorderThickness="1"
+                                CornerRadius="6"
+                                Padding="16">
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="Source Directory"
+                                           FontWeight="SemiBold"
+                                           Foreground="#0078D4"/>
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <TextBox Grid.Column="0"
+                                             Text="{Binding Settings.SourceDirectory}"
+                                             Margin="0,0,8,0"/>
+                                    <Button Grid.Column="1"
+                                            Content="Browse…"
+                                            Command="{Binding BrowseSourceDirectoryCommand}"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
 
-            <!-- Regular Expressions Section -->
-            <StackPanel Spacing="12">
-                <TextBlock Text="Regular Expressions" FontSize="18" FontWeight="Bold" Margin="0,0,0,8"/>
-                <Separator/>
-                
-                <Grid ColumnDefinitions="*,Auto" Margin="0,8,0,0">
-                    <ListBox Grid.Column="0" 
-                             Height="150" 
-                             ItemsSource="{Binding RegularExpressions}"
-                             SelectedItem="{Binding SelectedRegularExpression}"/>
-                    <StackPanel Grid.Column="1" Margin="8,0,0,0" Spacing="4">
-                        <Button Content="Add" Command="{Binding AddRegularExpressionCommand}"/>
-                        <Button Content="Remove" Command="{Binding RemoveRegularExpressionCommand}"/>
+                        <!-- Destination Directories card -->
+                        <Border Background="White"
+                                BorderBrush="#E0E0E0"
+                                BorderThickness="1"
+                                CornerRadius="6"
+                                Padding="16">
+                            <StackPanel Spacing="12">
+                                <TextBlock Text="Destination Directories"
+                                           FontWeight="SemiBold"
+                                           Foreground="#0078D4"/>
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <ListBox Grid.Column="0"
+                                             Height="110"
+                                             ItemsSource="{Binding DestinationDirectories}"
+                                             SelectedItem="{Binding SelectedDestinationDirectory}"
+                                             Margin="0,0,8,0"/>
+                                    <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Top">
+                                        <Button Content="Add"
+                                                Command="{Binding AddDestinationDirectoryCommand}"
+                                                Width="80"/>
+                                        <Button Content="Remove"
+                                                Command="{Binding RemoveDestinationDirectoryCommand}"
+                                                Width="80"/>
+                                    </StackPanel>
+                                </Grid>
+                                <StackPanel Spacing="4">
+                                    <TextBlock Text="Default Destination"
+                                               FontSize="12"
+                                               Foreground="#555555"/>
+                                    <ComboBox ItemsSource="{Binding DestinationDirectories}"
+                                              SelectedItem="{Binding Settings.DefaultDestinationDirectory}"
+                                              HorizontalAlignment="Stretch"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Ignored Directories card -->
+                        <Border Background="White"
+                                BorderBrush="#E0E0E0"
+                                BorderThickness="1"
+                                CornerRadius="6"
+                                Padding="16">
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="Ignored Directories"
+                                           FontWeight="SemiBold"
+                                           Foreground="#0078D4"/>
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <ListBox Grid.Column="0"
+                                             Height="110"
+                                             ItemsSource="{Binding IgnoredDirectories}"
+                                             SelectedItem="{Binding SelectedIgnoredDirectory}"
+                                             Margin="0,0,8,0"/>
+                                    <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Top">
+                                        <Button Content="Add"
+                                                Command="{Binding AddIgnoredDirectoryCommand}"
+                                                Width="80"/>
+                                        <Button Content="Remove"
+                                                Command="{Binding RemoveIgnoredDirectoryCommand}"
+                                                Width="80"/>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
                     </StackPanel>
-                </Grid>
-            </StackPanel>
+                </ScrollViewer>
+            </TabItem>
 
-            <!-- Behavior Options Section -->
-            <StackPanel Spacing="12">
-                <TextBlock Text="Behavior Options" FontSize="18" FontWeight="Bold" Margin="0,0,0,8"/>
-                <Separator/>
-                
-                <StackPanel Spacing="8" Margin="0,8,0,0">
-                    <CheckBox Content="Recurse Subdirectories" 
-                              IsChecked="{Binding Settings.RecurseSubdirectories}"/>
-                    <CheckBox Content="Delete Empty Subdirectories" 
-                              IsChecked="{Binding Settings.DeleteEmptySubdirectories}"/>
-                    <CheckBox Content="Rename If Exists" 
-                              IsChecked="{Binding Settings.RenameIfExists}"/>
-                    <CheckBox Content="Add Unmatched Shows" 
-                              IsChecked="{Binding Settings.AddUnmatchedShows}"/>
-                    <CheckBox Content="Unlock Matched Shows" 
-                              IsChecked="{Binding Settings.UnlockMatchedShows}"/>
-                    <CheckBox Content="Lock Shows With No Episodes" 
-                              IsChecked="{Binding Settings.LockShowsWithNoEpisodes}"/>
-                </StackPanel>
-            </StackPanel>
+            <!-- ════ File Options ════ -->
+            <TabItem Header="File Options">
+                <ScrollViewer Padding="4,8,4,4">
+                    <StackPanel Spacing="16">
 
-            <!-- Action Buttons -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8" Margin="0,16,0,0">
-                <Button Content="Revert" Command="{Binding RevertCommand}" Width="100"/>
-                <Button Content="Save" Command="{Binding SaveCommand}" Width="100"/>
+                        <!-- File Extensions card -->
+                        <Border Background="White"
+                                BorderBrush="#E0E0E0"
+                                BorderThickness="1"
+                                CornerRadius="6"
+                                Padding="16">
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="File Extensions"
+                                           FontWeight="SemiBold"
+                                           Foreground="#0078D4"/>
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <ListBox Grid.Column="0"
+                                             Height="110"
+                                             ItemsSource="{Binding FileExtensions}"
+                                             SelectedItem="{Binding SelectedFileExtension}"
+                                             Margin="0,0,8,0"/>
+                                    <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Top">
+                                        <Button Content="Add"
+                                                Command="{Binding AddFileExtensionCommand}"
+                                                Width="80"/>
+                                        <Button Content="Remove"
+                                                Command="{Binding RemoveFileExtensionCommand}"
+                                                Width="80"/>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Output Format card -->
+                        <Border Background="White"
+                                BorderBrush="#E0E0E0"
+                                BorderThickness="1"
+                                CornerRadius="6"
+                                Padding="16">
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="Default Output Format"
+                                           FontWeight="SemiBold"
+                                           Foreground="#0078D4"/>
+                                <TextBox Text="{Binding Settings.DefaultOutputFormat}"
+                                         Watermark="{}{FName}\Season {SNum(1)}\{SName(.)}.S{SNum(2)}E{ENum(2)}.{EName(.)}{Ext}"/>
+                                <TextBlock Text="Use format tokens like {FName}, {SNum}, {ENum}, {EName}, {Ext}."
+                                           FontSize="11"
+                                           Foreground="#888888"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Overwrite Keywords card -->
+                        <Border Background="White"
+                                BorderBrush="#E0E0E0"
+                                BorderThickness="1"
+                                CornerRadius="6"
+                                Padding="16">
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="Overwrite Keywords"
+                                           FontWeight="SemiBold"
+                                           Foreground="#0078D4"/>
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <ListBox Grid.Column="0"
+                                             Height="110"
+                                             ItemsSource="{Binding OverwriteKeywords}"
+                                             SelectedItem="{Binding SelectedOverwriteKeyword}"
+                                             Margin="0,0,8,0"/>
+                                    <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Top">
+                                        <Button Content="Add"
+                                                Command="{Binding AddOverwriteKeywordCommand}"
+                                                Width="80"/>
+                                        <Button Content="Remove"
+                                                Command="{Binding RemoveOverwriteKeywordCommand}"
+                                                Width="80"/>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- ════ Regular Expressions ════ -->
+            <TabItem Header="Regular Expressions">
+                <ScrollViewer Padding="4,8,4,4">
+                    <Border Background="White"
+                            BorderBrush="#E0E0E0"
+                            BorderThickness="1"
+                            CornerRadius="6"
+                            Padding="16">
+                        <StackPanel Spacing="8">
+                            <TextBlock Text="Regular Expressions"
+                                       FontWeight="SemiBold"
+                                       Foreground="#0078D4"/>
+                            <TextBlock Text="Patterns used to match episode filenames."
+                                       FontSize="11"
+                                       Foreground="#888888"/>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <ListBox Grid.Column="0"
+                                         Height="200"
+                                         ItemsSource="{Binding RegularExpressions}"
+                                         SelectedItem="{Binding SelectedRegularExpression}"
+                                         Margin="0,0,8,0"/>
+                                <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Top">
+                                    <Button Content="Add"
+                                            Command="{Binding AddRegularExpressionCommand}"
+                                            Width="80"/>
+                                    <Button Content="Remove"
+                                            Command="{Binding RemoveRegularExpressionCommand}"
+                                            Width="80"/>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- ════ Behavior ════ -->
+            <TabItem Header="Behavior">
+                <ScrollViewer Padding="4,8,4,4">
+                    <Border Background="White"
+                            BorderBrush="#E0E0E0"
+                            BorderThickness="1"
+                            CornerRadius="6"
+                            Padding="16">
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="Behavior Options"
+                                       FontWeight="SemiBold"
+                                       Foreground="#0078D4"
+                                       Margin="0,0,0,8"/>
+                            <CheckBox Content="Recurse Subdirectories"
+                                      IsChecked="{Binding Settings.RecurseSubdirectories}"
+                                      Padding="4"/>
+                            <CheckBox Content="Delete Empty Subdirectories"
+                                      IsChecked="{Binding Settings.DeleteEmptySubdirectories}"
+                                      Padding="4"/>
+                            <CheckBox Content="Rename If Exists"
+                                      IsChecked="{Binding Settings.RenameIfExists}"
+                                      Padding="4"/>
+                            <CheckBox Content="Add Unmatched Shows"
+                                      IsChecked="{Binding Settings.AddUnmatchedShows}"
+                                      Padding="4"/>
+                            <CheckBox Content="Unlock Matched Shows"
+                                      IsChecked="{Binding Settings.UnlockMatchedShows}"
+                                      Padding="4"/>
+                            <CheckBox Content="Lock Shows With No Episodes"
+                                      IsChecked="{Binding Settings.LockShowsWithNoEpisodes}"
+                                      Padding="4"/>
+                        </StackPanel>
+                    </Border>
+                </ScrollViewer>
+            </TabItem>
+
+        </TabControl>
+
+        <!-- ── Sticky footer: Save / Revert ── -->
+        <Border Grid.Row="2"
+                Background="#F5F5F5"
+                BorderBrush="#E0E0E0"
+                BorderThickness="0,1,0,0"
+                Padding="20,10">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Spacing="8">
+                <Button Content="Revert"
+                        Command="{Binding RevertCommand}"
+                        Width="100"/>
+                <Button Content="Save"
+                        Command="{Binding SaveCommand}"
+                        Width="100"/>
             </StackPanel>
-        </StackPanel>
-    </ScrollViewer>
+        </Border>
+
+    </Grid>
 </UserControl>

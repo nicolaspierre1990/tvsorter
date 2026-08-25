@@ -36,9 +36,19 @@
 				</Border>
 
 				<!-- Show Name -->
-				<TextBlock Text="{Binding Name}"
-						   FontSize="24"
-						   FontWeight="Bold"/>
+				<TextBlock
+					FontSize="24"
+					FontWeight="Bold">
+					<TextBlock.Text>
+						<MultiBinding StringFormat="{}{0} ({1})">
+							<Binding Path="Name"/>
+							<Binding Path="Year"/>
+						</MultiBinding>
+					</TextBlock.Text>
+				</TextBlock>
+
+				<!-- Show Description -->
+				<TextBlock Text="{Binding Overview}" />
 
 				<!-- TVDB ID -->
 				<StackPanel Orientation="Horizontal" Spacing="5">
@@ -105,7 +115,7 @@
 							</ListBox>
 						</Border>
 						<StackPanel Grid.Column="1" Orientation="Vertical" Spacing="5" Margin="5,0,0,0"
-							HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+									HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 							<Button Content="+" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch"></Button>
 							<Button Content="-" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch"></Button>
 						</StackPanel>

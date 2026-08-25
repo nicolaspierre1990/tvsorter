@@ -37,7 +37,7 @@ public class TvdbV2(ITvdbSeries series, ITvdbSearch search, ITvdbUpdate update, 
         {
             var series = await search.SeriesSearchAsync(name).ConfigureAwait(false);
             return [.. series.Data
-                .Select(x => new TvShow { Name = x.SeriesName, TvdbId = x.Id, FolderName = x.SeriesName, Banner = x.Banner })];
+                .Select(x => new TvShow { Name = x.SeriesName, TvdbId = x.Id, FolderName = x.SeriesName, Banner = x.Banner, Overview = x.Overview })];
         }
         catch (TvdbRequestException)
         {
@@ -60,7 +60,7 @@ public class TvdbV2(ITvdbSeries series, ITvdbSearch search, ITvdbUpdate update, 
                     SeasonNumber = x.SeasonNumber,
                     FirstAir = x.Aired.ValidateTime() ? DateTime.Parse(x.Aired) : DateTime.Parse("1970-01-01"),
                     Name = x.Name ?? string.Empty,
-                    Show = show,
+                    Show = show
                 })
             .ToList();
 
@@ -77,6 +77,8 @@ public class TvdbV2(ITvdbSeries series, ITvdbSearch search, ITvdbUpdate update, 
             }
         }
 
+        show.Year = newSeries.Data.Year;
+        show.Overview = newSeries.Data.Overview;
         show.Episodes = newEpisodes;
         show.LastUpdated = DateTime.UtcNow;
     }
