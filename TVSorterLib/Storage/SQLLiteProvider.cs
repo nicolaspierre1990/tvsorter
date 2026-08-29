@@ -155,7 +155,7 @@ public class SQLLiteProvider : IStorageProvider
 
         if (dbContext.TvShows.Any(x => x.TvdbId == show.TvdbId))
         {
-            dbContext.TvShows.Update(show);
+            //dbContext.TvShows.Update(show);
             OnTvShowChanged(show);
         }
         else

@@ -59,7 +59,8 @@ public static class ServicesBootstrapper
         // ViewModels
         services.RegisterLazySingleton(() => new ShowsViewModel(
             resolver.GetRequiredService<ILoggerFactory>().CreateLogger<ShowsViewModel>(),
-            resolver.GetRequiredService<ITvShowRepository>()), typeof(ShowsViewModel));
+            resolver.GetRequiredService<ITvShowRepository>(),
+            resolver.GetRequiredService<ISettingsRepository>()), typeof(ShowsViewModel));
 
         services.RegisterLazySingleton(() => new SplashScreenViewModel(
             resolver.GetRequiredService<ILoggerFactory>().CreateLogger<SplashScreenViewModel>(),

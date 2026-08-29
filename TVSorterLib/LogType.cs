@@ -17,6 +17,11 @@ public enum LogType
     Info,
 
     /// <summary>
+    ///     An warning log message
+    /// </summary>
+    Warning,
+
+    /// <summary>
     ///     An error log message.
     /// </summary>
     Error,

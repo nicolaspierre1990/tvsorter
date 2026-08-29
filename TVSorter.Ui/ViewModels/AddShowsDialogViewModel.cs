@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using ReactiveUI;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
@@ -41,6 +42,23 @@ public class AddShowsDialogViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _showName, value);
     }
 
+    private bool _isSelectionMode;
+
+    public bool IsSelectionMode
+    {
+        get => _isSelectionMode;
+        private set
+        {
+            this.RaiseAndSetIfChanged(ref _isSelectionMode, value);
+            this.RaisePropertyChanged(nameof(IsSearchVisible));
+            this.RaisePropertyChanged(nameof(ConfirmButtonText));
+        }
+    }
+
+    public bool IsSearchVisible => !IsSelectionMode;
+
+    public string ConfirmButtonText => IsSelectionMode ? "Select" : "Add";
+
     private ILogger<AddShowsDialogViewModel> _logger;
     private ITvShowRepository _tvShowRepository;
 
@@ -50,20 +68,38 @@ public class AddShowsDialogViewModel : ViewModelBase
     {
         SearchCommand = ReactiveCommand.CreateFromTask(SearchShowsAsync);
         AddCommand = ReactiveCommand.CreateFromTask(AddShowAsync, this.WhenAnyValue(x => x.SelectedShow, (TvShow? show) => show != null));
-        CancelCommand = ReactiveCommand.Create(() => App.CloseDialog(this));
+        CancelCommand = ReactiveCommand.Create(() =>
+        {
+            SelectedShow = null;
+            App.CloseDialog(this);
+        });
         _logger = logger;
         _tvShowRepository = tvShowRepository;
     }
 
+    public void PrepareForSelection(IEnumerable<TvShow> candidates)
+    {
+        IsSelectionMode = true;
+        ShowName = string.Empty;
+        SelectedShow = null;
+        SearchResults = new ObservableCollection<TvShow>(candidates);
+    }
+
     private async Task AddShowAsync()
     {
-        _tvShowRepository.FromSearchResult(SelectedShow!);
-        await _tvShowRepository.UpdateAsync(SelectedShow!);
+        if (!IsSelectionMode)
+        {
+            _tvShowRepository.FromSearchResult(SelectedShow!);
+            await _tvShowRepository.UpdateAsync(SelectedShow!);
+        }
 
         App.CloseDialog(this);
 
-        SearchResults = [];
-        ShowName = string.Empty;
+        if (!IsSelectionMode)
+        {
+            SearchResults = [];
+            ShowName = string.Empty;
+        }
     }
 
     private async Task SearchShowsAsync()

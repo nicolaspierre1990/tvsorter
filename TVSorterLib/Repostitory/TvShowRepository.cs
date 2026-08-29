@@ -145,7 +145,7 @@ public class TvShowRepository : ITvShowRepository
     /// <returns>
     ///     The results of the search.
     /// </returns>
-    public List<TvShow> SearchShow(string name) => dataProvider.SearchShow(name);
+    public List<TvShow> SearchShow(string name) => SearchShowAsync(name).GetAwaiter().GetResult();
 
     public Task<List<TvShow>> SearchShowAsync(string name, CancellationToken cancellationToken = default) => dataProvider.SearchShowAsync(name, cancellationToken);
 

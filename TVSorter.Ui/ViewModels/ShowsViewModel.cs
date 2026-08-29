@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -25,17 +26,23 @@ public class ShowsViewModel : ViewModelBase
     private Bitmap? _selectedShowImage;
     private string? _filterText;
     private string? _selectedAlternateName;
+    private readonly ISettingsRepository _settingsRepository;
+    private Settings _sorterSettings = new Settings();
 
-    public ShowsViewModel(ILogger<ShowsViewModel> logger, ITvShowRepository tvShowRepository)
+    public ShowsViewModel(ILogger<ShowsViewModel> logger, ITvShowRepository tvShowRepository, ISettingsRepository settingsRepository)
     {
         _logger = logger;
         _showRepository = tvShowRepository;
+        _settingsRepository = settingsRepository;
+        _settingsRepository.SettingsUpdated += async (s, e) => _sorterSettings = JsonSerializer.Deserialize<Settings>(e.Settings.SettingValue) ?? throw new InvalidOperationException("Failed to deserialize settings.");
+
         AddShowCommand = ReactiveCommand.Create(ExecuteAddShowAsync);
         UpdateAllCommand = ReactiveCommand.CreateFromTask(ExecuteUpdateAllAsync);
         SaveShowCommand = ReactiveCommand.CreateFromTask(ExecuteSaveShowAsync, 
             this.WhenAnyValue(x => x.SelectedShow, (TvShow? show) => show != null));
         UpdateShowCommand = ReactiveCommand.CreateFromTask(ExecuteUpdateShowAsync,
             this.WhenAnyValue(x => x.SelectedShow, (TvShow? show) => show != null && !show.Locked));
+        ImportShowsCommand = ReactiveCommand.CreateFromTask(ExecuteImportShowsAsync);
         ViewShowDetailsCommand = ReactiveCommand.CreateFromTask(ShowDetailDialogAsync,
             this.WhenAnyValue(x => x.SelectedShow, (TvShow? show) => show != null));
     }
@@ -47,6 +54,7 @@ public class ShowsViewModel : ViewModelBase
         var shows = await Task.Run(() => _showRepository.GetTvShows());
         _allShows = new ObservableCollection<TvShow>(shows);
         Shows = new ObservableCollection<TvShow>(shows);
+        _sorterSettings = await _settingsRepository.LoadSettingsAsync<Settings>(Settings.SETTING_NAME, cancellationToken);
 
         SetIsBusy(false);
     }
@@ -55,6 +63,8 @@ public class ShowsViewModel : ViewModelBase
     public ICommand UpdateAllCommand { get; }
     public ICommand SaveShowCommand { get; }
     public ICommand UpdateShowCommand { get; }
+    public ICommand ImportShowsCommand { get; }
+
     public ICommand ViewShowDetailsCommand { get; }
 
     public TvShow? SelectedShow
@@ -227,6 +237,79 @@ public class ShowsViewModel : ViewModelBase
         }
     }
 
+    private async Task ExecuteImportShowsAsync()
+    {
+        SetIsBusy(true);
+
+        try
+        {
+            _logger.LogInformation("Starting import shows operation");
+
+            var shows = Directory.GetDirectories(_sorterSettings.DefaultDestinationDirectory);
+
+            foreach (var show in shows)
+            {
+                var showDirectoryName = PathExtensions.GetLastPathSegment(show);
+                var result = await _showRepository.SearchShowAsync(showDirectoryName);
+
+                if(_allShows.Any(x => x.Name.Equals(showDirectoryName, StringComparison.OrdinalIgnoreCase)))
+                {
+                    _logger.LogInformation("Show already exists in the database: {ShowName}", showDirectoryName);
+                    continue;
+                }
+
+                if (result.Count == 1)
+                {
+                    var matchedShow = result.First();
+                    matchedShow.FolderName = showDirectoryName;
+                    await _showRepository.SaveAsync(matchedShow);
+                    _logger.LogInformation("Successfully imported show: {ShowName} (ID: {TvdbId})", matchedShow.Name, matchedShow.TvdbId.ToString());
+
+                    _allShows.Add(matchedShow);
+                }
+                else if (result.Count > 1)
+                {
+                    var selectionViewModel = Locator.Current.GetRequiredService<AddShowsDialogViewModel>();
+                    selectionViewModel.PrepareForSelection(result);
+
+                    var dialogTask = App.ShowDialog(selectionViewModel, $"Select matching show for {showDirectoryName}");
+                    if (dialogTask != null)
+                    {
+                        await dialogTask;
+                    }
+
+                    var selectedShow = selectionViewModel.SelectedShow;
+                    if (selectedShow != null)
+                    {
+                        selectedShow.FolderName = showDirectoryName;
+                        await _showRepository.SaveAsync(selectedShow);
+                        _logger.LogInformation("Successfully imported show: {ShowName} (ID: {TvdbId})", selectedShow.Name, selectedShow.TvdbId.ToString());
+                        _allShows.Add(selectedShow);
+                    }
+                    else
+                    {
+                        _logger.LogWarning("Multiple matching shows found for directory: {ShowDirectory}", show);
+                    }
+                }
+                else
+                {
+                    _logger.LogWarning("No matching show found for directory: {ShowDirectory}", show);
+                }
+            }
+
+            _logger.LogInformation("Successfully completed import shows operation");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to import shows");
+        }
+        finally
+        {
+            SetIsBusy(false);
+        }
+    }
+
+
     private async Task ShowDetailDialogAsync()
     {
         if (SelectedShow == null)
@@ -308,4 +391,16 @@ public class ShowsViewModel : ViewModelBase
         }
     }
 
+}
+
+public static class PathExtensions
+{
+    public static string GetLastPathSegment(this string path)
+    {
+        string lastPathSegment = path
+            .Split(new string[] { @"\" }, StringSplitOptions.RemoveEmptyEntries)
+            .LastOrDefault();
+
+        return lastPathSegment;
+    }
 }

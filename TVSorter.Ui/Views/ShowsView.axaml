@@ -8,6 +8,7 @@
 	<Grid ColumnDefinitions="250,4,*" RowDefinitions="Auto, *">
 		<StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Spacing="10" Margin="5">
 			<Button Content="Update All" Command="{Binding UpdateAllCommand}" />
+			<Button Content="Import Shows from Destination" Command="{Binding ImportShowsCommand}" />
 			<Button Content="Add Show" Command="{Binding AddShowCommand}" />
 			<TextBox Text="{Binding FilterText}"
 					 Watermark="Filter shows..."
