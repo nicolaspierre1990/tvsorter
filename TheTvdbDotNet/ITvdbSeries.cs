@@ -1,13 +1,15 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace TheTvdbDotNet;
 
 public interface ITvdbSeries
 {
-    Task<SeriesEpisodes> GetEpisodesAsync(int seriesId, string page = null);
+    Task<SeriesEpisodes> GetEpisodesAsync(int seriesId, string page = null, CancellationToken cancellationToken = default);
 
-    Task<SeriesDataResponse> GetSeriesAsync(int seriesId);
+    Task<SeriesDataResponse> GetSeriesAsync(int seriesId, CancellationToken cancellationToken = default);
 
     Task<SeriesEpisodes> QueryEpisodesAsync(
         int seriesId,
@@ -18,7 +20,8 @@ public interface ITvdbSeries
         string dvdEpisode = null,
         string absoluteNumber = null,
         string firstAired = null,
-        string page = null);
+        string page = null, CancellationToken cancellationToken = default);
 
-    Task<Stream> GetBannerAsnyc(Series series);
+    [Obsolete("This method is deprecated.")]
+    Task<Stream> GetBannerAsnyc(Series series, CancellationToken cancellationToken = default);
 }

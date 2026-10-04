@@ -17,7 +17,16 @@
 			<Button Content="Unselect All" Command="{Binding UnselectAllCommand}" Margin="5" />
 		</StackPanel>
 		<DataGrid Grid.Row="1" ItemsSource="{Binding FileResults}" CanUserResizeColumns="True"
-				  AutoGenerateColumns="False" CanUserSortColumns="True" Margin="5">
+				  AutoGenerateColumns="False" CanUserSortColumns="True" Margin="5"
+				  Background="White" Foreground="#1A1A1A" RowBackground="White">
+			<DataGrid.Styles>
+				<Style Selector="TextBlock">
+					<Setter Property="Foreground" Value="#1A1A1A"/>
+				</Style>
+				<Style Selector="DataGridCell">
+					<Setter Property="Foreground" Value="#1A1A1A"/>
+				</Style>
+			</DataGrid.Styles>
 			<DataGrid.Columns>
 				<DataGridCheckBoxColumn Binding="{Binding IsChecked}" Width="40" CanUserResize="False" CanUserSort="False" IsReadOnly="False"/>
 				<DataGridTextColumn Header="File Path" Binding="{Binding InputFileName}" Width="*" IsReadOnly="True"/>

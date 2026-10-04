@@ -1,8 +1,8 @@
-﻿using System;
-using System.Reactive;
-using System.Threading.Tasks;
-using ReactiveUI;
+﻿using ReactiveUI;
+using ReactiveUI.Primitives;
 using Splat;
+using System;
+using System.Threading.Tasks;
 using TVSorter.Ui.Extensions;
 
 namespace TVSorter.Ui.ViewModels;
@@ -10,8 +10,8 @@ namespace TVSorter.Ui.ViewModels;
 public class MainWindowViewModel : ViewModelBase
 {
     private string _title = default!;
-    public ReactiveCommand<Unit, Unit> ExitCommand { get; set; }
-    public ReactiveCommand<Unit, Unit> AddShowsCommand { get; set; }
+    public ReactiveCommand<RxVoid, RxVoid> ExitCommand { get; set; }
+    public ReactiveCommand<RxVoid, RxVoid> AddShowsCommand { get; set; }
 
     public string Title
     {

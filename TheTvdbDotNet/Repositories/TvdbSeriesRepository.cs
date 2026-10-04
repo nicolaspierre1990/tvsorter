@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using TheTvdbDotNet.Http;
 
@@ -14,17 +15,17 @@ public class TvdbSeriesRepository : TvdbBaseRepository, ITvdbSeries
         this.bannersHttpClient = bannersHttpClient;
     }
 
-    public Task<SeriesDataResponse> GetSeriesAsync(int seriesId)
+    public Task<SeriesDataResponse> GetSeriesAsync(int seriesId, CancellationToken cancellationToken = default)
     {
         var request = new Request("series/{id}", seriesId);
-        return HttpClient.GetAsync<SeriesDataResponse>(request);
+        return HttpClient.GetAsync<SeriesDataResponse>(request, cancellationToken);
     }
 
-    public Task<SeriesEpisodes> GetEpisodesAsync(int seriesId, string page = null)
+    public Task<SeriesEpisodes> GetEpisodesAsync(int seriesId, string page = null, CancellationToken cancellationToken = default)
     {
         var request = new Request("series/{id}/episodes/default", seriesId);
         request.AddCriteriaIfNotNull("page", page);
-        return HttpClient.GetAsync<SeriesEpisodes>(request);
+        return HttpClient.GetAsync<SeriesEpisodes>(request, cancellationToken);
     }
 
     public Task<SeriesEpisodes> QueryEpisodesAsync(
@@ -36,7 +37,7 @@ public class TvdbSeriesRepository : TvdbBaseRepository, ITvdbSeries
         string dvdEpisode = null,
         string absoluteNumber = null,
         string firstAired = null,
-        string page = null)
+        string page = null, CancellationToken cancellationToken = default)
     {
         var request = new Request("series/{id}/episodes/query", seriesId);
         request.AddCriteriaIfNotNull("airedSeason", airedSeason);
@@ -47,10 +48,10 @@ public class TvdbSeriesRepository : TvdbBaseRepository, ITvdbSeries
         request.AddCriteriaIfNotNull("absoluteNumber", absoluteNumber);
         request.AddCriteriaIfNotNull("firstAired", firstAired);
         request.AddCriteriaIfNotNull("page", page);
-        return HttpClient.GetAsync<SeriesEpisodes>(request);
+        return HttpClient.GetAsync<SeriesEpisodes>(request, cancellationToken);
     }
 
-    public Task<Stream> GetBannerAsnyc(Series series)
+    public Task<Stream> GetBannerAsnyc(Series series, CancellationToken cancellationToken = default)
     {
         var request = new Request(series.Banner);
         return bannersHttpClient.GetStreamAsync(request);

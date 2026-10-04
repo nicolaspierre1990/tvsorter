@@ -12,6 +12,7 @@
     <Project Path="TVSorterLib/TVSorterLib.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="TheTvDbDotNet.Tests/TheTvDbDotNet.Tests.csproj" Id="a3058851-be8a-488d-843d-7c0ea87d808f" />
     <Project Path="TVSorter.Test/TVSorter.Test.csproj" />
   </Folder>
 </Solution>

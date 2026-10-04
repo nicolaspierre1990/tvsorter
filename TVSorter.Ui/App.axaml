@@ -2,8 +2,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="TVSorter.Ui.App"
 			 xmlns:local="clr-namespace:TVSorter.Ui"
-             RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+             RequestedThemeVariant="Light">
+             <!-- Custom chrome uses light backgrounds, so stay on Light even when the OS theme is dark. -->
 
 	<Application.Styles>
 		<FluentTheme />

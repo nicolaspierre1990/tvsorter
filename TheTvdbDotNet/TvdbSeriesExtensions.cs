@@ -12,7 +12,18 @@ public static class TvdbSeriesExtensions
         int seriesId,
         CancellationToken cancellationToken = default)
     {
-        var episodeData = await seriesRepository.GetEpisodesAsync(seriesId, "0").ConfigureAwait(false);
-        return episodeData.Data.Episodes ?? Enumerable.Empty<BasicEpisode>();
+        var basicEpisodes = Enumerable.Empty<BasicEpisode>();
+        var currentPage = 0;
+        var result = await seriesRepository.GetEpisodesAsync(seriesId, currentPage.ToString(), cancellationToken).ConfigureAwait(false);
+        basicEpisodes = basicEpisodes.Concat(result.Data.Episodes ?? Enumerable.Empty<BasicEpisode>());
+
+        while (result.Links?.Next != null)
+        {
+            currentPage++;
+            result = await seriesRepository.GetEpisodesAsync(seriesId, currentPage.ToString(), cancellationToken).ConfigureAwait(false);
+            basicEpisodes = basicEpisodes.Concat(result.Data.Episodes ?? Enumerable.Empty<BasicEpisode>());
+        }
+
+        return basicEpisodes;
     }
 }

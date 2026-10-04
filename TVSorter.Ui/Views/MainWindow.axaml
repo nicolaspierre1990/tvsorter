@@ -8,6 +8,7 @@
 		x:Class="TVSorter.Ui.Views.MainWindow"
 		WindowStartupLocation="CenterScreen" WindowState="Maximized"
 		Title="{Binding Title}"
+		Background="White"
 		Icon="/Assets/tvsorter.ico">
 	<Design.DataContext>
 		<vm:MainWindowViewModel/>
@@ -124,6 +125,66 @@
 			<Setter Property="Background" Value="#E0E0E0"/>
 			<Setter Property="Height" Value="4"/>
 			<Setter Property="CornerRadius" Value="2"/>
+		</Style>
+
+		<!-- DataGrid: keep file paths readable on the light page background -->
+		<Style Selector="DataGrid">
+			<Setter Property="Background" Value="White"/>
+			<Setter Property="Foreground" Value="#1A1A1A"/>
+			<Setter Property="RowBackground" Value="White"/>
+			<Setter Property="BorderBrush" Value="#E0E0E0"/>
+			<Setter Property="HorizontalGridLinesBrush" Value="#F0F0F0"/>
+			<Setter Property="VerticalGridLinesBrush" Value="#F0F0F0"/>
+		</Style>
+
+		<Style Selector="DataGridColumnHeader">
+			<Setter Property="Background" Value="#F3F3F3"/>
+			<Setter Property="Foreground" Value="#1A1A1A"/>
+			<Setter Property="FontWeight" Value="SemiBold"/>
+			<Setter Property="SeparatorBrush" Value="#E0E0E0"/>
+		</Style>
+
+		<!-- Column headers are buttons; don't inherit the blue/white action-button style -->
+		<Style Selector="DataGrid Button">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="Foreground" Value="#1A1A1A"/>
+			<Setter Property="BorderBrush" Value="Transparent"/>
+			<Setter Property="BorderThickness" Value="0"/>
+			<Setter Property="Padding" Value="8,4"/>
+			<Setter Property="CornerRadius" Value="0"/>
+		</Style>
+
+		<Style Selector="DataGridRow">
+			<Setter Property="Foreground" Value="#1A1A1A"/>
+		</Style>
+
+		<Style Selector="DataGridCell">
+			<Setter Property="Foreground" Value="#1A1A1A"/>
+		</Style>
+
+		<Style Selector="DataGrid TextBlock">
+			<Setter Property="Foreground" Value="#1A1A1A"/>
+		</Style>
+
+		<Style Selector="DataGridRow:pointerover /template/ Rectangle#BackgroundRectangle">
+			<Setter Property="Fill" Value="#F3F9FD"/>
+		</Style>
+
+		<Style Selector="DataGridRow:selected /template/ Rectangle#BackgroundRectangle">
+			<Setter Property="Fill" Value="#CCE4F7"/>
+		</Style>
+
+		<Style Selector="DataGridRow:selected DataGridCell">
+			<Setter Property="Foreground" Value="#1A1A1A"/>
+		</Style>
+
+		<Style Selector="ListBox">
+			<Setter Property="Background" Value="White"/>
+			<Setter Property="Foreground" Value="#1A1A1A"/>
+		</Style>
+
+		<Style Selector="ListBoxItem">
+			<Setter Property="Foreground" Value="#1A1A1A"/>
 		</Style>
 	</Window.Styles>
 
