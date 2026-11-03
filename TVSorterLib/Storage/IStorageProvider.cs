@@ -90,6 +90,8 @@ public interface IStorageProvider
     /// </param>
     void RemoveShow(TvShow show);
 
+    Task RemoveShowAsync(TvShow show, CancellationToken cancellationToken = default);
+
     /// <summary>
     ///     Saves the specified episode.
     /// </summary>

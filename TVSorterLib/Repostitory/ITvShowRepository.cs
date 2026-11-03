@@ -41,6 +41,8 @@ public interface ITvShowRepository
     /// <param name="show">The show to delete.</param>
     void Delete(TvShow show);
 
+    Task DeleteAsync(TvShow show, CancellationToken cancellationToken = default);
+
     /// <summary>
     ///     Creates a TV show from the specified search result TV show.
     /// </summary>

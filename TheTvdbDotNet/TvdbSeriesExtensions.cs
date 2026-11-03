@@ -23,7 +23,7 @@ public static class TvdbSeriesExtensions
             result = await seriesRepository.GetEpisodesAsync(seriesId, currentPage.ToString(), cancellationToken).ConfigureAwait(false);
             basicEpisodes = basicEpisodes.Concat(result.Data.Episodes ?? Enumerable.Empty<BasicEpisode>());
         }
-
+         
         return basicEpisodes;
     }
 }

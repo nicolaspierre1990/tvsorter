@@ -83,8 +83,13 @@ public class SQLLiteProvider : IStorageProvider
 
     public void RemoveShow(TvShow show)
     {
+        RemoveShowAsync(show).GetAwaiter().GetResult();
+    }
+
+    public async Task RemoveShowAsync(TvShow show, CancellationToken cancellationToken = default)
+    {
         dbContext.TvShows.Remove(show);
-        dbContext.SaveChanges();
+        await dbContext.SaveChangesAsync(cancellationToken);
 
         OnTvShowRemoved(show);
     }

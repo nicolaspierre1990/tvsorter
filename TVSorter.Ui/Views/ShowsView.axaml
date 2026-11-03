@@ -129,6 +129,10 @@
 					<Button Content="Save Show"
 							Command="{Binding $parent[UserControl].DataContext.SaveShowCommand}"
 							Padding="20,10"/>
+					<Button Content="Delete Show"
+							Command="{Binding $parent[UserControl].DataContext.DeleteCommand}"
+							Padding="20,10"	
+							IsEnabled="{Binding !Locked}"/>
 					<Button Content="Update Show from TVDB"
 							Command="{Binding $parent[UserControl].DataContext.UpdateShowCommand}"
 							Padding="20,10"

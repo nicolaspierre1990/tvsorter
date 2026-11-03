@@ -94,6 +94,9 @@ public class TvShowRepository : ITvShowRepository
     /// </param>
     public void Delete(TvShow show) => storageProvider.RemoveShow(show);
 
+    public Task DeleteAsync(TvShow show, CancellationToken cancellationToken = default)
+        => storageProvider.RemoveShowAsync(show, cancellationToken);
+
     /// <summary>
     ///     Saves the specified show.
     /// </summary>

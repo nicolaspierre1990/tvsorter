@@ -42,6 +42,8 @@ public class ShowsViewModel : ViewModelBase
             this.WhenAnyValue(x => x.SelectedShow, (TvShow? show) => show != null));
         UpdateShowCommand = ReactiveCommand.CreateFromTask(ExecuteUpdateShowAsync,
             this.WhenAnyValue(x => x.SelectedShow, (TvShow? show) => show != null && !show.Locked));
+        DeleteCommand = ReactiveCommand.CreateFromTask(ExecuteDeleteShowAsync,
+            this.WhenAnyValue(x => x.SelectedShow, (TvShow? show) => show != null && !show.Locked));
         ImportShowsCommand = ReactiveCommand.CreateFromTask(ExecuteImportShowsAsync);
         ViewShowDetailsCommand = ReactiveCommand.CreateFromTask(ShowDetailDialogAsync,
             this.WhenAnyValue(x => x.SelectedShow, (TvShow? show) => show != null));
@@ -51,10 +53,7 @@ public class ShowsViewModel : ViewModelBase
     {
         SetIsBusy(true);
 
-        var shows = await Task.Run(() => _showRepository.GetTvShows());
-        _allShows = new ObservableCollection<TvShow>(shows);
-        Shows = new ObservableCollection<TvShow>(shows);
-        _sorterSettings = await _settingsRepository.LoadSettingsAsync<Settings>(Settings.SETTING_NAME, cancellationToken);
+        await LoadShowsAsync(cancellationToken);
 
         SetIsBusy(false);
     }
@@ -64,6 +63,7 @@ public class ShowsViewModel : ViewModelBase
     public ICommand SaveShowCommand { get; }
     public ICommand UpdateShowCommand { get; }
     public ICommand ImportShowsCommand { get; }
+    public ICommand DeleteCommand { get; }
 
     public ICommand ViewShowDetailsCommand { get; }
 
@@ -325,6 +325,33 @@ public class ShowsViewModel : ViewModelBase
         }
     }
 
+    private async Task ExecuteDeleteShowAsync()
+    {
+        using var cts = new CancellationTokenSource();
+
+        if (SelectedShow == null || SelectedShow.Locked)
+            return;
+
+        SetIsBusy(true);
+        try
+        {
+            _logger.LogInformation("Updating show from TVDB: {ShowName} (ID: {TvdbId})",
+                SelectedShow.Name, SelectedShow.TvdbId);
+
+            _showRepository.Delete(SelectedShow);
+
+            await LoadShowsAsync(cts.Token);
+        }
+        catch(Exception ex)
+        {
+            _logger.LogError(ex, "Failed to delete show: {ShowName}", SelectedShow?.Name);
+        }
+        finally
+        {
+            SetIsBusy(false);
+        }
+    }
+
     private async Task ExecuteUpdateShowAsync()
     {
         if (SelectedShow == null || SelectedShow.Locked)
@@ -389,6 +416,14 @@ public class ShowsViewModel : ViewModelBase
             ApplyFilter();
             SetIsBusy(false);
         }
+    }
+
+    private async Task LoadShowsAsync(CancellationToken cancellationToken)
+    {
+        var shows = await Task.Run(() => _showRepository.GetTvShows());
+        _allShows = new ObservableCollection<TvShow>(shows);
+        Shows = new ObservableCollection<TvShow>(shows);
+        _sorterSettings = await _settingsRepository.LoadSettingsAsync<Settings>(Settings.SETTING_NAME, cancellationToken);
     }
 
 }

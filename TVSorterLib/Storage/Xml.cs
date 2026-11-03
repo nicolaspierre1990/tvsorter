@@ -415,4 +415,9 @@ public class Xml : IStorageProvider, IDisposable
     {
         throw new NotImplementedException();
     }
+
+    public Task RemoveShowAsync(TvShow show, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
 }
